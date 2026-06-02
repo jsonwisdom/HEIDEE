@@ -1,0 +1,20 @@
+{
+  "repo": "HEIDEE",
+  "role": "child_joyspace",
+  "description": "Heidee's JoySpace — child-owned version of JOY template",
+  "authority": false,
+  "public_safe_only": true,
+  "template_source": "https://github.com/jsonwisdom/JOY",
+  "links": {
+    "living_family_ledger": "https://github.com/jsonwisdom/COMPUTERWISDOM/blob/master/docs/living_family_ledger_v1.md",
+    "parent_continuity": "https://github.com/jsonwisdom/MARYDEE",
+    "family_constitution": "https://github.com/jsonwisdom/AL",
+    "coordination": "https://github.com/jsonwisdom/COMPUTERWISDOM"
+  },
+  "disallowed_content": [
+    "private_data",
+    "secrets",
+    "ownership_claims"
+  ],
+  "status": "SEEDED_ALIGNED_WITH_LEDGER"
+}
