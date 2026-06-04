@@ -1,0 +1,17 @@
+{
+  "artifact": "WISDOM_GIRL_JSON_TV_POINTER_V0_1",
+  "repo": "jsonwisdom/HEIDEE",
+  "status": "PROPOSED_FOR_REVIEW",
+  "authority": false,
+  "promotion": false,
+  "role": "protected_continuity_surface",
+  "points_to": {
+    "destinee_replay_theaters": "https://github.com/jsonwisdom/DESTINEE/issues/1",
+    "json_tv_layer_comment": "https://github.com/jsonwisdom/DESTINEE/issues/1#issuecomment-4626367253",
+    "meme_court_public_index_pr": "https://github.com/jsonwisdom/COMPUTERWISDOM/pull/259",
+    "zora_surface": "https://zora.co/@jaywisdom",
+    "identity_surface": "jaywisdom.base.eth"
+  },
+  "rule": "Machine-speed JSON movies may preserve public-safe continuity moments only with care, consent boundaries, and authority:false.",
+  "authority": false
+}
