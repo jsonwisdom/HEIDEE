@@ -1,0 +1,30 @@
+name: Builder Boundary Sentinel
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  sentinel:
+    name: family-builder-boundary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Emit boundary report
+        run: |
+          {
+            echo "# Builder Boundary Sentinel"
+            echo ""
+            echo "repo: ${{ github.repository }}"
+            echo "ref: ${{ github.ref }}"
+            echo "sha: ${{ github.sha }}"
+            echo "environment: family_builder_environment"
+            echo "authority: false"
+            echo "green_implied: false"
+            echo "no_fake_green: true"
+            echo "rule: receipts, manifests, hashes, and commit SHAs only"
+          } >> "$GITHUB_STEP_SUMMARY"
