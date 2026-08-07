@@ -22,6 +22,35 @@ assert.equal(M.network_boundary.unknown_capability,'VALIDATION_FAILURE');
 assert.deepEqual(M.network_boundary.allowed_runtime_reads,['./metadata.json','./fixtures/instrument.blank.json']);
 assert.equal(M.ai.model_download_policy,'DO_NOT_TRIGGER_DOWNLOAD');
 assert.equal(M.ai.browser_model_activation,'ONLY_IF_ALREADY_AVAILABLE');
+
+const C = M.chrome_ai_priority_doctrine;
+assert.equal(C.id,'CHROME_JOY_PRIORITY_V1');
+assert.equal(C.status,'DESIGN_LOCKED_AND_REPO_PINNED');
+assert.equal(C.CHROME_AI_PURPOSE,'OPTIONAL_ENHANCEMENT');
+assert.equal(C.CHROME_AI_PRIORITY,'SUBORDINATE');
+assert.equal(C.AI_UNAVAILABLE,'JOYSPACE_REMAINS_AVAILABLE');
+assert.equal(C.AI_FAILURE,'DETERMINISTIC_LOCAL_FALLBACK');
+assert.equal(C.BROWSER_FEATURE,'NOT_FAMILY_AUTHORITY');
+assert.deepEqual(C.priority_order,[
+  'FAMILY_SAFETY_BOUNDARY',
+  'JOY_GATE_HUMAN_CHOICE',
+  'DETERMINISTIC_LOCAL_RUNTIME',
+  'METADATA_FIXTURES_RECEIPTS',
+  'BROWSER_PORTABILITY',
+  'OPTIONAL_CHROME_ON_DEVICE_AI',
+  'EXPERIMENTAL_BROWSER_FEATURES'
+]);
+assert.equal(C.architectural_rule,'Chrome may improve JoySpace. Chrome may never define JoySpace.');
+assert.deepEqual(C.browser_specific_api_may_not_be,[
+  'STARTUP_DEPENDENCY',
+  'AUTHORITY_SOURCE',
+  'SAFETY_POLICY_SOURCE',
+  'REQUIRED_STORAGE_LAYER',
+  'REQUIRED_MODEL_PROVIDER',
+  'CONDITION_FOR_PRESERVING_OR_REPLAYING_FAMILY_SESSION'
+]);
+assert.equal(C.runtime_failure_direction,'DETERMINISTIC_WEB_STANDARD_PATH');
+
 assert.equal(fixture.chosen_by,'JOY_AND_FAMILY');
 assert.equal(fixture.score_person,false);
 assert.equal(fixture.remote_send,false);
@@ -84,10 +113,16 @@ const joyAi=read('joy-ai.html');
 assert.ok(joyAi.includes('LanguageModel.availability()'),'joy-ai: availability gate missing');
 assert.ok(joyAi.includes("availability!=='available'"),'joy-ai: must refuse downloadable/downloading model');
 assert.ok(joyAi.indexOf('LanguageModel.availability()') < joyAi.indexOf('LanguageModel.create('),'joy-ai: create occurs before availability check');
+assert.ok(joyAi.includes('fallback('),'joy-ai: deterministic fallback missing');
+
+const index=read('index.html');
+assert.ok(!index.includes('LanguageModel.'),'index: Chrome AI must not be a startup dependency');
+assert.ok(index.includes('localStorage'),'index: local deterministic session path missing');
 
 const workflow=read('.github/workflows/joyspace-runtime.yml');
 assert.ok(!/upload-artifact|curl\s|wget\s/i.test(workflow),'workflow: artifact upload or ad-hoc network command forbidden');
 
 console.log('JOYSPACE_RUNTIME=PASS');
 console.log('JOY_NETWORK_BOUNDARY_V1=PASS');
+console.log('CHROME_JOY_PRIORITY_V1=PASS');
 console.log('AUTHORITY_CREATED=FALSE');
