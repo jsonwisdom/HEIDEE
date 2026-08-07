@@ -1,0 +1,64 @@
+{
+  "schema": "atomic-family-metadata/v0.1",
+  "project": {
+    "id": "HEIDEE_JOYSPACE",
+    "name": "HEIDEE JOY",
+    "repo": "jsonwisdom/HEIDEE",
+    "authority": false,
+    "public_safe": true
+  },
+  "family_tree": {
+    "parent_layer": "JSON",
+    "child_experience": "HEIDEE JOY",
+    "pattern_library": "jsonwisdom/JOY",
+    "rule": "JSON enables the structure. JOY & Family choose what the structure means."
+  },
+  "joy_gate": {
+    "question": "Did I enjoy that?",
+    "no_behavior": "preserve_and_stop",
+    "yes_behavior": "reveal_easy_button",
+    "easy_button": "GENERATE MY STORY",
+    "reward": "ownership_of_reflection"
+  },
+  "story_lanes": [
+    {"id":"tried","label":"WHAT I TRIED","prompt":"What did you try?"},
+    {"id":"discovered","label":"WHAT I DISCOVERED","prompt":"What surprised you or became clearer?"},
+    {"id":"built","label":"WHAT I BUILT","prompt":"What did you make, change, test, or finish?"},
+    {"id":"mine","label":"WHAT MADE IT MINE","prompt":"What choice, detail, joke, idea, or feeling made this yours?"}
+  ],
+  "atomic_family": {
+    "enablements": {
+      "custom_instruments": true,
+      "local_session_memory": true,
+      "story_export": true,
+      "receipt_export": true,
+      "remix": true,
+      "replay": true,
+      "ai_assist": true
+    },
+    "instrument_policy": {
+      "chooser": "JOY_AND_FAMILY",
+      "meaning_is_not_preassigned": true,
+      "default_fixture": "fixtures/instrument.blank.json",
+      "rule": "An instrument may observe, ask, collect, compare, create, or reflect on whatever JOY & Family choose."
+    }
+  },
+  "privacy": {
+    "telemetry": false,
+    "remote_storage": false,
+    "secrets_in_repo": false,
+    "default_storage": "browser_local_only",
+    "child_safe_rule": "Do not request private identifiers, addresses, phone numbers, birthdates, passwords, or sensitive records."
+  },
+  "ai": {
+    "mode": "optional_on_device_first",
+    "external_api_required": false,
+    "auto_send": false,
+    "can_overwrite_family_words": false,
+    "purpose": "help ask kind questions, organize reflections, and suggest possibilities without scoring the person"
+  },
+  "receipt": {
+    "type": "JOY_RECEIPT",
+    "fields": ["session_id","fixtures_used","things_created","results_rendered","story_version","owner","anchor_optional"]
+  }
+}
