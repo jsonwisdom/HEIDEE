@@ -7,9 +7,7 @@
 
 ## JOYSPACE — metadata-driven runtime
 
-`index.html` now runs from `metadata.json`.
-
-Family relationship:
+`index.html` runs from `metadata.json`.
 
 ```text
 JSON
@@ -23,7 +21,11 @@ JOY & FAMILY DECIDE
 
 The metadata enables capabilities. It does **not** preassign meaning to the family's instruments.
 
-The shipped fixture is intentionally blank: `fixtures/instrument.blank.json`.
+### Public pages
+
+- `index.html` — HEIDEE JOY runtime
+- `joy-ai.html` — optional already-installed on-device AI helper + deterministic local fallback
+- `parents.html` — **JoySpace Formal Verification for Parents Who Just Want the Kids to Be Safe (and Maybe Have a Little Fun)**
 
 ### JOY gate
 
@@ -36,30 +38,31 @@ PLAY → BUILD → TEST → RESULT → REFLECT → DID I ENJOY THAT?
                                       GENERATE MY STORY
 ```
 
-Story lanes:
-
-- WHAT I TRIED
-- WHAT I DISCOVERED
-- WHAT I BUILT
-- WHAT MADE IT MINE
-
 The reward is ownership of the reflection, not points.
+
+### JOY_NETWORK_BOUNDARY_V1
+
+```text
+DEFAULT = DENY
+ALLOWED_RUNTIME_READS = [
+  "./metadata.json",
+  "./fixtures/instrument.blank.json"
+]
+UNKNOWN NETWORK CAPABILITY = VALIDATION FAILURE
+NEW RUNTIME RESOURCE = EXPLICIT METADATA DECLARATION REQUIRED
+```
+
+`tools/validate-runtime.mjs` is the tracked validator. It checks metadata invariants, declared reads, common browser network/resource escape paths, JOY AI's no-download gate, and receipt parity.
+
+The validator is a **strong static boundary**, not a claim of exhaustive information-flow proof, model checking, or theorem-prover certification.
 
 ### JOY AI
 
-`joy-ai.html` is an alternative family-safe creative surface.
-
-- optional on-device browser AI when available
-- deterministic local JOY spark fallback when it is not
-- no API key in the repo
-- no automatic external sending
-- no scoring, ranking, diagnosis, or authority claims
-- AI suggestions cannot overwrite family words
-- local browser storage only by default
+JOY AI never auto-sends family words. It only creates a browser language-model session when `LanguageModel.availability()` reports the model is already `available`; it does not intentionally trigger a model download. Otherwise it uses the deterministic local JOY spark helper.
 
 ### Receipt
 
-`schema/joy_receipt.schema.json` defines the lightweight `JOY_RECEIPT`:
+`schema/joy_receipt.schema.json` defines `JOY_RECEIPT` with:
 
 ```text
 session_id
@@ -87,14 +90,10 @@ anchor_optional
 }
 ```
 
----
-
 ## Public-safe boundary
 
-No private family data.  
-No secrets.  
-No phone numbers, addresses, birthdates, private identifiers, passwords, or sensitive records.
+No private family data. No secrets. No phone numbers, addresses, birthdates, private identifiers, passwords, or sensitive records.
 
 JOY & Family choose the meaning. The schema only makes the choice replayable.
 
-**Authority false.**
+**Authority false. PR #2 remains a draft until an explicit merge decision.**
