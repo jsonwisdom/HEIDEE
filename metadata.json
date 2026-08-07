@@ -1,0 +1,57 @@
+{
+  "schema": "atomic-family-metadata/v0.3",
+  "project": {"id":"HEIDEE_JOYSPACE","name":"HEIDEE JOY","repo":"jsonwisdom/HEIDEE","authority":false,"public_safe":true},
+  "family_tree": {"parent_layer":"JSON","child_experience":"HEIDEE JOY","pattern_library":"jsonwisdom/JOY","rule":"JSON enables the structure. JOY & Family choose what the structure means."},
+  "public_pages": {"home":"index.html","joy_ai":"joy-ai.html","parents":"parents.html"},
+  "joy_gate": {"question":"Did I enjoy that?","no_behavior":"preserve_and_stop","yes_behavior":"reveal_easy_button","easy_button":"GENERATE MY STORY","reward":"ownership_of_reflection"},
+  "story_lanes": [
+    {"id":"tried","label":"WHAT I TRIED","prompt":"What did you try?"},
+    {"id":"discovered","label":"WHAT I DISCOVERED","prompt":"What surprised you or became clearer?"},
+    {"id":"built","label":"WHAT I BUILT","prompt":"What did you make, change, test, or finish?"},
+    {"id":"mine","label":"WHAT MADE IT MINE","prompt":"What choice, detail, joke, idea, or feeling made this yours?"}
+  ],
+  "atomic_family": {
+    "enablements": {"custom_instruments":true,"local_session_memory":true,"story_export":true,"receipt_export":true,"remix":true,"replay":true,"ai_assist":true},
+    "instrument_policy": {"chooser":"JOY_AND_FAMILY","meaning_is_not_preassigned":true,"default_fixture":"./fixtures/instrument.blank.json","rule":"An instrument may observe, ask, collect, compare, create, or reflect on whatever JOY & Family choose."}
+  },
+  "network_boundary": {
+    "id":"JOY_NETWORK_BOUNDARY_V1",
+    "default":"DENY",
+    "allowed_runtime_reads":["./metadata.json","./fixtures/instrument.blank.json"],
+    "allowed_storage":["localStorage","in_memory_state","user_initiated_file_download"],
+    "unknown_capability":"VALIDATION_FAILURE",
+    "new_runtime_resource":"EXPLICIT_METADATA_DECLARATION_REQUIRED",
+    "validation_style":"ALLOWLIST_FIRST"
+  },
+  "chrome_ai_priority_doctrine": {
+    "id":"CHROME_JOY_PRIORITY_V1",
+    "status":"DESIGN_LOCKED_AND_REPO_PINNED",
+    "CHROME_AI_PURPOSE":"OPTIONAL_ENHANCEMENT",
+    "CHROME_AI_PRIORITY":"SUBORDINATE",
+    "AI_UNAVAILABLE":"JOYSPACE_REMAINS_AVAILABLE",
+    "AI_FAILURE":"DETERMINISTIC_LOCAL_FALLBACK",
+    "BROWSER_FEATURE":"NOT_FAMILY_AUTHORITY",
+    "priority_order":[
+      "FAMILY_SAFETY_BOUNDARY",
+      "JOY_GATE_HUMAN_CHOICE",
+      "DETERMINISTIC_LOCAL_RUNTIME",
+      "METADATA_FIXTURES_RECEIPTS",
+      "BROWSER_PORTABILITY",
+      "OPTIONAL_CHROME_ON_DEVICE_AI",
+      "EXPERIMENTAL_BROWSER_FEATURES"
+    ],
+    "architectural_rule":"Chrome may improve JoySpace. Chrome may never define JoySpace.",
+    "browser_specific_api_may_not_be":[
+      "STARTUP_DEPENDENCY",
+      "AUTHORITY_SOURCE",
+      "SAFETY_POLICY_SOURCE",
+      "REQUIRED_STORAGE_LAYER",
+      "REQUIRED_MODEL_PROVIDER",
+      "CONDITION_FOR_PRESERVING_OR_REPLAYING_FAMILY_SESSION"
+    ],
+    "runtime_failure_direction":"DETERMINISTIC_WEB_STANDARD_PATH"
+  },
+  "privacy": {"telemetry":false,"remote_storage":false,"secrets_in_repo":false,"default_storage":"browser_local_only","child_safe_rule":"Do not request private identifiers, addresses, phone numbers, birthdates, passwords, or sensitive records."},
+  "ai": {"mode":"optional_on_device_first","external_api_required":false,"auto_send":false,"can_overwrite_family_words":false,"model_download_policy":"DO_NOT_TRIGGER_DOWNLOAD","browser_model_activation":"ONLY_IF_ALREADY_AVAILABLE","purpose":"help ask kind questions, organize reflections, and suggest possibilities without scoring the person"},
+  "receipt": {"type":"JOY_RECEIPT","fields":["session_id","fixtures_used","things_created","results_rendered","story_version","owner","anchor_optional"]}
+}

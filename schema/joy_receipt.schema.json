@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "joy_receipt.schema.json",
+  "title": "JOY_RECEIPT",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "fixtures_used",
+    "things_created",
+    "results_rendered",
+    "story_version",
+    "owner",
+    "anchor_optional"
+  ],
+  "properties": {
+    "session_id": {"type": "string", "minLength": 1},
+    "fixtures_used": {"type": "array", "items": {"type": "string"}},
+    "things_created": {"type": "array", "items": {"type": "string"}},
+    "results_rendered": {"type": "array", "items": {"type": "string"}},
+    "story_version": {"type": "string", "minLength": 1},
+    "owner": {"type": "string", "minLength": 1},
+    "anchor_optional": {"type": ["string", "null"]}
+  }
+}

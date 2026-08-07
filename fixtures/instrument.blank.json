@@ -1,0 +1,15 @@
+{
+  "schema": "atomic-family-instrument/v0.1",
+  "fixture_id": "INSTRUMENT_BLANK_001",
+  "name": "",
+  "chosen_by": "JOY_AND_FAMILY",
+  "purpose": "",
+  "question": "",
+  "input_kind": "freeform",
+  "capture": [],
+  "result": null,
+  "authority": false,
+  "score_person": false,
+  "remote_send": false,
+  "notes": "This fixture intentionally does not define what the instrument is for. Name it together, use it, then decide whether it belongs in the story."
+}
