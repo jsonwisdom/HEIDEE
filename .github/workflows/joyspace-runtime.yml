@@ -16,39 +16,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate JOY metadata and runtime
-        shell: bash
-        run: |
-          node <<'NODE'
-          const fs = require('fs');
-          const assert = require('assert');
-          const metadata = JSON.parse(fs.readFileSync('metadata.json','utf8'));
-          const fixture = JSON.parse(fs.readFileSync('fixtures/instrument.blank.json','utf8'));
-          const receipt = JSON.parse(fs.readFileSync('schema/joy_receipt.schema.json','utf8'));
-
-          assert.equal(metadata.family_tree.parent_layer, 'JSON');
-          assert.equal(metadata.family_tree.child_experience, 'HEIDEE JOY');
-          assert.equal(metadata.atomic_family.instrument_policy.chooser, 'JOY_AND_FAMILY');
-          assert.equal(metadata.atomic_family.instrument_policy.meaning_is_not_preassigned, true);
-          assert.equal(metadata.joy_gate.question, 'Did I enjoy that?');
-          assert.equal(metadata.joy_gate.no_behavior, 'preserve_and_stop');
-          assert.equal(metadata.joy_gate.yes_behavior, 'reveal_easy_button');
-          assert.deepEqual(metadata.receipt.fields, [
-            'session_id','fixtures_used','things_created','results_rendered',
-            'story_version','owner','anchor_optional'
-          ]);
-          assert.equal(fixture.chosen_by, 'JOY_AND_FAMILY');
-          assert.equal(fixture.score_person, false);
-          assert.equal(fixture.remote_send, false);
-          assert.deepEqual(receipt.required, metadata.receipt.fields);
-
-          for (const file of ['index.html','joy-ai.html']) {
-            const html = fs.readFileSync(file,'utf8');
-            const matches = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
-            assert(matches.length > 0, `${file}: no inline script`);
-            for (const [,script] of matches) new Function(script);
-            assert(!html.includes('http://'), `${file}: external http URL`);
-            assert(!html.includes('https://'), `${file}: external https URL`);
-          }
-          console.log('JOYSPACE_RUNTIME=PASS');
-          NODE
+      - name: Validate JOY metadata, parent page, and network boundary
+        run: node tools/validate-runtime.mjs
