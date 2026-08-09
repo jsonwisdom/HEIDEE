@@ -1,6 +1,6 @@
 {
   "$schema": "urn:jsonwisdom:family-surface-metadata:v0.1",
-  "metadata_version": "0.1.0",
+  "metadata_version": "0.1.1",
   "repository": "jsonwisdom/HEIDEE",
   "repository_visibility": "PUBLIC",
   "surface": "HEIDEE",
@@ -10,6 +10,14 @@
     "joy_pattern_repository": "jsonwisdom/JOY",
     "relationship_type": "DIRECT_SISTER_POINTER",
     "downstream_interface": "metadata.json"
+  },
+  "access_model": {
+    "public_repository_read_access": true,
+    "application_participant_access_enabled": false,
+    "private_family_content_publication_enabled": false,
+    "youth_personal_data_publication_enabled": false,
+    "publication_authority_created": false,
+    "legacy_public_access_field": "PROHIBITED_AMBIGUOUS"
   },
   "actor_model": {
     "human_actor_type": "HUMAN",
@@ -33,7 +41,14 @@
     "secrets_allowed": false,
     "youth_personal_data_allowed": false
   },
+  "review_scale": {
+    "green_may_prepare_summary": true,
+    "yellow_requires_human_judgment": true,
+    "red_requires_halt": true,
+    "machine_green_creates_authority": false,
+    "placeholder_digest_signing_allowed": false
+  },
   "authority_created": false,
   "publication_authority_created": false,
-  "next_transition": "HUMAN_REVIEWS_METADATA_BYTES"
+  "next_transition": "HUMAN_REVIEWS_SCOPED_ACCESS_FIELDS"
 }
