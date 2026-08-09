@@ -1,0 +1,39 @@
+{
+  "$schema": "urn:jsonwisdom:family-surface-metadata:v0.1",
+  "metadata_version": "0.1.0",
+  "repository": "jsonwisdom/HEIDEE",
+  "repository_visibility": "PUBLIC",
+  "surface": "HEIDEE",
+  "direct_human_surface": true,
+  "purpose": "Public-safe family continuity and JoySpace implementation surface.",
+  "relationship": {
+    "joy_pattern_repository": "jsonwisdom/JOY",
+    "relationship_type": "DIRECT_SISTER_POINTER",
+    "downstream_interface": "metadata.json"
+  },
+  "actor_model": {
+    "human_actor_type": "HUMAN",
+    "reviewer_position": "HUMAN_REVIEWER",
+    "machine_may_prepare": true,
+    "machine_may_approve": false,
+    "machine_may_sign": false
+  },
+  "identity_references": {
+    "operator_name": "Jay Wisdom",
+    "ens_identifiers": [
+      "jaywisdom.eth",
+      "jaywisdom.base.eth"
+    ],
+    "ens_resolution_verified_here": false,
+    "credential_control_verified_here": false,
+    "identity_confers_authority": false
+  },
+  "privacy": {
+    "private_family_data_allowed": false,
+    "secrets_allowed": false,
+    "youth_personal_data_allowed": false
+  },
+  "authority_created": false,
+  "publication_authority_created": false,
+  "next_transition": "HUMAN_REVIEWS_METADATA_BYTES"
+}
