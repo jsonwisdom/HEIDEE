@@ -8,11 +8,20 @@
   "family_layer": "INCLUDED_TYPED_BOUNDED",
   "family_math_source": "FAMILY_MATH_v0.1",
   "family_math_replay_envelope": "FAMILY_MATH_v0.2",
+  "parental_controls": "ENCODED_REVIEW_OPEN",
+  "parental_authority": true,
+  "system_authority": false,
+  "institutional_authority": false,
+  "ziggy": "ENABLED_BY_DEFAULT_SWITCHABLE",
+  "ai_enablement_fixtures": "SEEDED",
+  "ai_enablement_instruments": "SEEDED",
+  "story_building": "ON_BY_DEFAULT_SWITCHABLE",
+  "embedded_math": "ON_BY_DEFAULT_SWITCHABLE",
   "source_byte_replay": "NOT_PERFORMED_IN_THIS_BUILD",
   "relationship_verification": "NOT_PERFORMED",
   "github_mutation": true,
   "drive_mutation": true,
   "source_mutated": false,
   "new_family_created": false,
-  "authority_created": false
+  "authority_created": "PARENTAL_ONLY"
 }

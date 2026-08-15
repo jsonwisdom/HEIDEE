@@ -1,0 +1,11 @@
+{
+  "instrument_id": "ZIGGY_MATH_WEAVER_v0.1",
+  "input": "ORIGINAL_STORY_SCENE",
+  "output": "STORY_WITH_EMBEDDED_NUMERACY",
+  "method": "Embed mathematical structure in story mechanics before formal labeling.",
+  "domains": ["COUNT", "GROUP", "COMPARE", "TIME", "SPACE", "PATTERN", "FRACTION_RATIO", "PROBABILITY", "ESTIMATION"],
+  "requires_lane": "EMBEDDED_MATH",
+  "transparent_reveal": "SHOW_ME_THE_MATH",
+  "covert_persuasion": false,
+  "evidence_created": false
+}

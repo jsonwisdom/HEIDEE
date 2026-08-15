@@ -1,0 +1,9 @@
+{
+  "instrument_id": "ZIGGY_STORY_BUILDER_v0.1",
+  "input": ["fixture", "parental_switchboard", "child_choice"],
+  "output": "ORIGINAL_STORY_SCENE",
+  "operations": ["SET_GOAL", "SET_SCENE", "OFFER_CHOICES", "TRACK_CONSEQUENCES", "CONTINUE_STORY"],
+  "requires_lane": "STORY_BUILDING",
+  "blocks": ["PRIVATE_DATA_INFERENCE", "GENEALOGY_PROMOTION", "COPYRIGHTED_CHARACTER_CLONING"],
+  "evidence_created": false
+}

@@ -1,0 +1,20 @@
+{
+  "fixture_id": "HEIDEE_PARENTAL_SWITCHBOARD_v0.1",
+  "authority": {
+    "PARENTAL_AUTHORITY": true,
+    "SYSTEM_AUTHORITY": false,
+    "INSTITUTIONAL_AUTHORITY": false
+  },
+  "lanes": {
+    "ART": true,
+    "MUSIC": true,
+    "CREATION": true,
+    "IMAGINATION": true,
+    "STORY_BUILDING": true,
+    "EMBEDDED_MATH": true,
+    "ZIGGY_AI": true
+  },
+  "gate_posture": "REVIEW_OPEN",
+  "order_lock": true,
+  "authority_created": "PARENTAL_ONLY"
+}
