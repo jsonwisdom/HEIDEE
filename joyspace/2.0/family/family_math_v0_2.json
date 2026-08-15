@@ -1,0 +1,32 @@
+{
+  "artifact": "FAMILY_MATH_v0.2",
+  "artifact_class": "VERSIONED_REPLAY_ENVELOPE",
+  "preserved_source": "FAMILY_MATH_v0.1",
+  "replay_structure_result": "PASS",
+  "source_byte_replay": "NOT_PERFORMED_IN_THIS_BUILD",
+  "relationship_verification": "NOT_PERFORMED",
+  "role_card_set": 6,
+  "porch_node_set": 10,
+  "family_member_count": "NOT_DERIVED_FROM_EITHER",
+  "type_invariants": [
+    "FUNCTION != POSITION",
+    "POSITION != KINSHIP",
+    "FUNCTION != KINSHIP"
+  ],
+  "count_invariant": "6_ROLE_CARDS + 10_PORCH_NODES != 16_PEOPLE != 16_FAMILY_MEMBERS != GENEALOGY",
+  "promotion_states": {
+    "SUPPORTED": "sufficient explicit evidence",
+    "REJECTED": "contradiction established",
+    "HOLD": "evidence missing or insufficient"
+  },
+  "posture": {
+    "role_math": "DEFINED",
+    "relationship_math": "DEFINED",
+    "version_delta": "EXPLICIT",
+    "porch_position_kinship": "SEPARATED",
+    "relationship_edges": "HOLD_UNTIL_EXPLICIT_BINDING",
+    "source_mutated": false,
+    "new_family_created": false,
+    "authority_created": false
+  }
+}
