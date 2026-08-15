@@ -1,0 +1,18 @@
+{
+  "artifact": "HEIDEE_JOYSPACE",
+  "version": "2.0",
+  "status": "SCAFFOLDED",
+  "build_mode": "DIRECTORIES_FIRST",
+  "previous_version": "docs/joyspace_v1.md",
+  "previous_version_preserved": true,
+  "family_layer": "INCLUDED_TYPED_BOUNDED",
+  "family_math_source": "FAMILY_MATH_v0.1",
+  "family_math_replay_envelope": "FAMILY_MATH_v0.2",
+  "source_byte_replay": "NOT_PERFORMED_IN_THIS_BUILD",
+  "relationship_verification": "NOT_PERFORMED",
+  "github_mutation": true,
+  "drive_mutation": "PENDING",
+  "source_mutated": false,
+  "new_family_created": false,
+  "authority_created": false
+}
