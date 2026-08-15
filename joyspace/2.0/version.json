@@ -11,7 +11,7 @@
   "source_byte_replay": "NOT_PERFORMED_IN_THIS_BUILD",
   "relationship_verification": "NOT_PERFORMED",
   "github_mutation": true,
-  "drive_mutation": "PENDING",
+  "drive_mutation": true,
   "source_mutated": false,
   "new_family_created": false,
   "authority_created": false
