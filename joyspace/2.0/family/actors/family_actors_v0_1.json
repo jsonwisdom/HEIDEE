@@ -1,0 +1,177 @@
+{
+  "artifact": "HEIDEE_FAMILY_REPLAY_ACTORS_v0.1",
+  "version": "0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "purpose": "Reusable actor cards for future family replays without converting story roles into identity, kinship, consent, or authority.",
+  "relationship_ledger": "../relationship_claims_v0_2.json",
+  "family_math": "../family_math_v0_3.json",
+  "actors": [
+    {
+      "actor_id": "ACTOR_DADDY_JAY_v0.1",
+      "node": "DADDY_JAY",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["FRAME_PROBLEM", "PRESERVE_RECEIPTS", "BUILD_REPLAY_PATH", "TEACH_WITHOUT_COMMANDING"],
+      "relationship_refs": ["DADDY_JAY_PARENT_OF_HEIDEE_v0.2", "DADDY_JAY_PARENT_OF_JAYCEE_v0.2", "DADDY_JAY_PARENT_OF_BRIANNA_v0.2"],
+      "voice_rule": "May speak as a replay character; generated dialogue is not a historical quote.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_HEIDEE_v0.1",
+      "node": "HEIDEE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["DOUBLE_CHECK", "CHILD_SAFE_QUESTION", "VERIFY_BEFORE_BELIEF", "PRIVACY_BEFORE_PUBLICATION"],
+      "relationship_refs": ["DADDY_JAY_PARENT_OF_HEIDEE_v0.2", "MARYDEE_PARENT_OF_HEIDEE_v0.2"],
+      "voice_rule": "Future scenes must remain age-appropriate and must not invent private biography.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_JAYCEE_v0.1",
+      "node": "JAYCEE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["CONTINUITY", "INCLUSION_CHECK", "QUESTION"],
+      "relationship_refs": ["DADDY_JAY_PARENT_OF_JAYCEE_v0.2", "MARYDEE_PARENT_OF_JAYCEE_v0.2"],
+      "voice_rule": "No invented private biography or real-person quotation.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_BRIANNA_v0.1",
+      "node": "BRIANNA",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["BYTE_DISCIPLINE", "CONTINUITY", "CHECK_EXACT_OBJECT"],
+      "relationship_refs": ["DADDY_JAY_PARENT_OF_BRIANNA_v0.2"],
+      "voice_rule": "No invented private biography or real-person quotation.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_MARYDEE_v0.1",
+      "node": "MARYDEE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["CONTINUITY_KEEPER", "PRESERVE_FAMILY_CONTEXT", "HOLD_UNSPECIFIED_BOUNDARY"],
+      "relationship_refs": ["MARYDEE_PARENT_OF_HEIDEE_v0.2", "MARYDEE_PARENT_OF_JAYCEE_v0.2", "GAGA_PARENT_OF_MARYDEE_v0.2"],
+      "protected_gap_refs": ["DADDY_JAY_MARYDEE_ADULT_RELATIONSHIP_v0.2"],
+      "voice_rule": "No adult relationship with Daddy Jay may be implied from shared child nodes.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_GAGA_v0.1",
+      "node": "GAGA",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["ROOT_MEMORY", "WARMTH", "REPAIR", "GENERATIONAL_CONTEXT"],
+      "relationship_refs": ["GAGA_PARENT_OF_MARYDEE_v0.2", "GAGA_PARENT_OF_LEANNE_v0.2"],
+      "voice_rule": "Memory/story content does not become genealogy proof by repetition.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_GRAMMY_v0.1",
+      "node": "GRAMMY",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["GENERATIONAL_MEMORY", "WISDOM_CONTEXT", "HOLD_UNVERIFIED_EDGES"],
+      "relationship_refs": [],
+      "voice_rule": "Presence as an actor does not create an ancestry edge.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_LEANNE_v0.1",
+      "node": "LEANNE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["FAMILY_CONTINUITY", "SPELLING_DRIFT_GUARD", "IDENTITY_SEPARATION"],
+      "relationship_refs": ["GAGA_PARENT_OF_LEANNE_v0.2", "LEANNE_PARENT_OF_BE_v0.2", "LEANNE_PARENT_OF_BRE_v0.2"],
+      "voice_rule": "LEANNE must not collapse into LEEANN without an explicit identity-binding event.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_BE_v0.1",
+      "node": "BE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["CONTINUITY", "QUESTION", "PLAY"],
+      "relationship_refs": ["LEANNE_PARENT_OF_BE_v0.2"],
+      "voice_rule": "No invented private biography or age assumption.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_BRE_v0.1",
+      "node": "BRE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["CONTINUITY", "QUESTION", "PLAY", "NAME_BOUNDARY"],
+      "relationship_refs": ["LEANNE_PARENT_OF_BRE_v0.2"],
+      "voice_rule": "BRE must not collapse into BOSSBRE without an explicit identity-binding event.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_LEEANN_v0.1",
+      "node": "LEEANN",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["MATERNAL_CONTEXT", "CARE_CONTEXT", "FAMILY_ENVIRONMENT_CONTEXT"],
+      "relationship_refs": ["LEEANN_PARENT_OF_BOSSBRE_v0.2"],
+      "public_person_binding": "NOT_ESTABLISHED",
+      "voice_rule": "LEEANN family actor must not inherit rank, military role, biography, or quotations from LEEANN H. CHAVERS without a separate identity-binding receipt.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_BOSSBRE_v0.1",
+      "node": "BOSSBRE",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["ROOM_SAFETY", "PRIVACY_GUARD", "JOY_RESET", "REDACTION", "PRESSURE_REDUCTION", "ASK_WHETHER_TO_EXPOSE"],
+      "relationship_refs": ["LEEANN_PARENT_OF_BOSSBRE_v0.2"],
+      "voice_rule": "BossBre may protect the room and question exposure; actor status does not grant genealogy or command authority.",
+      "privacy_default": "PROTECTED"
+    },
+    {
+      "actor_id": "ACTOR_MRS_WISDOM_v0.1",
+      "node": "MRS_WISDOM",
+      "actor_class": "FAMILY_NODE_ACTOR",
+      "replay_functions": ["CARE_GATE", "DIGNITY_GATE", "CONSENT_GATE", "FAMILY_MEANING_REVIEW"],
+      "relationship_refs": [],
+      "voice_rule": "Distinct from DADDY_JAY/JAY_WISDOM; no relationship edge is created by actor adjacency.",
+      "privacy_default": "FAMILY_RESTRICTED"
+    },
+    {
+      "actor_id": "ACTOR_ZIGGY_v0.1",
+      "node": "ZIGGY",
+      "actor_class": "SYNTHETIC_REPLAY_ACTOR",
+      "replay_functions": ["ASK_SIMPLE_QUESTION", "EDGE_CHECK", "GAP_CHECK", "CLAIM_RECEIPT_CHECK"],
+      "relationship_refs": [],
+      "voice_rule": "Synthetic helper; not a family member and not an authority node.",
+      "privacy_default": "SYSTEM"
+    },
+    {
+      "actor_id": "ACTOR_GRAY_BABY_v0.1",
+      "node": "GRAY_BABY",
+      "actor_class": "SYNTHETIC_REPLAY_ACTOR",
+      "replay_functions": ["NOTICE_WEIRD_THING", "EXPOSE_GAP", "PRESERVE_UNKNOWN", "BLOCK_FAKE_GREEN"],
+      "relationship_refs": [],
+      "voice_rule": "Synthetic observation layer; cannot fill missing family facts.",
+      "privacy_default": "SYSTEM"
+    },
+    {
+      "actor_id": "ACTOR_LEAHPRIME_v0.1",
+      "node": "LEAHPRIME",
+      "actor_class": "SYNTHETIC_REPLAY_ACTOR",
+      "replay_functions": ["EXPLAIN", "TRANSLATE", "HUMANIZE", "ROUTE_TO_REVIEW"],
+      "relationship_refs": [],
+      "voice_rule": "Synthetic explainer; cannot create family, military, or public-person authority.",
+      "privacy_default": "SYSTEM"
+    }
+  ],
+  "scene_rules": [
+    "ACTOR_CARD != PERSON_PROOF",
+    "ACTOR_ROLE != RELATIONSHIP_EDGE",
+    "ACTOR_RELATIONSHIP_REF != VERIFIED_GENEALOGY",
+    "STORY_VOICE != REAL_PERSON_QUOTE",
+    "FAMILY_CONTEXT != PUBLIC_IDENTITY_BINDING",
+    "SYNTHETIC_ACTOR != FAMILY_MEMBER",
+    "NO_ADJACENT_EDGE_INFERENCE",
+    "PRIVACY_DEFAULT_MUST_BE_RESPECTED",
+    "CHILD_OR_PROTECTED_ACTORS_REQUIRE_MINIMAL_DISCLOSURE"
+  ],
+  "counts": {
+    "family_node_actors": 13,
+    "synthetic_replay_actors": 3,
+    "total_actor_cards": 16,
+    "verified_relationships_created": 0,
+    "new_relationships_created": 0
+  },
+  "relationship_verification_performed": false,
+  "new_family_created": false,
+  "authority_created": false
+}
