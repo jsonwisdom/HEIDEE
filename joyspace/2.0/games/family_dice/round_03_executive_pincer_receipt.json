@@ -1,0 +1,60 @@
+{
+  "artifact": "FAMILY_DICE_ROUND_03_EXECUTIVE_PINCER_RECEIPT_v0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "protocol": "Parental Process Pincer Pinky Promise Protocol.md",
+  "round": 3,
+  "status": "ROLLED_HOLD_FOR_SPECIFIC_ORDER",
+  "played": "2026-08-17 America/Chicago",
+  "dice_result": {
+    "EXECUTIVE_ACTION_DIE": "EXECUTIVE_ORDER",
+    "AUTHORITY_DIE": "SHARED_POWER",
+    "RECEIPT_DIE": "COURT_RECORD",
+    "CHECKS_DIE": "APPROPRIATIONS",
+    "FAMILY_DIE": "LEARN",
+    "DISPOSITION": "HOLD"
+  },
+  "family_facing_reading": [
+    "Start with the exact Executive Order text and number.",
+    "Identify the constitutional and statutory authority cited in the order.",
+    "SHARED_POWER means do not assume the President acts alone; identify the congressional role actually established by law.",
+    "COURT_RECORD means look for a real judicial opinion, order, injunction, or docket entry tied to this exact Executive Order rather than treating commentary as a ruling.",
+    "APPROPRIATIONS means check whether implementation requires money Congress enacted, limited, conditioned, withheld, or never supplied.",
+    "LEARN means explain the separation-of-powers path before scoring the claim.",
+    "HOLD until a specific Executive Order and its receipts are bound."
+  ],
+  "pincer_replay": {
+    "left_jaw": "WHAT_DOES_THE_EXECUTIVE_ORDER_ACTUALLY_DIRECT",
+    "right_jaw": "WHAT_PART_OF_THE_POWER_IS_EXECUTIVE_AND_WHAT_PART_DEPENDS_ON_CONGRESS",
+    "center": "COURT_RECORD_PLUS_APPROPRIATIONS_RECEIPT_CHECK",
+    "family_action": "LEARN",
+    "current_disposition": "HOLD"
+  },
+  "membrane": [
+    "EXECUTIVE_ORDER != STATUTE",
+    "SHARED_POWER != UNLIMITED_POWER",
+    "COURT_FILING != FINAL_HOLDING",
+    "INJUNCTION != FINAL_MERITS_DECISION",
+    "APPROPRIATED_FUNDS != BLANK_CHECK",
+    "DICE_ROLL != LEGAL_CONCLUSION",
+    "LEARN != PROMOTE",
+    "PARENTAL_PROCESS != GOVERNMENT_AUTHORITY"
+  ],
+  "family_posture": {
+    "parental_authority": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "privacy": "SEALED",
+    "message": "Show the order. Show the statute. Show the court record. Show the money."
+  },
+  "privacy": {
+    "protected_details_exposed": false,
+    "relationship_edges_created": 0,
+    "public_identity_bindings_created": 0
+  },
+  "next_input": "A specific Executive Order number, title, or claim for replay.",
+  "round_04": {
+    "state": "READY_NOT_ROLLED"
+  },
+  "authority_created": false,
+  "source_mutated": false
+}
