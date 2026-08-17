@@ -1,0 +1,67 @@
+{
+  "schema": "JOYSPACE_FAMILY_DICE_ROUND_RECEIPT",
+  "version": "0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "round": 1,
+  "status": "MARKED_COMPLETE",
+  "played_at": "2026-08-17T16:27:00-05:00",
+  "base_contract": "porchlight_on_v0_1.json",
+  "round_local_state": {
+    "PORCHLIGHT_ROUND": "DIMMED_FOR_PLAY",
+    "MEMBRANE_SEALED": true,
+    "DICE_LIVE": true
+  },
+  "claim": "Daddy Jay + MaryDee can be viewed through a Gemini Co-Parental replay lens around shared child nodes.",
+  "speaker": "JAY_USER_DECLARATION",
+  "dice": {
+    "FACT_DIE": "WITNESS",
+    "IRON_BOWL_DIE": "ROLL_TIDE",
+    "FAMILY_DIE": "REPAIR"
+  },
+  "sister_secret_syntax": {
+    "exact_claim": "Two declared parent-perspective lanes may be replayed together under a single mechanical label.",
+    "speaker": "JAY — current user declaration",
+    "memory_portion": "UNSPECIFIED",
+    "receipt_portion": "Parent-edge declarations exist in the ledger. Relationship verification remains FALSE.",
+    "privacy_boundary": "Adult relationship history stays closed. No spouse, partner, co-parent, custody, household, or interpersonal-history inference is permitted."
+  },
+  "gemini_co_parental": {
+    "class": "REPLAY_MECHANIC_ONLY",
+    "mechanic_label_disposition": "PASS",
+    "real_relationship_predicate": "HOLD_UNSPECIFIED",
+    "not_equal": [
+      "CO_PARENT_OF",
+      "SPOUSE_OF",
+      "PARTNER_OF",
+      "CUSTODY_RELATIONSHIP",
+      "HOUSEHOLD_WITH",
+      "INTERPERSONAL_HISTORY"
+    ],
+    "meaning": "Two parent-perspective viewpoints may orbit shared child-space for storytelling and repair without asserting an adult relationship predicate."
+  },
+  "disposition": {
+    "MECHANIC_LABEL": "PASS",
+    "REAL_RELATIONSHIP_PREDICATE": "HOLD",
+    "REPAIR": "ACTIVE",
+    "GAP": "PRESERVED",
+    "FAKE_GENEALOGY": 0,
+    "AUTHORITY_CREATED": false,
+    "RELATIONSHIP_EDGES_CREATED": 0,
+    "PUBLIC_IDENTITY_BINDINGS_CREATED": 0
+  },
+  "name_boundaries": {
+    "MARYDEE_AND_MRS_WISDOM_MAY_MARY_WISDOM": "SEPARATE_LANES_NO_SILENT_COLLAPSE"
+  },
+  "storyteller_after_mark": "UNASSIGNED",
+  "replay_ready": true,
+  "guards": [
+    "GEMINI_CO_PARENTAL = REPLAY_MECHANIC_ONLY",
+    "GEMINI_CO_PARENTAL != CO_PARENT_OF",
+    "GEMINI_CO_PARENTAL != SPOUSE_OF",
+    "GEMINI_CO_PARENTAL != PARTNER_OF",
+    "PASS != VERIFIED_HISTORY",
+    "SHARED_CHILD != ADULT_RELATIONSHIP",
+    "DICE_ROLL != EVIDENCE",
+    "ROUND_RECEIPT != FAMILY_AUTHORITY"
+  ]
+}
