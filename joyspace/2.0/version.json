@@ -6,10 +6,12 @@
   "previous_version": "docs/joyspace_v1.md",
   "previous_version_preserved": true,
   "family_layer": "INCLUDED_TYPED_BOUNDED",
-  "family_relationship_ledger": "family/relationship_claims_v0_2.json",
+  "family_relationship_ledger": "family/relationship_claims_v0_3.json",
   "family_math_replay_envelope": "family/family_math_v0_3.json",
-  "family_actor_cast": "family/actors/family_actors_v0_1.json",
+  "family_actor_cast": "family/actors/family_actors_v0_2.json",
   "family_actor_cast_state": "DEFINED_REVIEW_OPEN",
+  "children_version_registry": "family/children/children_versions_v0_1.json",
+  "children_version_state": "ASYMMETRIC_SURFACES_RECORDED",
   "heidee_doublecheck": "CHILD_SAFE_SECOND_PASS_ACTIVE",
   "parental_controls": "ENCODED_REVIEW_OPEN",
   "parental_authority": true,
@@ -20,26 +22,42 @@
   "embedded_math": "ON_BY_DEFAULT_SWITCHABLE",
   "source_byte_replay": "NOT_PERFORMED_IN_THIS_BUILD",
   "relationship_verification": "NOT_PERFORMED",
-  "declared_relationship_claims": 10,
+  "canonical_family_nodes": 12,
+  "alias_resolutions": 3,
+  "declared_relationship_claims": 9,
   "verified_relationship_edges": 0,
   "inferred_relationship_edges": 0,
   "protected_unspecified_relationships": 1,
+  "children": {
+    "HEIDEE": "JOYSPACE_2_0_DRAFT",
+    "JAYCEE": "SEEDED_CONTINUITY_UNVERSIONED",
+    "BRIANNA": "NODE_ONLY_HOLD_NO_CONNECTED_REPO_SURFACE"
+  },
+  "zora_candidate_binding": {
+    "coin_address": "0x03271a72d017af1c2deff57aa7e4ab6133484ff5",
+    "network": "base",
+    "state": "HOLD_PENDING_ZORA_SDK_READBACK"
+  },
   "actor_counts": {
-    "family_node_actors": 13,
+    "family_node_actors": 12,
     "synthetic_replay_actors": 3,
-    "total_actor_cards": 16
+    "total_actor_cards": 15,
+    "retired_alias_actor_ids": 3
   },
   "actor_invariants": [
     "ACTOR_CARD != PERSON_PROOF",
     "ACTOR_ROLE != RELATIONSHIP_EDGE",
     "ACTOR_RELATIONSHIP_REF != VERIFIED_GENEALOGY",
     "STORY_VOICE != REAL_PERSON_QUOTE",
-    "SYNTHETIC_ACTOR != FAMILY_MEMBER"
+    "SYNTHETIC_ACTOR != FAMILY_MEMBER",
+    "ALIAS_ACTOR != SECOND_PERSON"
   ],
   "identity_membranes": [
-    "LEEANN != LEANNE_UNLESS_EXPLICITLY_BOUND",
-    "BOSSBRE != BRE_UNLESS_EXPLICITLY_BOUND",
-    "LEEANN_FAMILY_NODE != LEEANN_H_CHAVERS_PUBLIC_PERSON_UNLESS_IDENTITY_BINDING_IS_ESTABLISHED"
+    "LEEANN -> LEANNE = USER_DIRECTED_ALIAS",
+    "BE -> BRAE = USER_DIRECTED_RENAME",
+    "BOSSBRE -> BRE = USER_DIRECTED_ALIAS",
+    "MRS_WISDOM != MS_WISDOM",
+    "FAMILY_NODE != PUBLIC_PERSON_WITHOUT_SEPARATE_BINDING"
   ],
   "github_mutation": true,
   "source_mutated": false,
