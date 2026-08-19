@@ -13,7 +13,9 @@
   "children_version_registry": "family/children/children_versions_v0_1.json",
   "children_version_state": "ASYMMETRIC_SURFACES_RECORDED",
   "external_story_intel_registry": "family/external_nodes/zora_story_intel_nodes_v0_1.json",
+  "boxdee_leahprime_zora_cluster": "family/external_nodes/boxdee_leahprime_zora_cluster_v0_1.json",
   "external_story_intel_state": "TYPED_NO_GENEALOGY_PROMOTION",
+  "zero_trust_zora_state": "SDK_REST_READBACK_REQUIRED_BEFORE_LABEL_PROMOTION",
   "heidee_doublecheck": "CHILD_SAFE_SECOND_PASS_ACTIVE",
   "parental_controls": "ENCODED_REVIEW_OPEN",
   "parental_authority": true,
@@ -44,7 +46,12 @@
     "NODE8": "SOURCE_BOUND_ZORA_PROFILE_SNAPSHOT",
     "DEEZER": "RECEIPT_BOUND_OPERATOR_VERIFICATION_ASSERTED",
     "SOPHIA": "CONCEPTUAL_BRANCH_PASS_CONTRACT_BINDING_HOLD",
-    "CHUCK_GRASSLEY_NAMED_ARTIFACT": "HOLD_PENDING_ZORA_READBACK"
+    "CHUCK_GRASSLEY_NAMED_ARTIFACT": "HOLD_PENDING_ZORA_READBACK",
+    "BOXDEE_ZORA_CANDIDATE_001": "HOLD_PENDING_ZORA_READBACK",
+    "LEAHPRIME_ZORA_CANDIDATE_001": "HOLD_PENDING_ZORA_READBACK",
+    "LEAHPRIME_ZORA_CANDIDATE_002": "HOLD_PENDING_ZORA_READBACK",
+    "LEAHPRIME_ZORA_CANDIDATE_003": "HOLD_PENDING_ZORA_READBACK",
+    "LEAHPRIME_ZORA_CANDIDATE_004": "HOLD_PENDING_ZORA_READBACK"
   },
   "actor_counts": {
     "family_node_actors": 12,
@@ -60,7 +67,11 @@
     "SYNTHETIC_ACTOR != FAMILY_MEMBER",
     "ALIAS_ACTOR != SECOND_PERSON",
     "EXTERNAL_NODE != FAMILY_MEMBER",
-    "NAMED_ARTIFACT != PUBLIC_PERSON_ENDORSEMENT"
+    "NAMED_ARTIFACT != PUBLIC_PERSON_ENDORSEMENT",
+    "USER_SUPPLIED_LABEL != ZORA_METADATA_READBACK",
+    "BOXDEE != AUTHORITY",
+    "LEAHPRIME != REAL_PERSON",
+    "LEAHPRIME != COMMAND_AUTHORITY"
   ],
   "identity_membranes": [
     "LEEANN -> LEANNE = USER_DIRECTED_ALIAS",
@@ -68,7 +79,8 @@
     "BOSSBRE -> BRE = USER_DIRECTED_ALIAS",
     "MRS_WISDOM != MS_WISDOM",
     "FAMILY_NODE != PUBLIC_PERSON_WITHOUT_SEPARATE_BINDING",
-    "CONTRACT_ADDRESS != HUMAN_IDENTITY"
+    "CONTRACT_ADDRESS != HUMAN_IDENTITY",
+    "REFERRER_PARAMETER != CREATOR_PROOF"
   ],
   "github_mutation": true,
   "source_mutated": false,
