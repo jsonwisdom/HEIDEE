@@ -12,6 +12,8 @@
   "family_actor_cast_state": "DEFINED_REVIEW_OPEN",
   "children_version_registry": "family/children/children_versions_v0_1.json",
   "children_version_state": "ASYMMETRIC_SURFACES_RECORDED",
+  "external_story_intel_registry": "family/external_nodes/zora_story_intel_nodes_v0_1.json",
+  "external_story_intel_state": "TYPED_NO_GENEALOGY_PROMOTION",
   "heidee_doublecheck": "CHILD_SAFE_SECOND_PASS_ACTIVE",
   "parental_controls": "ENCODED_REVIEW_OPEN",
   "parental_authority": true,
@@ -38,6 +40,12 @@
     "network": "base",
     "state": "HOLD_PENDING_ZORA_SDK_READBACK"
   },
+  "external_nodes": {
+    "NODE8": "SOURCE_BOUND_ZORA_PROFILE_SNAPSHOT",
+    "DEEZER": "RECEIPT_BOUND_OPERATOR_VERIFICATION_ASSERTED",
+    "SOPHIA": "CONCEPTUAL_BRANCH_PASS_CONTRACT_BINDING_HOLD",
+    "CHUCK_GRASSLEY_NAMED_ARTIFACT": "HOLD_PENDING_ZORA_READBACK"
+  },
   "actor_counts": {
     "family_node_actors": 12,
     "synthetic_replay_actors": 3,
@@ -50,14 +58,17 @@
     "ACTOR_RELATIONSHIP_REF != VERIFIED_GENEALOGY",
     "STORY_VOICE != REAL_PERSON_QUOTE",
     "SYNTHETIC_ACTOR != FAMILY_MEMBER",
-    "ALIAS_ACTOR != SECOND_PERSON"
+    "ALIAS_ACTOR != SECOND_PERSON",
+    "EXTERNAL_NODE != FAMILY_MEMBER",
+    "NAMED_ARTIFACT != PUBLIC_PERSON_ENDORSEMENT"
   ],
   "identity_membranes": [
     "LEEANN -> LEANNE = USER_DIRECTED_ALIAS",
     "BE -> BRAE = USER_DIRECTED_RENAME",
     "BOSSBRE -> BRE = USER_DIRECTED_ALIAS",
     "MRS_WISDOM != MS_WISDOM",
-    "FAMILY_NODE != PUBLIC_PERSON_WITHOUT_SEPARATE_BINDING"
+    "FAMILY_NODE != PUBLIC_PERSON_WITHOUT_SEPARATE_BINDING",
+    "CONTRACT_ADDRESS != HUMAN_IDENTITY"
   ],
   "github_mutation": true,
   "source_mutated": false,
