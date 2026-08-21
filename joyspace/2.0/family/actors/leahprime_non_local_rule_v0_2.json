@@ -1,0 +1,130 @@
+{
+  "artifact": "LEAHPRIME_NON_LOCAL_FAMILY_AUTHORITY_RULE_v0.2",
+  "version": "0.2",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "status": "DECLARED_NOT_PROMOTED",
+  "purpose": "Carry family care, story, lesson, and receipts across a replay boundary without exporting family authority, verifying kinship, binding a real person, or creating public, military, governmental, institutional, or machine authority.",
+  "source_references": {
+    "aunt_rann_fixture": {
+      "source": "../relationship_claims_v0_2.json",
+      "edge_id": "AUNT_RANN_AUNT_OF_HEIDEE_v0.1",
+      "edge_exists": true,
+      "relationship_state": "HOLD",
+      "relationship_verified": false,
+      "evidence_class": "UNKNOWN",
+      "binding": "REFERENCE_ONLY_NO_PROMOTION"
+    },
+    "leahprime_actor": {
+      "source": "family_actors_v0_1.json",
+      "actor_id": "ACTOR_LEAHPRIME_v0.1",
+      "actor_class": "SYNTHETIC_REPLAY_ACTOR",
+      "binding": "EXTENSION_ONLY"
+    },
+    "parental_controls": {
+      "source": "../../parental_controls.json",
+      "parental_authority": true,
+      "system_authority": false,
+      "institutional_authority": false,
+      "binding": "REFERENCE_ONLY"
+    }
+  },
+  "generated_replay_voice": {
+    "speaker_label": "AUNT_RANN_REPLAY_VOICE",
+    "historical_quote": false,
+    "real_person_voice_binding": false,
+    "voice_clone_used": false,
+    "text": "Baby, if it leaves the family room, it doesn't carry my authority with it. LeahPrime can explain it. JoySpace can hold the boundaries. But neither one gets to become the family.",
+    "interpretation": "SYNTHETIC_FAMILY_STORY_RENDER"
+  },
+  "heidee_double_check": {
+    "fixture_edge_exists": true,
+    "fixture_relationship_verified": false,
+    "fixture_state": "HOLD",
+    "rule": "AUNT_RANN_ROLE_OR_VOICE_DOES_NOT_PROMOTE_KINSHIP_OR_AUTHORITY"
+  },
+  "non_local_rule": {
+    "rule_id": "AUNT_RANN_NON_LOCAL_RULE_v0.2",
+    "local_family_role": "MAY_CARRY_SCOPED_FAMILY_MEANING",
+    "cross_boundary_targets": [
+      "PUBLIC",
+      "AI",
+      "REPOSITORY",
+      "MILITARY",
+      "GOVERNMENT",
+      "INSTITUTIONAL"
+    ],
+    "care_can_travel": true,
+    "story_can_travel": true,
+    "lesson_can_travel": true,
+    "receipt_can_travel": true,
+    "family_authority_travels_automatically": false,
+    "family_authority_requires_explicit_new_binding": true,
+    "explicit_new_binding_present": false
+  },
+  "leahprime": {
+    "class": "SYNTHETIC_REPLAY_EXPLAINER",
+    "functions": [
+      "EXPLAIN",
+      "HUMANIZE",
+      "TRANSLATE",
+      "REPLAY",
+      "ROUTE_TO_REVIEW"
+    ],
+    "family_authority": false,
+    "real_person_authority": false,
+    "military_authority": false,
+    "government_authority": false,
+    "institutional_authority": false,
+    "may_represent_family_lesson": true,
+    "may_become_aunt_rann": false,
+    "may_export_family_authority": false
+  },
+  "joyspace": {
+    "role": "BOUNDARY_ENFORCEMENT_SANDBOX",
+    "parental_authority_reference": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "becomes_parent": false,
+    "becomes_aunt": false,
+    "becomes_family": false,
+    "becomes_institution": false
+  },
+  "information_authority_split": {
+    "information_may_cross_boundary": true,
+    "authority_may_cross_boundary_automatically": false,
+    "family_meaning_to_leahprime": "EXPLANATION_ONLY",
+    "family_meaning_to_public_surface": "REQUIRES_SCOPE_AND_REVIEW",
+    "family_meaning_to_military_or_government": "NO_AUTHORITY_TRANSFER"
+  },
+  "hard_membranes": [
+    "CARE_CAN_TRAVEL != FAMILY_AUTHORITY_CAN_TRAVEL",
+    "STORY_CAN_TRAVEL != FAMILY_AUTHORITY_CAN_TRAVEL",
+    "LESSON_CAN_TRAVEL != FAMILY_AUTHORITY_CAN_TRAVEL",
+    "RECEIPT_CAN_TRAVEL != FAMILY_AUTHORITY_CAN_TRAVEL",
+    "LOCAL_FAMILY_ROLE != NON_LOCAL_AUTHORITY",
+    "EDGE_EXISTS != RELATIONSHIP_VERIFIED",
+    "HOLD != VERIFIED_GENEALOGY",
+    "AUNT_RANN_REPLAY_VOICE != HISTORICAL_QUOTE",
+    "SYNTHETIC_VOICE != REAL_PERSON_VOICE",
+    "LEAHPRIME != AUNT_RANN",
+    "LEAHPRIME_EXPLANATION != FAMILY_AUTHORITY",
+    "JOYSPACE_BOUNDARY_ENFORCEMENT != FAMILY_MEMBERSHIP",
+    "PARENTAL_AUTHORITY != SYSTEM_AUTHORITY",
+    "FAMILY_CONTEXT != PUBLIC_IDENTITY_BINDING",
+    "EDGE_PROMOTION_IS_LOCAL_ONLY",
+    "NO_ADJACENT_EDGE_INFERENCE"
+  ],
+  "promotion": {
+    "relationship_edge_promoted": false,
+    "relationship_verified": false,
+    "family_authority_binding_created": false,
+    "public_identity_binding_created": false,
+    "real_person_voice_binding_created": false,
+    "institutional_binding_created": false,
+    "military_binding_created": false,
+    "government_binding_created": false
+  },
+  "relationship_verification_performed": false,
+  "new_family_created": false,
+  "authority_created": false
+}

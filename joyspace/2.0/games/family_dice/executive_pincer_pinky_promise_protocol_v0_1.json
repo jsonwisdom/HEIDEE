@@ -1,0 +1,91 @@
+{
+  "artifact": "EXECUTIVE_PINCER_PINKY_PROMISE_PROTOCOL_v0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "game_lane": "CRISSCROSS_CONSTITUTION_EXECUTIVE",
+  "status": "READY_NOT_ROLLED",
+  "purpose": "A parent-controlled dice process for asking hard questions about Executive Branch actions without converting an executive act, family question, or dice result into law, fact, or family authority.",
+  "official_source_rails": [
+    "Constitution Annotated / Article II",
+    "Federal Register presidential documents and executive actions",
+    "USAGov branch overview"
+  ],
+  "pincer": {
+    "left_jaw": "WHAT_EXECUTIVE_ACTION_IS_CLAIMED",
+    "right_jaw": "WHAT_CONSTITUTIONAL_OR_STATUTORY_AUTHORITY_IS_CITED",
+    "center": "RECEIPT_AND_LIMIT_CHECK"
+  },
+  "pinky_promise": {
+    "parental_process": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "promises": [
+      "ASK_BEFORE_INFER",
+      "SOURCE_BEFORE_SCORE",
+      "SEPARATE_ORDER_FROM_LAW",
+      "SEPARATE_ENFORCEMENT_FROM_LEGISLATION",
+      "KEEP_FAMILY_PRIVACY_SEALED",
+      "PRESERVE_UNKNOWN_AS_HOLD",
+      "NEVER_PROMOTE_DICE_TO_FACT"
+    ]
+  },
+  "dice": [
+    {
+      "die": "EXECUTIVE_ACTION_DIE",
+      "faces": ["EXECUTIVE_ORDER", "PROCLAMATION", "MEMORANDUM", "AGENCY_ACTION", "ENFORCEMENT_ACTION", "PUBLIC_STATEMENT"]
+    },
+    {
+      "die": "AUTHORITY_DIE",
+      "faces": ["ARTICLE_II", "ACT_OF_CONGRESS", "SHARED_POWER", "DELEGATED_AUTHORITY", "CLAIMED_INHERENT_POWER", "UNKNOWN"]
+    },
+    {
+      "die": "RECEIPT_DIE",
+      "faces": ["FEDERAL_REGISTER", "STATUTE_TEXT", "CONSTITUTION_ANNOTATED", "COURT_RECORD", "AGENCY_RECORD", "MISSING"]
+    },
+    {
+      "die": "CHECKS_DIE",
+      "faces": ["CONGRESS", "COURT", "SENATE_ADVICE_CONSENT", "APPROPRIATIONS", "STATUTORY_LIMIT", "NOT_YET_BOUND"]
+    },
+    {
+      "die": "FAMILY_DIE",
+      "faces": ["ASK", "LEARN", "COMPARE", "REPAIR", "HOLD", "REPLAY"]
+    }
+  ],
+  "round_flow": [
+    "FAMILY_QUESTION",
+    "ROLL_TYPED_DICE",
+    "IDENTIFY_EXECUTIVE_ACTION",
+    "FIND_OFFICIAL_RECEIPT",
+    "BIND_AUTHORITY_OR_PRESERVE_GAP",
+    "CHECK_CONGRESSIONAL_AND_JUDICIAL_LIMITS",
+    "PARENTAL_PRIVACY_CHECK",
+    "PASS_HOLD_CONFLICT_OUTSIDE_SCOPE",
+    "REPLAY"
+  ],
+  "constitutional_membrane": [
+    "EXECUTIVE_ORDER != ACT_OF_CONGRESS",
+    "PRESIDENTIAL_STATEMENT != LAW",
+    "AGENCY_ACTION != FAMILY_AUTHORITY",
+    "COMMANDER_IN_CHIEF != GENERAL_DOMESTIC_LAWMAKING_POWER",
+    "EXECUTIVE_POWER != UNLIMITED_POWER",
+    "ENFORCEMENT != LEGISLATION",
+    "DICE_ROLL != CONSTITUTIONALITY_RULING",
+    "FAMILY_QUESTION != ACCUSATION",
+    "PARENTAL_PROCESS != GOVERNMENT_AUTHORITY"
+  ],
+  "source_notes": {
+    "article_ii": "Article II vests executive power in the President and includes specified powers and duties, including the duty to take care that the laws be faithfully executed.",
+    "checks_and_balances": "Executive authority operates within a constitutional structure that includes legislative and judicial checks.",
+    "executive_documents": "Presidential directives and executive actions require source-specific review; label alone does not establish legal effect or constitutional validity."
+  },
+  "privacy": {
+    "family_details_default": "FAMILY_RESTRICTED",
+    "public_person_binding": "REQUIRES_SEPARATE_RECEIPT",
+    "new_relationship_edges_created": 0
+  },
+  "round_02": {
+    "state": "READY_NOT_ROLLED",
+    "outcome": null
+  },
+  "authority_created": false,
+  "source_mutated": false
+}

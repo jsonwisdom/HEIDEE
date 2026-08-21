@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonwisdom.example/joyspace/2.0/schemas/atomic_family_exchange_checkpoint_v0_1.schema.json",
+  "title": "Atomic Family Exchange Checkpoint v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "event_id",
+    "observed_at",
+    "vcr_action",
+    "nodes",
+    "checkpoint",
+    "exchange_policy",
+    "expected_result",
+    "authority_created"
+  ],
+  "properties": {
+    "schema": {"const": "ATOMIC_FAMILY_EXCHANGE_CHECKPOINT_V0_1"},
+    "version": {"const": "0.1.0"},
+    "event_id": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "vcr_action": {
+      "enum": ["REW", "PLAY", "FF", "TRACKING", "PAUSE", "EJECT"]
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "node_kind", "version", "content_hash", "ownership"],
+        "properties": {
+          "node_id": {"type": "string", "minLength": 1},
+          "node_kind": {"enum": ["LOCAL_AUTHORED_VERSION", "ASSIST_LOG"]},
+          "version": {"type": "integer", "minimum": 0},
+          "content_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "ownership": {"const": "NODE_LOCAL"}
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint_id", "kind", "acknowledged_at", "participants", "scope", "purpose", "node_versions"],
+      "properties": {
+        "checkpoint_id": {"type": "string", "minLength": 1},
+        "kind": {"const": "LAST_MUTUALLY_ACKNOWLEDGED_CHECKPOINT"},
+        "acknowledged_at": {"type": "string", "format": "date-time"},
+        "participants": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "scope": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "node_versions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "exchange_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["auto_global_merge", "divergence_policy", "reconciliation"],
+      "properties": {
+        "auto_global_merge": {"const": false},
+        "divergence_policy": {"const": "PRESERVE"},
+        "reconciliation": {"const": "MANUAL_RELATIONAL_VOLUNTARY"}
+      }
+    },
+    "expected_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "auto_merge_performed", "post_versions_unchanged"],
+      "properties": {
+        "disposition": {"enum": ["MATCH", "DIFFERENCE_RECEIPT", "HOLD", "CONFLICT", "REJECT"]},
+        "auto_merge_performed": {"const": false},
+        "post_versions_unchanged": {"const": true}
+      }
+    },
+    "authority_created": {"const": false}
+  }
+}

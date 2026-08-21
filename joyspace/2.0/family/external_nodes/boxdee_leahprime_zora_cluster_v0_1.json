@@ -1,0 +1,120 @@
+{
+  "artifact": "JOYSPACE_BOXDEE_LEAHPRIME_ZORA_CLUSTER_v0.1",
+  "version": "0.1",
+  "scope": "JOYSPACE_EXTERNAL_STORY_INTEL",
+  "status": "DRAFT_REVIEW_OPEN",
+  "purpose": "Preserve operator-supplied Zora candidates for BoxDee and LeahPrime as external story/intel objects pending Zero Trust Zora SDK/REST readback. No family, identity, authority, commander, wallet-control, or truth promotion is created by the labels or URLs.",
+  "network": "base",
+  "chain_id": 8453,
+  "referrer_parameter_observed_in_supplied_urls": "0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+  "referrer_rule": "REFERRER_PARAMETER != CREATOR_PROOF != WALLET_CONTROL_PROOF != IDENTITY_PROOF",
+  "nodes": [
+    {
+      "node_id": "BOXDEE_ZORA_CANDIDATE_001",
+      "story_label": "BoxDee",
+      "node_class": "BOXDEE_PERSPECTIVE_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0x282f132e8e77a72555b5f1d681243886ceffe94c",
+      "supplied_url": "https://zora.co/coin/base:0x282f132e8e77a72555b5f1d681243886ceffe94c?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "evidence_state": "HOLD_USER_SUPPLIED_URL_PENDING_ZORA_READBACK",
+      "semantic_role": "PERSPECTIVE_PRESERVATION_REVERSE_REPLAY",
+      "authority": false,
+      "family_member": false,
+      "child_node": false
+    },
+    {
+      "node_id": "LEAHPRIME_ZORA_CANDIDATE_001",
+      "story_label": "LeahPrime",
+      "node_class": "SYNTHETIC_REPLAY_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0xadfdb7a4ef2b892b14200a3cb4c17bcc9aed38c3",
+      "supplied_url": "https://zora.co/coin/base:0xadfdb7a4ef2b892b14200a3cb4c17bcc9aed38c3?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "evidence_state": "HOLD_USER_SUPPLIED_URL_PENDING_ZORA_READBACK",
+      "synthetic_actor": true,
+      "real_person_binding": false,
+      "commander_authority": false,
+      "authority": false,
+      "family_member": false,
+      "child_node": false
+    },
+    {
+      "node_id": "LEAHPRIME_ZORA_CANDIDATE_002",
+      "story_label": "LeahPrime",
+      "node_class": "SYNTHETIC_REPLAY_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0x8535c78da6b0c2b6c8b242a65d20bdb50e3599ab",
+      "supplied_url": "https://zora.co/coin/base:0x8535c78da6b0c2b6c8b242a65d20bdb50e3599ab?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "evidence_state": "HOLD_USER_SUPPLIED_URL_PENDING_ZORA_READBACK",
+      "synthetic_actor": true,
+      "real_person_binding": false,
+      "commander_authority": false,
+      "authority": false,
+      "family_member": false,
+      "child_node": false
+    },
+    {
+      "node_id": "LEAHPRIME_ZORA_CANDIDATE_003",
+      "story_label": "LeahPrime",
+      "node_class": "SYNTHETIC_REPLAY_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0x6ec1e70ce1486b6e5386388eadebec747021a77f",
+      "supplied_url": "https://zora.co/coin/base:0x6ec1e70ce1486b6e5386388eadebec747021a77f?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "evidence_state": "HOLD_USER_SUPPLIED_URL_PENDING_ZORA_READBACK",
+      "synthetic_actor": true,
+      "real_person_binding": false,
+      "commander_authority": false,
+      "authority": false,
+      "family_member": false,
+      "child_node": false
+    },
+    {
+      "node_id": "LEAHPRIME_ZORA_CANDIDATE_004",
+      "story_label": "LeahPrime",
+      "node_class": "SYNTHETIC_REPLAY_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0x54022649f1f6427e1aeea0a1c7c03f472c787044",
+      "supplied_url": "https://zora.co/coin/base:0x54022649f1f6427e1aeea0a1c7c03f472c787044?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "evidence_state": "HOLD_USER_SUPPLIED_URL_PENDING_ZORA_READBACK",
+      "synthetic_actor": true,
+      "real_person_binding": false,
+      "commander_authority": false,
+      "authority": false,
+      "family_member": false,
+      "child_node": false
+    }
+  ],
+  "cluster_roles": {
+    "BOXDEE": "FREEZE_ORIGINAL_ROUTE_REVERSE_REPLAY_FORWARD_REPLAY_PERSPECTIVE",
+    "LEAHPRIME": "SYNTHETIC_EXPLAIN_TRANSLATE_HUMANIZE_ROUTE_TO_REVIEW"
+  },
+  "promotion_gate": {
+    "required": [
+      "ZORA_SDK_OR_REST_OBJECT_READBACK",
+      "CHAIN_ID_MATCH_8453",
+      "CONTRACT_ADDRESS_MATCH",
+      "NAME_SYMBOL_METADATA_CAPTURE",
+      "CREATOR_ADDRESS_OBSERVATION",
+      "CREATOR_PROFILE_OBSERVATION_IF_AVAILABLE",
+      "TOKEN_URI_OR_MEDIA_METADATA_CAPTURE_IF_AVAILABLE",
+      "OBSERVED_AT_TIMESTAMP",
+      "RAW_RESPONSE_HASH_OR_EQUIVALENT_RECEIPT",
+      "EXPLICIT_ZORA_OBJECT_BINDING"
+    ],
+    "heuristic_label_binding_allowed": false,
+    "html_scraper_may_override_sdk": false,
+    "html_scraper_role": "INDEPENDENT_DRIFT_WITNESS_ONLY"
+  },
+  "replay_dispositions": ["PASS", "HOLD", "CONFLICT", "REJECT"],
+  "invariants": [
+    "USER_SUPPLIED_LABEL != ZORA_METADATA_READBACK",
+    "CONTRACT_ADDRESS != HUMAN_IDENTITY",
+    "ZORA_OBJECT != EXTERNAL_FACT",
+    "ZORA_TIMESTAMP != EVENT_PROOF",
+    "BOXDEE != AUTHORITY",
+    "BOXDEE_ARTIFACT != BOXDEE_TRUTH_SOURCE",
+    "LEAHPRIME != REAL_PERSON",
+    "LEAHPRIME != MILITARY_OFFICER",
+    "LEAHPRIME != COMMAND_AUTHORITY",
+    "LEAHPRIME_ARTIFACT != HISTORICAL_QUOTE",
+    "REFERRER_PARAMETER != CREATOR_PROOF",
+    "EXTERNAL_NODE != FAMILY_MEMBER",
+    "AUTHORITY_CREATED = FALSE"
+  ],
+  "authority_created": false,
+  "family_membership_created": false
+}

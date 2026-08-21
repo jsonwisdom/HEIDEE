@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "joyspace://v2/parental-controls",
+  "title": "JoySpace 2.0 Parental Controls Configuration",
+  "type": "object",
+  "properties": {
+    "authority": {
+      "type": "object",
+      "properties": {
+        "PARENTAL_AUTHORITY": { "const": true },
+        "SYSTEM_AUTHORITY": { "const": false },
+        "INSTITUTIONAL_AUTHORITY": { "const": false }
+      },
+      "required": ["PARENTAL_AUTHORITY", "SYSTEM_AUTHORITY", "INSTITUTIONAL_AUTHORITY"],
+      "additionalProperties": false
+    },
+    "default_posture": {
+      "type": "object",
+      "properties": {
+        "ART": { "type": "boolean", "default": true },
+        "MUSIC": { "type": "boolean", "default": true },
+        "CREATION": { "type": "boolean", "default": true },
+        "IMAGINATION": { "type": "boolean", "default": true },
+        "STORY_BUILDING": { "type": "boolean", "default": true },
+        "EMBEDDED_MATH": { "type": "boolean", "default": true },
+        "ZIGGY_AI": { "type": "boolean", "default": true }
+      },
+      "additionalProperties": false
+    },
+    "enforcement": {
+      "type": "object",
+      "properties": {
+        "flow": { "const": "PARENT_AUTHORITY→SETS_BOUNDARIES→CHILD→EXPLORES→ZIGGY→ASSISTS→JOYSPACE→ENFORCES→COMPUTERWISDOM→RECORDS" },
+        "gate_posture": { "const": "REVIEW_OPEN" },
+        "order_lock": { "const": true }
+      },
+      "required": ["flow", "gate_posture", "order_lock"],
+      "additionalProperties": false
+    },
+    "authority_created": { "const": "PARENTAL_ONLY" },
+    "system_or_institutional_authority_created": { "const": false }
+  },
+  "required": ["authority", "default_posture", "enforcement", "authority_created", "system_or_institutional_authority_created"],
+  "additionalProperties": false
+}

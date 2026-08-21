@@ -1,0 +1,33 @@
+{
+  "artifact": "HEIDEE_RELATIONSHIP_CLAIMS_v0.1",
+  "version": "0.1",
+  "subject": "HEIDEE",
+  "claims": [
+    {
+      "edge_id": "AUNT_RANN_AUNT_OF_HEIDEE_v0.1",
+      "from": "AUNT_RANN",
+      "predicate": "AUNT_OF",
+      "to": "HEIDEE",
+      "edge_exists": true,
+      "relationship_verified": false,
+      "status": "HOLD",
+      "evidence_refs": [],
+      "consent_scope": "UNKNOWN",
+      "notes": "Versioned relationship claim object only. Existence of this object does not verify kinship."
+    }
+  ],
+  "promotion_rule": {
+    "SUPPORTED": "sufficient explicit evidence",
+    "REJECTED": "contradiction established",
+    "HOLD": "evidence missing or insufficient"
+  },
+  "invariants": [
+    "EDGE_EXISTS != RELATIONSHIP_VERIFIED",
+    "FUNCTION != POSITION",
+    "POSITION != KINSHIP",
+    "FUNCTION != KINSHIP"
+  ],
+  "relationship_verification_performed": false,
+  "new_family_created": false,
+  "authority_created": false
+}

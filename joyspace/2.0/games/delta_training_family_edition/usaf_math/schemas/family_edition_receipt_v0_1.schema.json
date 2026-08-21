@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "joyspace://v2/games/delta-training-family-edition/usaf-math/family-edition-receipt-v0.1",
+  "title": "DELTA Training Family Edition USAF-Style Math Receipt v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "semantic_class",
+    "status",
+    "mission",
+    "math",
+    "roles",
+    "checks",
+    "delta",
+    "receiptos",
+    "execution",
+    "boundaries",
+    "authority_created"
+  ],
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "semantic_class": {"const": "CIVILIAN_FAMILY_MATH_REPLAY_RECEIPT"},
+    "status": {"enum": ["RECORDED", "PASS_WITH_BOUNDARY", "HOLD", "CONFLICT", "REJECT"]},
+    "mission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mission_id", "context_class", "scenario_source", "real_world_event_claimed"],
+      "properties": {
+        "mission_id": {"type": "string", "minLength": 1},
+        "context_class": {"const": "USAF_STYLE_CIVILIAN_EDUCATIONAL"},
+        "scenario_source": {"enum": ["SYNTHETIC", "USER_SUPPLIED"]},
+        "real_world_event_claimed": {"const": false}
+      }
+    },
+    "math": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "problem_type", "prompt", "inputs", "expected_answer", "expected_units"],
+      "properties": {
+        "level": {"enum": ["M0_COUNTING", "M1_ARITHMETIC", "M2_RATIOS_RATES", "M3_UNIT_CONVERSION", "M4_ALGEBRA", "M5_GEOMETRY", "M6_VECTORS", "M7_FUNCTIONS", "M8_DELTA", "M9_PROBABILITY", "M10_STATISTICS", "M11_GRAPH_THEORY", "M12_OPTIMIZATION", "M13_RECURSION"]},
+        "problem_type": {"enum": ["COUNTING", "ARITHMETIC", "RATE", "UNIT_CONVERSION", "ALGEBRA", "GEOMETRY", "VECTOR", "FUNCTION", "DELTA", "PROBABILITY", "STATISTICS", "GRAPH_ROUTE", "OPTIMIZATION", "RECURSION"]},
+        "prompt": {"type": "string", "minLength": 1},
+        "inputs": {"type": "object"},
+        "expected_answer": {},
+        "expected_units": {"type": ["string", "null"]}
+      }
+    },
+    "dice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["used", "problem_selector_only", "answer_authority", "evidence_authority", "verdict_authority"],
+      "properties": {
+        "used": {"type": "boolean"},
+        "die_result": {"type": ["integer", "null"], "minimum": 1, "maximum": 6},
+        "selected_problem_type": {"type": ["string", "null"]},
+        "problem_selector_only": {"const": true},
+        "answer_authority": {"const": false},
+        "evidence_authority": {"const": false},
+        "verdict_authority": {"const": false}
+      }
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["daddy_jay", "jaycee", "heidee", "ziggy", "leahprime", "bossbre", "delta", "receiptos"],
+      "properties": {
+        "daddy_jay": {"const": "FRAME_MISSION"},
+        "jaycee": {"const": "LEARNER_REPLAY_ROLE"},
+        "heidee": {"const": "DOUBLE_CHECK"},
+        "ziggy": {"const": "GAP_CHECK"},
+        "leahprime": {"const": "EXPLAIN_MATH"},
+        "bossbre": {"const": "PRIVACY_PRESSURE_GATE"},
+        "delta": {"const": "COMPARE_BEFORE_AFTER"},
+        "receiptos": {"const": "RECORD_EXACT_STATE"}
+      }
+    },
+    "learner_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "answer", "units", "real_performance_claimed", "school_grade_created"],
+      "properties": {
+        "mode": {"enum": ["SYNTHETIC_DEMONSTRATION", "USER_SUPPLIED_ATTEMPT"]},
+        "answer": {},
+        "units": {"type": ["string", "null"]},
+        "real_performance_claimed": {"const": false},
+        "school_grade_created": {"const": false}
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["solve", "units", "reverse", "gap_check", "explanation"],
+      "properties": {
+        "solve": {"enum": ["PASS", "HOLD", "FAIL", "NOT_RUN"]},
+        "units": {"enum": ["PASS", "HOLD", "FAIL", "NOT_APPLICABLE", "NOT_RUN"]},
+        "reverse": {"enum": ["PASS", "HOLD", "FAIL", "NOT_APPLICABLE", "NOT_RUN"]},
+        "gap_check": {"type": "object", "required": ["status", "gaps"], "properties": {"status": {"enum": ["PASS", "HOLD", "CONFLICT", "NOT_RUN"]}, "gaps": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
+        "explanation": {"type": "object", "required": ["status", "synthetic", "authority"], "properties": {"status": {"enum": ["PRESENT", "HOLD", "NOT_RUN"]}, "synthetic": {"const": true}, "authority": {"const": false}}, "additionalProperties": false}
+      }
+    },
+    "delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state_a", "transform", "state_b", "delta_description", "change_detected", "cause_proven"],
+      "properties": {
+        "state_a": {},
+        "transform": {"type": "string"},
+        "state_b": {},
+        "delta_description": {"type": "string"},
+        "change_detected": {"type": "boolean"},
+        "cause_proven": {"const": false}
+      }
+    },
+    "receiptos": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recorded", "replayable", "source_mutated", "facts_promoted"],
+      "properties": {
+        "recorded": {"const": true},
+        "replayable": {"const": true},
+        "source_mutated": {"const": false},
+        "facts_promoted": {"const": 0}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "external_effect", "consequential_action_requires_human_authorization", "human_authorization_present"],
+      "properties": {
+        "scope": {"const": "LOCAL_LEARNING_REPLAY_ONLY"},
+        "external_effect": {"const": "NONE"},
+        "consequential_action_requires_human_authorization": {"const": true},
+        "human_authorization_present": {"const": false}
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["usaf_curriculum_claimed", "military_training_claimed", "operational_order_created", "institutional_adoption_claimed", "family_fact_created", "public_identity_binding_created"],
+      "properties": {
+        "usaf_curriculum_claimed": {"const": false},
+        "military_training_claimed": {"const": false},
+        "operational_order_created": {"const": false},
+        "institutional_adoption_claimed": {"const": false},
+        "family_fact_created": {"const": false},
+        "public_identity_binding_created": {"const": false}
+      }
+    },
+    "authority_created": {"const": false}
+  }
+}

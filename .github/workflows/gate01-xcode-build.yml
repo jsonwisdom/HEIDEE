@@ -1,0 +1,66 @@
+name: Gate 01 - macOS SwiftPM EJECT
+
+on:
+  push:
+    branches:
+      - agent/joyspace-2.0-family-directories-first
+    paths:
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/**'
+      - '.github/workflows/gate01-xcode-build.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/**'
+      - '.github/workflows/gate01-xcode-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate01:
+    name: Gate 01 / SwiftPM Build + EJECT
+    runs-on: macos-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Capture Toolchain Receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version | tee joyspace/2.0/appledevelop/AppleBlossomCore/xcode-version.txt
+          swift --version | tee joyspace/2.0/appledevelop/AppleBlossomCore/swift-version.txt
+          git rev-parse HEAD | tee joyspace/2.0/appledevelop/AppleBlossomCore/commit-sha.txt
+
+      - name: Resolve Swift Packages
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        run: swift package resolve
+
+      - name: Build AppleBlossomCore (Debug)
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        run: swift build -c debug
+
+      - name: Run EJECT Test
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        shell: bash
+        run: |
+          set -o pipefail
+          swift test --filter AppleBlossomEjectTests 2>&1 | tee test-log.txt
+
+      - name: Archive Build Receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Gate01_XcodeBuild_Receipt
+          path: |
+            joyspace/2.0/appledevelop/AppleBlossomCore/.build/**
+            joyspace/2.0/appledevelop/AppleBlossomCore/test-log.txt
+            joyspace/2.0/appledevelop/AppleBlossomCore/xcode-version.txt
+            joyspace/2.0/appledevelop/AppleBlossomCore/swift-version.txt
+            joyspace/2.0/appledevelop/AppleBlossomCore/commit-sha.txt
+          retention-days: 7
+          if-no-files-found: warn

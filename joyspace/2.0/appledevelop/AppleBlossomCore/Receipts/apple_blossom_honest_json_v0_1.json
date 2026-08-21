@@ -1,0 +1,34 @@
+{
+  "schema": "APPLE_BLOSSOM_HONEST_JSON_V0_1",
+  "observed_at": "2026-08-20T22:35:00-05:00",
+  "repository": "jsonwisdom/HEIDEE",
+  "pull_request": 3,
+  "branch": "agent/joyspace-2.0-family-directories-first",
+  "hardening_commit": "7ebf6e636c25ad67354e733d82ae97f660067619",
+  "scope": "APPLE_BLOSSOM_RECEIPT_ONLY",
+  "claims": {
+    "apple_blossom_receipt_authority_parameter_removed": true,
+    "apple_blossom_receipt_authority_bound_false_in_initializer": true,
+    "apple_blossom_receipt_caller_can_set_authority_true": false,
+    "gate00_receipt_caller_can_set_authority_true": true,
+    "system_zero_authority_by_convention": true,
+    "system_zero_authority_by_type": false,
+    "boxdee_evaluator_surface_verified": false,
+    "lock_for_real": false
+  },
+  "verification": {
+    "source_edit_committed": true,
+    "existing_test_suite_rerun": "PENDING_CI_AT_CREATION",
+    "xcode_27_environment": "HOLD_UNTIL_OBSERVED",
+    "negative_compile_suite": "NOT_YET_ADDED"
+  },
+  "next_gate": "REMOVE_CALLER_CONTROL_FROM_GATE00_RECEIPT_THEN_PROVE_ALL_PUBLIC_NONAUTHORITATIVE_RECEIPT_PATHS",
+  "invariants": [
+    "DEFAULT_FALSE != TYPE_ENFORCED_FALSE",
+    "APPLE_BLOSSOM_RECEIPT_TYPE_ENFORCED_FALSE = TRUE",
+    "SYSTEM_WIDE_TYPE_ENFORCED_FALSE = FALSE",
+    "LOCKED_INTENT != VERIFIED_INTERFACE",
+    "HOLD_UNTIL_PROVEN"
+  ],
+  "authority_created": false
+}

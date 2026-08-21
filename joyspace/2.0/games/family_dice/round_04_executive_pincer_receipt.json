@@ -1,0 +1,61 @@
+{
+  "artifact": "FAMILY_DICE_ROUND_04_EXECUTIVE_PINCER_RECEIPT_v0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "protocol": "Parental Process Pincer Pinky Promise Protocol.md",
+  "round": 4,
+  "status": "ROLLED_HOLD_FOR_SPECIFIC_MEMORANDUM",
+  "played": "2026-08-17T16:41:00-05:00 America/Chicago",
+  "roll_method": "cryptographically_secure_local_random_choice",
+  "dice_result": {
+    "EXECUTIVE_ACTION_DIE": "MEMORANDUM",
+    "AUTHORITY_DIE": "ACT_OF_CONGRESS",
+    "RECEIPT_DIE": "FEDERAL_REGISTER",
+    "CHECKS_DIE": "APPROPRIATIONS",
+    "FAMILY_DIE": "REPLAY",
+    "DISPOSITION": "HOLD"
+  },
+  "family_facing_reading": [
+    "Start with the exact presidential or executive memorandum.",
+    "Identify the Act of Congress that the memorandum claims to implement, interpret, or rely on.",
+    "Find the official memorandum text or presidential document in the Federal Register when applicable.",
+    "Trace any spending, withholding, transfer, grant, or implementation step to the enacted appropriations authority.",
+    "REPLAY the chain from memorandum to statute to receipt to money.",
+    "HOLD until one specific memorandum is bound to one specific statute and appropriations path."
+  ],
+  "pincer_replay": {
+    "left_jaw": "WHAT_DOES_THE_MEMORANDUM_ACTUALLY_DIRECT",
+    "right_jaw": "WHAT_ACT_OF_CONGRESS_SUPPLIES_OR_LIMITS_THE_CLAIMED_AUTHORITY",
+    "center": "FEDERAL_REGISTER_PLUS_APPROPRIATIONS_RECEIPT_CHECK",
+    "family_action": "REPLAY",
+    "current_disposition": "HOLD"
+  },
+  "membrane": [
+    "MEMORANDUM != STATUTE",
+    "ACT_OF_CONGRESS != BLANK_EXECUTIVE_AUTHORITY",
+    "FEDERAL_REGISTER_PUBLICATION != CONSTITUTIONALITY_RULING",
+    "APPROPRIATION != UNLIMITED_DISCRETION",
+    "IMPLEMENTATION_CLAIM != STATUTORY_TEXT",
+    "DICE_ROLL != LEGAL_CONCLUSION",
+    "REPLAY != PROMOTE",
+    "PARENTAL_PROCESS != GOVERNMENT_AUTHORITY"
+  ],
+  "family_posture": {
+    "parental_authority": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "privacy": "SEALED",
+    "executive_action_separate_from_family_authority": true,
+    "message": "Show the memo. Show the law. Show the publication. Show the money. Replay it."
+  },
+  "privacy": {
+    "protected_details_exposed": false,
+    "relationship_edges_created": 0,
+    "public_identity_bindings_created": 0
+  },
+  "next_input": "A specific executive memorandum title, date, identifier, or claim for replay.",
+  "round_05": {
+    "state": "READY_NOT_ROLLED"
+  },
+  "authority_created": false,
+  "source_mutated": false
+}

@@ -1,0 +1,42 @@
+{
+  "artifact": "FAMILY_MATH_v0.3",
+  "artifact_class": "VERSIONED_REPLAY_ENVELOPE",
+  "preserved_source": "FAMILY_MATH_v0.2",
+  "relationship_ledger": "relationship_claims_v0_2.json",
+  "doublecheck_role": "HEIDEE_CHILD_SAFE_SECOND_PASS",
+  "replay_structure_result": "PASS",
+  "relationship_verification": "NOT_PERFORMED",
+  "rules": [
+    "ONE_EDGE_ONE_STATE",
+    "EDGE_PROMOTION_IS_LOCAL_ONLY",
+    "SHARED_CHILD_DOES_NOT_CREATE_ADULT_RELATIONSHIP",
+    "ROLE_OR_POSITION_DOES_NOT_CREATE_KINSHIP",
+    "FAMILY_NODE_DOES_NOT_BIND_PUBLIC_IDENTITY",
+    "CHILD_SAFE_DISPLAY_REQUIRES_PRIVACY_AND_CONSENT_REVIEW"
+  ],
+  "identity_guards": [
+    "LEEANN != LEANNE_UNLESS_EXPLICITLY_BOUND",
+    "BOSSBRE != BRE_UNLESS_EXPLICITLY_BOUND",
+    "LEEANN_FAMILY_NODE != LEEANN_H_CHAVERS_PUBLIC_PERSON_UNLESS_IDENTITY_BINDING_IS_ESTABLISHED"
+  ],
+  "states": {
+    "USER_DECLARED": "preserve declaration without verification promotion",
+    "HOLD": "evidence missing or insufficient",
+    "HOLD_UNSPECIFIED": "relationship label intentionally not asserted",
+    "VERIFIED": "requires edge-local qualifying evidence and evaluation"
+  },
+  "counts": {
+    "preserved_hold_fixtures": 1,
+    "user_declared_relationship_claims": 10,
+    "verified_relationship_edges": 0,
+    "inferred_relationship_edges": 0,
+    "protected_unspecified_relationships": 1
+  },
+  "posture": {
+    "family_map": "DECLARED_EDGE_MAP_AVAILABLE",
+    "public_genealogy": false,
+    "source_mutated": false,
+    "new_family_created": false,
+    "authority_created": false
+  }
+}

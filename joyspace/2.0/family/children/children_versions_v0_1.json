@@ -1,0 +1,77 @@
+{
+  "artifact": "JOYSPACE_CHILDREN_VERSIONS_v0.1",
+  "version": "0.1",
+  "scope": "DADDY_JAY_THREE_DAUGHTERS",
+  "status": "DRAFT_REVIEW_OPEN",
+  "relationship_ledger": "../relationship_claims_v0_3.json",
+  "children": [
+    {
+      "node": "HEIDEE",
+      "relationship_ref": "DADDY_JAY_PARENT_OF_HEIDEE_v0.3",
+      "repo": "jsonwisdom/HEIDEE",
+      "repo_surface_observed": true,
+      "surface_version": "JoySpace 2.0",
+      "surface_state": "ACTIVE_DRAFT_CHILD_SAFE_SECOND_PASS",
+      "version_source": "joyspace/2.0/version.json",
+      "public_safe": true,
+      "authority_created": false
+    },
+    {
+      "node": "JAYCEE",
+      "relationship_ref": "DADDY_JAY_PARENT_OF_JAYCEE_v0.3",
+      "repo": "jsonwisdom/JAYCEE",
+      "repo_surface_observed": true,
+      "surface_version": null,
+      "surface_state": "SEEDED_CONTINUITY_UNVERSIONED",
+      "version_source": "README.md",
+      "public_safe": true,
+      "authority_created": false
+    },
+    {
+      "node": "BRIANNA",
+      "relationship_ref": "DADDY_JAY_PARENT_OF_BRIANNA_v0.3",
+      "repo": null,
+      "repo_surface_observed": false,
+      "surface_version": null,
+      "surface_state": "NODE_ONLY_HOLD_NO_CONNECTED_REPO_SURFACE",
+      "version_source": null,
+      "public_safe": true,
+      "authority_created": false
+    }
+  ],
+  "zora_candidate": {
+    "source_class": "USER_SUPPLIED_ZORA_URL",
+    "url": "https://zora.co/coin/base:0x03271a72d017af1c2deff57aa7e4ab6133484ff5?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+    "network": "base",
+    "chain_id": 8453,
+    "coin_address": "0x03271a72d017af1c2deff57aa7e4ab6133484ff5",
+    "referrer_parameter": "0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+    "page_fetch_state": "HOLD_WEB_FETCH_UNAVAILABLE",
+    "checked_in_live_zora_inventory_state": "NOT_FOUND_AT_REVIEW_TIME",
+    "semantic_binding_to_children": "HOLD_PENDING_ZORA_SDK_READBACK",
+    "creator_binding": "HOLD_PENDING_SOURCE_READBACK",
+    "market_state": "HOLD_PENDING_SOURCE_READBACK"
+  },
+  "upgrade_rule": {
+    "required_before_zora_binding_pass": [
+      "ZORA_SDK_OR_REST_READBACK",
+      "COIN_ADDRESS_MATCH",
+      "CREATOR_PROFILE_OR_ADDRESS_OBSERVATION",
+      "METADATA_CAPTURE",
+      "OBSERVED_AT_TIMESTAMP",
+      "RECEIPT"
+    ],
+    "heuristic_binding_allowed": false
+  },
+  "invariants": [
+    "CHILD_NODE != PUBLIC_BIOGRAPHY",
+    "REPO_EXISTS != CHILD_CONSENT",
+    "REPO_ABSENT != CHILD_ABSENT",
+    "ZORA_LINK != CHILD_VERSION_PROOF",
+    "COIN_ADDRESS != FAMILY_IDENTITY",
+    "REFERRER_PARAMETER != CREATOR_PROOF",
+    "ZORA_MARKET_STATE != FAMILY_VALUE",
+    "STORY_SURFACE != AUTHORITY"
+  ],
+  "authority_created": false
+}
