@@ -298,7 +298,7 @@ public actor AppleBlossomEngine {
             sessionID: state.sessionID,
             sourceSessionID: source.sessionID,
             originalText: state.currentPhrase,
-            translatedText: state.translatedText,
+            translatedText: state.translatedPhrase,
             targetLanguage: state.targetLanguage,
             providerID: source.providerID,
             providerCapabilities: source.providerCapabilities,
