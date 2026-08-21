@@ -381,3 +381,96 @@ AUTO_TRADE = FALSE
 AUTHORITY_CREATED = FALSE
 MERGE_AUTHORIZED = FALSE
 ```
+
+---
+
+## Correction — existing parental switchboard is the Parent Boundary
+
+`PARENT BOUNDARY` above is not a new layer and must not be implemented as one.
+
+Directories-first readback on this branch already exposes:
+
+```text
+joyspace/2.0/parental_controls.json
+joyspace/2.0/ziggy/enablements/fixtures/parental_switchboard_fixture_v0_1.json
+joyspace/2.0/receipts/switchboard-2026-08-15.json
+```
+
+Therefore the implementation binding is:
+
+```text
+JOY / FAMILY ROLE SEMANTICS
+→ EXISTING PARENTAL CONTROLS
+→ EXISTING PARENTAL SWITCHBOARD
+→ APPLEBLOSSOM ROUND
+→ HEIDEE EXPERIENCE
+→ OPTIONAL MODEL PROVIDER
+```
+
+The authority distinction remains exactly the one already encoded by JoySpace:
+
+```text
+PARENTAL_AUTHORITY = TRUE
+SYSTEM_AUTHORITY = FALSE
+INSTITUTIONAL_AUTHORITY = FALSE
+AUTHORITY_SCOPE = PARENTAL_ONLY
+```
+
+AppleBlossom consumes this boundary. AppleBlossom does not create or replace it.
+
+```text
+APPLEBLOSSOM != PARENTAL_AUTHORITY_SOURCE
+OPENAI != PARENTAL_AUTHORITY_SOURCE
+APPLE_FOUNDATION_MODEL != PARENTAL_AUTHORITY_SOURCE
+PROVIDER_SELECTION != FAMILY_ROLE_MUTATION
+```
+
+## Directories-first responsive-language rule
+
+Project vocabulary is navigational state, not decorative repetition.
+
+```text
+RULE_01 = DIRECTORIES_FIRST
+WORD = PATH_TOKEN
+REPEATED_WORD = INCREASE_LOOKUP_DEPTH
+VARIANT = CHECK_LINEAGE_BEFORE_NEW_NODE
+KNOWN_TERM = REPLAY_EXISTING_SEMANTICS_THEN_APPLY_DELTA
+```
+
+Before creating a new abstraction, implementation work must traverse the existing repo/platform structure to the depth supplied by the user's language.
+
+```text
+TOKEN
+→ ROOT
+→ LEVEL_1
+→ LEVEL_2
+→ LEVEL_3
+→ ...
+→ OBSERVED EXISTING OBJECT
+→ DELTA
+```
+
+Examples:
+
+```text
+PARENT
+→ joyspace/2.0/parental_controls.json
+→ parental switchboard fixture
+→ switchboard receipt
+→ family-role variants / relationship receipts
+
+APPLEBLOSSOM
+→ method rail
+→ AppleDevelop
+→ AppleBlossomCore
+→ AppleBlossomApp
+→ receipts / gates
+```
+
+```text
+REPETITION != REDUNDANCY
+VARIANT != NEW_IDENTITY_BY_DEFAULT
+DIRECTORY_EXISTS_BEFORE_ABSTRACTION = REQUIRED_CHECK
+```
+
+This is a navigation/implementation correction only. It does not authorize merge, deployment, provider access, financial action, or a change to family meaning.
