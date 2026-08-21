@@ -1,0 +1,48 @@
+{
+  "schema": "APPLE_BLOSSOM_GATE02_XCODE27_EXTERNAL_AVAILABILITY_V0_1",
+  "observed_at": "2026-08-20T20:31:00-05:00",
+  "source_scope": "APPLE_OFFICIAL_RELEASE_FEED_AND_DEVELOPER_ACCESS",
+  "apple_toolchain": {
+    "xcode_27_exists": true,
+    "release_channel": "DEVELOPER_BETA",
+    "latest_official_verified": "Xcode 27 beta 5",
+    "build": "27A5237l",
+    "released_at": "2026-08-10",
+    "swift": "6.4",
+    "sdk_generation": {
+      "ios": "27",
+      "ipados": "27",
+      "tvos": "27",
+      "watchos": "27",
+      "macos": "27",
+      "visionos": "27"
+    },
+    "minimum_macos": "macOS Tahoe 26.4 or later",
+    "free_developer_account_can_access_beta_xcode": true,
+    "paid_program_required_for_beta_download": false
+  },
+  "tested_github_runner": {
+    "xcode_27_available": false,
+    "xcode": "26.6",
+    "ios_simulator_sdk": "26.5",
+    "gate02_run_id": 32436151548
+  },
+  "normalized_state": {
+    "gate02_source": "PASS",
+    "gate02_current_sdk_typecheck": "PASS",
+    "gate02_xcode27_ios27": "HOLD_RUNNER_AVAILABILITY",
+    "apple_toolchain_available": true,
+    "tested_github_runner_has_required_toolchain": false
+  },
+  "invariants": [
+    "APPLE_TOOLCHAIN_AVAILABLE != GITHUB_RUNNER_TOOLCHAIN_AVAILABLE",
+    "IOS_26_5_TYPECHECK != IOS_27_TYPECHECK",
+    "SOURCE_PASS != ENVIRONMENT_PASS",
+    "HOLD_RUNNER_AVAILABILITY != CODE_FAILURE",
+    "FINAL_PUBLIC_XCODE27_RELEASE = NOT_CLAIMED",
+    "AUTHORITY_CREATED = FALSE",
+    "MERGE_PERFORMED = FALSE"
+  ],
+  "authority_created": false,
+  "merge_performed": false
+}
