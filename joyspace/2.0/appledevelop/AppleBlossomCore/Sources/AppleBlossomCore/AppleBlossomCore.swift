@@ -175,7 +175,7 @@ public struct RoundResult: Codable, Equatable, Sendable {
 
 public actor AppleBlossomEngine {
     private var state: AppleBlossomState
-    private let provider: any LanguageProvider
+    private var provider: any LanguageProvider
     private let receiptSink: any ReceiptSink
 
     public init(
@@ -190,6 +190,14 @@ public actor AppleBlossomEngine {
 
     public func snapshot() -> AppleBlossomState {
         state
+    }
+
+    public func setProvider(_ newProvider: any LanguageProvider) {
+        provider = newProvider
+    }
+
+    public func providerDescriptor() -> (id: String, capabilities: ProviderCapabilities) {
+        (provider.id, provider.capabilities)
     }
 
     public func startRound(
