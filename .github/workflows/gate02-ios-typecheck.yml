@@ -159,3 +159,4 @@ jobs:
             joyspace/2.0/appledevelop/AppleBlossomCore/.gate02/**
           retention-days: 7
           if-no-files-found: error
+          include-hidden-files: true

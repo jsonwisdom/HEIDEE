@@ -3,7 +3,7 @@ import AppIntents
 import AppleBlossomCore
 
 struct Gate02StartBlossomIntent: AppIntent {
-    static var title: LocalizedStringResource = "Start Apple Blossom"
+    static let title: LocalizedStringResource = "Start Apple Blossom"
 
     func perform() async throws -> some IntentResult {
         let engine = AppleBlossomEngine(sessionID: "GATE02_INTENT_SESSION")
