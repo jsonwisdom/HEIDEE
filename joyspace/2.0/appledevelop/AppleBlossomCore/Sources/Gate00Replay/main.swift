@@ -35,8 +35,7 @@ struct Gate00Replay {
             ejectedSessionID: ejectReceipt.sessionID,
             postEjectSessionID: state.sessionID,
             oldSessionReactivated: state.sessionID == initialSession,
-            postEjectRoundCompleted: postEjectRound.receipt.disposition == .pass,
-            authorityCreated: false
+            postEjectRoundCompleted: postEjectRound.receipt.disposition == .pass
         )
 
         let encoder = JSONEncoder()
