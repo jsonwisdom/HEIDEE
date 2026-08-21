@@ -114,6 +114,7 @@ public struct AppleBlossomReceipt: Identifiable, Codable, Equatable, Sendable {
     public let providerCapabilities: ProviderCapabilities?
     public let fallbackUsed: Bool
     public let disposition: EvidenceDisposition
+    /// Non-authoritative receipt invariant. Callers cannot set this value.
     public let authorityCreated: Bool
 
     public init(
@@ -129,8 +130,7 @@ public struct AppleBlossomReceipt: Identifiable, Codable, Equatable, Sendable {
         providerID: String? = nil,
         providerCapabilities: ProviderCapabilities? = nil,
         fallbackUsed: Bool,
-        disposition: EvidenceDisposition,
-        authorityCreated: Bool = false
+        disposition: EvidenceDisposition
     ) {
         self.id = id
         self.timestamp = timestamp
@@ -145,7 +145,7 @@ public struct AppleBlossomReceipt: Identifiable, Codable, Equatable, Sendable {
         self.providerCapabilities = providerCapabilities
         self.fallbackUsed = fallbackUsed
         self.disposition = disposition
-        self.authorityCreated = authorityCreated
+        self.authorityCreated = false
     }
 }
 
@@ -271,8 +271,7 @@ public actor AppleBlossomEngine {
             providerID: nil,
             providerCapabilities: nil,
             fallbackUsed: false,
-            disposition: .pass,
-            authorityCreated: false
+            disposition: .pass
         )
         await receiptSink.append(receipt)
 
@@ -303,8 +302,7 @@ public actor AppleBlossomEngine {
             providerID: source.providerID,
             providerCapabilities: source.providerCapabilities,
             fallbackUsed: source.fallbackUsed,
-            disposition: .pass,
-            authorityCreated: false
+            disposition: .pass
         )
         await receiptSink.append(receipt)
         return RoundResult(state: state, receipt: receipt)
@@ -332,8 +330,7 @@ public actor AppleBlossomEngine {
             providerID: providerID,
             providerCapabilities: providerCapabilities,
             fallbackUsed: fallbackUsed,
-            disposition: disposition,
-            authorityCreated: false
+            disposition: disposition
         )
     }
 }
