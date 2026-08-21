@@ -26,6 +26,27 @@ func gate00Fallback() async throws {
     #expect(receipts.count == 1)
 }
 
+@Test("Gate00Receipt is non-authoritative by construction")
+func gate00ReceiptAuthorityIsTypeBoundFalse() {
+    let receipt = Gate00Receipt(
+        disposition: .pass,
+        externalProviderActive: false,
+        networkRequired: false,
+        microphoneRequired: false,
+        foundationModelRequired: false,
+        fallbackUsed: true,
+        receiptCreated: true,
+        rawAudioPersistence: .memoryOnlyNeverDisk,
+        initialSessionID: "TYPE_TEST_A",
+        ejectedSessionID: "TYPE_TEST_A",
+        postEjectSessionID: "TYPE_TEST_B",
+        oldSessionReactivated: false,
+        postEjectRoundCompleted: true
+    )
+
+    #expect(receipt.authorityCreated == false)
+}
+
 @Test("Eject rotates the session and later start does not reactivate the ejected session")
 func ejectThenStart() async throws {
     let store = InMemoryReceiptStore()
