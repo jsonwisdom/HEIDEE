@@ -1,7 +1,8 @@
 {
   "schema": "APPLE_BLOSSOM_FAMILY_BUILD_V0_1",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "observed_at": "2026-08-20T19:40:00-05:00",
+  "corrected_at": "2026-08-21T04:38:00-05:00",
   "identity": {
     "primary_index": "jaywisdom.eth",
     "base_context_anchor": "jaywisdom.base.eth"
@@ -17,10 +18,38 @@
       "repo": "jsonwisdom/HEIDEE",
       "pr": 3,
       "branch": "agent/joyspace-2.0-family-directories-first"
+    },
+    "parental_controls": {
+      "path": "joyspace/2.0/parental_controls.json",
+      "role": "EXISTING_PARENTAL_AUTHORITY_SCHEMA"
+    },
+    "parental_switchboard": {
+      "path": "joyspace/2.0/ziggy/enablements/fixtures/parental_switchboard_fixture_v0_1.json",
+      "receipt": "joyspace/2.0/receipts/switchboard-2026-08-15.json",
+      "role": "EXISTING_PARENTAL_SWITCHBOARD"
     }
+  },
+  "responsive_language": {
+    "rule_01": "DIRECTORIES_FIRST",
+    "word": "PATH_TOKEN",
+    "repeated_word": "INCREASE_LOOKUP_DEPTH",
+    "variant": "CHECK_LINEAGE_BEFORE_NEW_NODE",
+    "known_term": "REPLAY_EXISTING_SEMANTICS_THEN_APPLY_DELTA",
+    "stop_condition": "USER_LANGUAGE_DEPTH_EXHAUSTED",
+    "directory_exists_before_abstraction": true
+  },
+  "parental_binding": {
+    "appleblossom_creates_parent_boundary": false,
+    "uses_existing_joyspace_parental_controls": true,
+    "uses_existing_parental_switchboard": true,
+    "PARENTAL_AUTHORITY": true,
+    "SYSTEM_AUTHORITY": false,
+    "INSTITUTIONAL_AUTHORITY": false,
+    "authority_scope": "PARENTAL_ONLY"
   },
   "product_loop": [
     "FAMILY_MEANING",
+    "EXISTING_PARENTAL_SWITCHBOARD",
     "APPLE_BLOSSOM_ROUND",
     "LOCAL_LEARNER_RECEIPT",
     "DELAYED_REPLAY",
@@ -62,7 +91,9 @@
       "AGENTS_SDK_REPLAY_EVALUATION_HARNESS"
     ],
     "api_key_in_repo": false,
-    "memory_is_canon": false
+    "memory_is_canon": false,
+    "parental_authority_source": false,
+    "family_semantics_source": false
   },
   "financial_boundary": {
     "wallet_balance_is_family_value": false,
@@ -95,6 +126,12 @@
     "F_OPTIONAL_ADULT_REINVESTMENT_BRIDGE"
   ],
   "invariants": [
+    "RULE_01 = DIRECTORIES_FIRST",
+    "WORD = PATH_TOKEN",
+    "REPEATED_WORD = INCREASE_LOOKUP_DEPTH",
+    "VARIANT = CHECK_LINEAGE_BEFORE_NEW_NODE",
+    "DIRECTORY_EXISTS_BEFORE_ABSTRACTION = TRUE",
+    "APPLEBLOSSOM != PARENTAL_AUTHORITY_SOURCE",
     "MODEL_OUTPUT != LEARNER_MASTERY",
     "TRANSLATION_OUTPUT != LEARNER_MASTERY",
     "CHECKPOINT != GLOBAL_TRUTH",
