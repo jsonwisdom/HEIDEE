@@ -1,0 +1,112 @@
+{
+  "schema": "APPLE_BLOSSOM_FAMILY_BUILD_V0_1",
+  "version": "0.1.0",
+  "observed_at": "2026-08-20T19:40:00-05:00",
+  "identity": {
+    "primary_index": "jaywisdom.eth",
+    "base_context_anchor": "jaywisdom.base.eth"
+  },
+  "sources": {
+    "apple_blossom": {
+      "repo": "jsonwisdom/COMPUTERWISDOM",
+      "pr": 518,
+      "path": "docs/gray-baby/APPLE_BLOSSOM_LANGUAGE_LOOP_V0_1.md",
+      "schema_state": "Apple-Blossom-0.3.1_LOCKED"
+    },
+    "joyspace": {
+      "repo": "jsonwisdom/HEIDEE",
+      "pr": 3,
+      "branch": "agent/joyspace-2.0-family-directories-first"
+    }
+  },
+  "product_loop": [
+    "FAMILY_MEANING",
+    "APPLE_BLOSSOM_ROUND",
+    "LOCAL_LEARNER_RECEIPT",
+    "DELAYED_REPLAY",
+    "FAMILY_OWNED_ARTIFACT",
+    "OPTIONAL_PUBLIC_CREATOR_SURFACE",
+    "OPTIONAL_ADULT_CAPITAL_RAIL",
+    "NEXT_FAMILY_BUILD"
+  ],
+  "vcr_controls": {
+    "REW": "LAST_LOCALLY_VALID_OR_MUTUALLY_ACKNOWLEDGED_CHECKPOINT",
+    "PLAY": "RENDER_NODE_AUTHORED_STATE_WITH_PROVENANCE",
+    "FF": "PROPOSE_DELTA_ON_PROPOSER_NODE_ONLY",
+    "TRACKING": "MATCH_VARIANT_CONFLICT_HOLD",
+    "PAUSE": "NO_MUTATION_PRESERVE_STATE",
+    "EJECT": "END_EXCHANGE_PRESERVE_NODES"
+  },
+  "apple_platform": {
+    "ui": "SwiftUI",
+    "intents": [
+      "StartBlossomRound",
+      "ReplayLastRound",
+      "SwapLanguage",
+      "ConfirmMeaning",
+      "ShowMyReceipt",
+      "EjectSession"
+    ],
+    "provider_contract": [
+      "AppleFoundationModelProvider",
+      "OpenAIRealtimeProvider",
+      "DeterministicFixtureProvider"
+    ],
+    "default_posture": "LOCAL_FIRST_NETWORK_OPTIONAL"
+  },
+  "openai": {
+    "core_dependency": false,
+    "candidate_uses": [
+      "GPT_REALTIME_TRANSLATE_LANGUAGE_SWAP",
+      "GPT_REALTIME_2_CONVERSATIONAL_VOICE",
+      "AGENTS_SDK_REPLAY_EVALUATION_HARNESS"
+    ],
+    "api_key_in_repo": false,
+    "memory_is_canon": false
+  },
+  "financial_boundary": {
+    "wallet_balance_is_family_value": false,
+    "token_price_is_learning_progress": false,
+    "child_is_financial_actor_by_default": false,
+    "auto_trade": false,
+    "auto_buy": false,
+    "auto_sell": false,
+    "adult_decision_required": true,
+    "exact_current_wallet_balance_published": false
+  },
+  "privacy": {
+    "child_data_to_wallet_data": false,
+    "assistant_log_is_child_memory": false,
+    "public_export_requires_redaction": true,
+    "private_wallet_screenshot_published": false
+  },
+  "success": {
+    "family_chooses_to_replay": true,
+    "learning_receipt_valid": true,
+    "privacy_boundary_holds": true,
+    "token_appreciation_required": false
+  },
+  "implementation_phases": [
+    "A_DETERMINISTIC_SWIFTUI_PROTOTYPE",
+    "B_SIRI_APP_INTENTS",
+    "C_LOCAL_FOUNDATION_MODELS",
+    "D_OPTIONAL_OPENAI_REALTIME_BRIDGE",
+    "E_OPTIONAL_PUBLIC_CREATOR_BRIDGE",
+    "F_OPTIONAL_ADULT_REINVESTMENT_BRIDGE"
+  ],
+  "invariants": [
+    "MODEL_OUTPUT != LEARNER_MASTERY",
+    "TRANSLATION_OUTPUT != LEARNER_MASTERY",
+    "CHECKPOINT != GLOBAL_TRUTH",
+    "DIVERGENCE != ERROR",
+    "RECONCILIATION != OVERWRITE",
+    "WALLET_BALANCE != FAMILY_VALUE",
+    "TOKEN_PRICE != LEARNING_PROGRESS",
+    "CAPITAL_EVENT != FAMILY_MEANING",
+    "OPENAI_MEMORY != CANON",
+    "AUTO_GLOBAL_MERGE = FALSE",
+    "AUTHORITY_CREATED = FALSE"
+  ],
+  "authority_created": false,
+  "merge_authorized": false
+}
