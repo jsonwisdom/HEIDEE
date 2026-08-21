@@ -1,0 +1,18 @@
+{
+  "authorityCreated" : false,
+  "disposition" : "PASS",
+  "ejectedSessionID" : "GATE00_SESSION_A",
+  "externalProviderActive" : false,
+  "fallbackUsed" : true,
+  "foundationModelRequired" : false,
+  "gate" : "00_SOURCE_ONLY_FALLBACK",
+  "initialSessionID" : "GATE00_SESSION_A",
+  "microphoneRequired" : false,
+  "networkRequired" : false,
+  "oldSessionReactivated" : false,
+  "postEjectRoundCompleted" : true,
+  "postEjectSessionID" : "GATE00_SESSION_B",
+  "rawAudioPersistence" : "MEMORY_ONLY_NEVER_DISK",
+  "receiptCreated" : true,
+  "schema" : "APPLE_BLOSSOM_GATE_00_RECEIPT_V0_1"
+}
