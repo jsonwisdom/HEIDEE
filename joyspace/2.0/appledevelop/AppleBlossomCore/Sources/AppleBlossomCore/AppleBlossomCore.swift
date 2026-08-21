@@ -351,6 +351,7 @@ public struct Gate00Receipt: Codable, Equatable, Sendable {
     public let postEjectSessionID: String
     public let oldSessionReactivated: Bool
     public let postEjectRoundCompleted: Bool
+    /// Gate00 is a non-authoritative verification receipt. Callers cannot set this value.
     public let authorityCreated: Bool
 
     public init(
@@ -368,8 +369,7 @@ public struct Gate00Receipt: Codable, Equatable, Sendable {
         ejectedSessionID: String,
         postEjectSessionID: String,
         oldSessionReactivated: Bool,
-        postEjectRoundCompleted: Bool,
-        authorityCreated: Bool
+        postEjectRoundCompleted: Bool
     ) {
         self.schema = schema
         self.gate = gate
@@ -386,6 +386,6 @@ public struct Gate00Receipt: Codable, Equatable, Sendable {
         self.postEjectSessionID = postEjectSessionID
         self.oldSessionReactivated = oldSessionReactivated
         self.postEjectRoundCompleted = postEjectRoundCompleted
-        self.authorityCreated = authorityCreated
+        self.authorityCreated = false
     }
 }
