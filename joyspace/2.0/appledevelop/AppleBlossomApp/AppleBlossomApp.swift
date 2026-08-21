@@ -2,84 +2,9 @@ import Foundation
 import SwiftUI
 import AppIntents
 import FoundationModels
+import AppleBlossomCore
 
-// MARK: - Atomic Family Data Model
-struct LearningReceipt: Identifiable, Codable, Hashable, Sendable {
-    let id: UUID
-    let originalText: String
-    let translatedText: String
-    let targetLanguage: String
-    let timestamp: Date
-    let assistanceUsed: [String]
-    let sessionID: String
-
-    init(
-        id: UUID = UUID(),
-        originalText: String,
-        translatedText: String,
-        targetLanguage: String,
-        timestamp: Date = Date(),
-        assistanceUsed: [String],
-        sessionID: String
-    ) {
-        self.id = id
-        self.originalText = originalText
-        self.translatedText = translatedText
-        self.targetLanguage = targetLanguage
-        self.timestamp = timestamp
-        self.assistanceUsed = assistanceUsed
-        self.sessionID = sessionID
-    }
-}
-
-// MARK: - Durable Local Receipt Store
-@MainActor
-final class ReceiptStore: ObservableObject {
-    @Published private(set) var receipts: [LearningReceipt] = []
-
-    private let fileURL: URL
-    private let encoder: JSONEncoder
-    private let decoder: JSONDecoder
-
-    init() {
-        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let directory = base.appendingPathComponent("AppleBlossom", isDirectory: true)
-        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        self.fileURL = directory.appendingPathComponent("learning-receipts-v0.1.json")
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        encoder.dateEncodingStrategy = .iso8601
-        self.encoder = encoder
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        self.decoder = decoder
-
-        load()
-    }
-
-    func append(_ receipt: LearningReceipt) {
-        receipts.append(receipt)
-        persist()
-    }
-
-    private func load() {
-        guard let data = try? Data(contentsOf: fileURL),
-              let decoded = try? decoder.decode([LearningReceipt].self, from: data) else {
-            receipts = []
-            return
-        }
-        receipts = decoded
-    }
-
-    private func persist() {
-        guard let data = try? encoder.encode(receipts) else { return }
-        try? data.write(to: fileURL, options: [.atomic])
-    }
-}
-
-// MARK: - Providers
+// MARK: - iOS Provider Adapters
 enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
     case appleLocal
     case openAIRealtime
@@ -110,12 +35,14 @@ enum ProviderError: LocalizedError {
     }
 }
 
-protocol LanguageProvider: Sendable {
-    func translate(_ text: String, to language: String) async throws -> String
-    func transcribeAudio() async throws -> String
-}
-
 struct AppleFoundationProvider: LanguageProvider {
+    let id = "APPLE_FOUNDATION_LOCAL"
+    let capabilities = ProviderCapabilities(
+        requiresNetwork: false,
+        requiresMicrophone: false,
+        externalProvider: false
+    )
+
     func translate(_ text: String, to language: String) async throws -> String {
         switch SystemLanguageModel.default.availability {
         case .available:
@@ -123,71 +50,195 @@ struct AppleFoundationProvider: LanguageProvider {
                 Translate the person's text into the requested target language.
                 Preserve meaning. Return only the translation, with no explanation.
                 """)
-            let response = try await session.respond(
-                to: "Translate into \(language): \(text)"
-            )
+            let response = try await session.respond(to: "Translate into \(language): \(text)")
             return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
         default:
             throw ProviderError.appleModelUnavailable
         }
     }
-
-    // v0.1 keeps speech capture deterministic. Replace with a microphone/Speech rail later.
-    func transcribeAudio() async throws -> String {
-        "I love this."
-    }
 }
 
 struct OpenAIDeepVoiceProvider: LanguageProvider {
-    // Deliberately disabled in the iOS client until a server broker mints a short-lived
-    // Realtime client secret. Never embed OPENAI_API_KEY in an app binary.
-    func translate(_ text: String, to language: String) async throws -> String {
-        throw ProviderError.openAINotConfigured
-    }
+    let id = "OPENAI_REALTIME_OPTIONAL"
+    let capabilities = ProviderCapabilities(
+        requiresNetwork: true,
+        requiresMicrophone: false,
+        externalProvider: true
+    )
 
-    func transcribeAudio() async throws -> String {
+    // Deliberately disabled until a server broker mints a short-lived Realtime client secret.
+    // Never embed OPENAI_API_KEY in the app binary.
+    func translate(_ text: String, to language: String) async throws -> String {
         throw ProviderError.openAINotConfigured
     }
 }
 
-struct DeterministicFixtureProvider: LanguageProvider {
-    func translate(_ text: String, to language: String) async throws -> String {
-        if text == "I love this." && language == "Spanish" { return "Me encanta esto." }
-        if text == "I love this." && language == "French" { return "J’adore ça." }
-        return "Fixture: \(text) in \(language)"
+// MARK: - Durable Family-Local Engine Receipts
+actor DiskReceiptStore: ReceiptSink {
+    private var receipts: [AppleBlossomReceipt]
+    private let fileURL: URL
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
+
+    init() {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let directory = base.appendingPathComponent("AppleBlossom", isDirectory: true)
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        fileURL = directory.appendingPathComponent("appleblossom-engine-receipts-v0.1.json")
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        self.encoder = encoder
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        self.decoder = decoder
+
+        if let data = try? Data(contentsOf: fileURL),
+           let decoded = try? decoder.decode([AppleBlossomReceipt].self, from: data) {
+            receipts = decoded
+        } else {
+            receipts = []
+        }
     }
 
-    func transcribeAudio() async throws -> String {
-        "I love this."
+    func append(_ receipt: AppleBlossomReceipt) {
+        receipts.append(receipt)
+        persist()
+    }
+
+    func allReceipts() -> [AppleBlossomReceipt] {
+        receipts
+    }
+
+    private func persist() {
+        guard let data = try? encoder.encode(receipts) else { return }
+        try? data.write(to: fileURL, options: [.atomic])
+    }
+}
+
+// MARK: - Shared Engine Controller
+@MainActor
+final class AppleBlossomController: ObservableObject {
+    @Published private(set) var state: AppleBlossomState
+    @Published private(set) var receipts: [AppleBlossomReceipt] = []
+    @Published private(set) var providerKind: ProviderKind = .appleLocal
+    @Published var statusMessage = "Ready."
+
+    private let receiptStore: DiskReceiptStore
+    private let engine: AppleBlossomEngine
+
+    init() {
+        let sessionID = UUID().uuidString
+        let store = DiskReceiptStore()
+        receiptStore = store
+        engine = AppleBlossomEngine(
+            sessionID: sessionID,
+            provider: AppleFoundationProvider(),
+            receiptSink: store
+        )
+        state = AppleBlossomState(sessionID: sessionID)
+
+        Task { await refreshFromEngine() }
+    }
+
+    func setProvider(_ kind: ProviderKind) async {
+        switch kind {
+        case .appleLocal:
+            await engine.setProvider(AppleFoundationProvider())
+        case .openAIRealtime:
+            await engine.setProvider(OpenAIDeepVoiceProvider())
+        case .fixture:
+            await engine.setProvider(DeterministicFixtureProvider())
+        }
+        providerKind = kind
+        statusMessage = "Provider: \(kind.label)"
+    }
+
+    func startRound() async {
+        do {
+            // Gate 00 / v0.1 intentionally does not request microphone access.
+            let result = try await engine.startRound(text: "I love this.", inputKind: .fixture)
+            state = result.state
+            statusMessage = "Round started."
+        } catch {
+            await engine.setProvider(DeterministicFixtureProvider())
+            providerKind = .fixture
+            do {
+                let result = try await engine.startRound(text: "I love this.", inputKind: .fixture)
+                state = result.state
+                statusMessage = "Local fallback used: \(error.localizedDescription)"
+            } catch {
+                statusMessage = "Fallback failed: \(error.localizedDescription)"
+            }
+        }
+        await refreshReceipts()
+    }
+
+    func swapLanguage() async {
+        do {
+            let result = try await engine.swapLanguage()
+            state = result.state
+            statusMessage = "Language: \(state.targetLanguage)"
+        } catch {
+            await engine.setProvider(DeterministicFixtureProvider())
+            providerKind = .fixture
+            do {
+                let result = try await engine.swapLanguage()
+                state = result.state
+                statusMessage = "Language fallback used: \(error.localizedDescription)"
+            } catch {
+                statusMessage = "Swap failed: \(error.localizedDescription)"
+            }
+        }
+        await refreshReceipts()
+    }
+
+    func confirmMeaning() async {
+        let receipt = await engine.confirmMeaning()
+        statusMessage = receipt.disposition == .pass
+            ? "Meaning confirmed for this bounded fixture."
+            : "Meaning needs learner confirmation."
+        await refreshReceipts()
+    }
+
+    func replayLastRound() async {
+        guard let result = await engine.replayLastRound() else {
+            statusMessage = "No local round receipt yet."
+            return
+        }
+        state = result.state
+        statusMessage = "Last local round replayed into the current session."
+        await refreshReceipts()
+    }
+
+    func ejectSession() async {
+        _ = await engine.ejectSession()
+        await refreshFromEngine()
+        statusMessage = "Session ejected. Old session not reactivated; receipts preserved."
+    }
+
+    private func refreshFromEngine() async {
+        state = await engine.snapshot()
+        await refreshReceipts()
+    }
+
+    private func refreshReceipts() async {
+        receipts = await receiptStore.allReceipts()
     }
 }
 
 // MARK: - Main View
 struct AppleBlossomView: View {
-    @StateObject private var receiptStore = ReceiptStore()
+    @StateObject private var controller = AppleBlossomController()
 
-    @State private var currentPhrase = "I love this."
-    @State private var translatedPhrase = "Me encanta esto."
-    @State private var targetLanguage = "Spanish"
     @State private var isPlaying = false
     @State private var trackingOffset: Double = 0.0
-    @State private var sessionID = UUID().uuidString
     @State private var showReceipts = false
-
-    @State private var providerKind: ProviderKind = .appleLocal
     @State private var pendingProviderKind: ProviderKind?
-
     @State private var showGateHold = false
     @State private var gateMessage = ""
-    @State private var statusMessage = "Ready."
-
-    private var activeProvider: any LanguageProvider {
-        switch providerKind {
-        case .appleLocal: AppleFoundationProvider()
-        case .openAIRealtime: OpenAIDeepVoiceProvider()
-        case .fixture: DeterministicFixtureProvider()
-        }
-    }
 
     var body: some View {
         NavigationStack {
@@ -198,7 +249,7 @@ struct AppleBlossomView: View {
                     .padding(.top, 10)
 
                 VStack(spacing: 8) {
-                    Text(currentPhrase)
+                    Text(controller.state.currentPhrase)
                         .font(.largeTitle)
                         .fontWeight(.bold)
 
@@ -206,7 +257,7 @@ struct AppleBlossomView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
-                    Text(translatedPhrase)
+                    Text(controller.state.translatedPhrase)
                         .font(.title)
                         .foregroundStyle(.blue)
                         .padding()
@@ -220,7 +271,7 @@ struct AppleBlossomView: View {
                     Text("Provider:")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    Text(providerKind.label)
+                    Text(controller.providerKind.label)
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(6)
@@ -231,31 +282,41 @@ struct AppleBlossomView: View {
 
                     Menu("🌐 Provider") {
                         Button("🍎 Apple Foundation (Local)") {
-                            setProvider(.appleLocal)
+                            Task { await controller.setProvider(.appleLocal) }
                         }
                         Button("🎙️ OpenAI Realtime (Optional)") {
-                            requestExternalProvider(.openAIRealtime)
+                            pendingProviderKind = .openAIRealtime
+                            gateMessage = "External AI sends session content off-device. Explicit adult-controlled approval is required. No family authority is created."
+                            showGateHold = true
                         }
                         Button("📼 Deterministic Fixture (No AI)") {
-                            setProvider(.fixture)
+                            Task { await controller.setProvider(.fixture) }
                         }
                     }
                 }
                 .padding(.horizontal)
 
                 HStack(spacing: 12) {
-                    Button(action: rewindAction) {
+                    Button {
+                        isPlaying = false
+                        trackingOffset = max(-1.0, trackingOffset - 0.2)
+                    } label: {
                         Image(systemName: "backward.fill")
                     }
                     .font(.title2)
 
-                    Button(action: playAction) {
+                    Button {
+                        isPlaying.toggle()
+                    } label: {
                         Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                     }
                     .font(.title)
                     .foregroundStyle(isPlaying ? .orange : .green)
 
-                    Button(action: forwardAction) {
+                    Button {
+                        isPlaying = false
+                        trackingOffset = min(1.0, trackingOffset + 0.2)
+                    } label: {
                         Image(systemName: "forward.fill")
                     }
                     .font(.title2)
@@ -264,22 +325,15 @@ struct AppleBlossomView: View {
 
                     HStack(spacing: 4) {
                         Text("TRK").font(.caption)
-                        Slider(
-                            value: $trackingOffset,
-                            in: -1.0...1.0,
-                            step: 0.1,
-                            onEditingChanged: { editing in
-                                if !editing {
-                                    appendReceipt(assistance: ["TRACKING_\(trackingOffset)"])
-                                }
-                            }
-                        )
-                        .frame(width: 70)
+                        Slider(value: $trackingOffset, in: -1.0...1.0, step: 0.1)
+                            .frame(width: 70)
                     }
 
                     Divider().frame(height: 30)
 
-                    Button(role: .destructive, action: ejectAction) {
+                    Button(role: .destructive) {
+                        Task { await controller.ejectSession() }
+                    } label: {
                         Image(systemName: "eject.fill")
                     }
                     .font(.title2)
@@ -290,22 +344,25 @@ struct AppleBlossomView: View {
                 .padding(.horizontal)
 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 10) {
-                    IntentButton("Start Round", systemImage: "sparkles") { await startBlossomRound() }
-                    IntentButton("Swap Lang", systemImage: "globe") { await swapLanguage() }
-                    IntentButton("Confirm Meaning", systemImage: "checkmark.seal.fill") { await confirmMeaning() }
+                    IntentButton("Start Round", systemImage: "sparkles") { await controller.startRound() }
+                    IntentButton("Swap Lang", systemImage: "globe") { await controller.swapLanguage() }
+                    IntentButton("Confirm Meaning", systemImage: "checkmark.seal.fill") { await controller.confirmMeaning() }
                     IntentButton("Show Receipt", systemImage: "list.bullet.rectangle") { showReceipts.toggle() }
-                    IntentButton("Replay Last", systemImage: "arrow.clockwise") { await replayLastRound() }
-                    IntentButton("Eject Session", systemImage: "door.left.hand.open") { ejectAction() }
+                    IntentButton("Replay Last", systemImage: "arrow.clockwise") { await controller.replayLastRound() }
+                    IntentButton("Eject Session", systemImage: "door.left.hand.open") { await controller.ejectSession() }
                 }
                 .padding(.horizontal)
 
-                Text(statusMessage)
+                Text(controller.statusMessage)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
 
                 Spacer()
 
+                Text("RAW_AUDIO_PERSISTENCE = MEMORY_ONLY_NEVER_DISK")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
                 Text("AI_UNAVAILABLE != JOYSPACE_UNAVAILABLE")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
@@ -317,130 +374,22 @@ struct AppleBlossomView: View {
             .padding()
             .navigationTitle("🌸 Apple Blossom")
             .sheet(isPresented: $showReceipts) {
-                ReceiptListView(receipts: receiptStore.receipts)
+                ReceiptListView(receipts: controller.receipts)
             }
             .alert("🥊 Shock Glove", isPresented: $showGateHold) {
                 Button("Allow External Provider") {
                     guard let pendingProviderKind else { return }
-                    providerKind = pendingProviderKind
                     self.pendingProviderKind = nil
-                    appendReceipt(assistance: ["GATE_PASSED", "PROVIDER_SWITCH_OPENAI"])
-                    statusMessage = "External provider selected. Server broker still required."
+                    Task { await controller.setProvider(pendingProviderKind) }
                 }
                 Button("Hold / Cancel", role: .cancel) {
                     pendingProviderKind = nil
                     gateMessage = "Boundary held. No provider change occurred."
-                    statusMessage = gateMessage
                 }
             } message: {
                 Text(gateMessage)
             }
         }
-    }
-
-    private func setProvider(_ kind: ProviderKind) {
-        providerKind = kind
-        pendingProviderKind = nil
-        appendReceipt(assistance: ["PROVIDER_SWITCH_\(kind.rawValue.uppercased())"])
-        statusMessage = "Provider: \(kind.label)"
-    }
-
-    private func requestExternalProvider(_ kind: ProviderKind) {
-        pendingProviderKind = kind
-        gateMessage = "External AI sends session content off-device. An adult-controlled boundary must explicitly allow that provider for this prototype. No family authority is created."
-        showGateHold = true
-    }
-
-    private func startBlossomRound() async {
-        do {
-            let heardText = try await activeProvider.transcribeAudio()
-            currentPhrase = heardText
-            translatedPhrase = try await activeProvider.translate(heardText, to: targetLanguage)
-            appendReceipt(assistance: ["START_ROUND", "AUDIO_CUE", providerKind.rawValue])
-            statusMessage = "Round started."
-        } catch {
-            let fixture = DeterministicFixtureProvider()
-            currentPhrase = (try? await fixture.transcribeAudio()) ?? currentPhrase
-            translatedPhrase = (try? await fixture.translate(currentPhrase, to: targetLanguage)) ?? currentPhrase
-            appendReceipt(assistance: ["FALLBACK_FIXTURE", "PROVIDER_ERROR_\(providerKind.rawValue)"])
-            statusMessage = error.localizedDescription
-        }
-    }
-
-    private func swapLanguage() async {
-        targetLanguage = (targetLanguage == "Spanish") ? "French" : "Spanish"
-        do {
-            translatedPhrase = try await activeProvider.translate(currentPhrase, to: targetLanguage)
-            appendReceipt(assistance: ["LANG_SWAP_\(targetLanguage)", providerKind.rawValue])
-            statusMessage = "Language: \(targetLanguage)"
-        } catch {
-            let fixture = DeterministicFixtureProvider()
-            translatedPhrase = (try? await fixture.translate(currentPhrase, to: targetLanguage)) ?? currentPhrase
-            appendReceipt(assistance: ["LANG_SWAP_FALLBACK_\(targetLanguage)"])
-            statusMessage = error.localizedDescription
-        }
-    }
-
-    private func confirmMeaning() async {
-        let normalized = translatedPhrase.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
-        let isFixtureMatch = currentPhrase == "I love this." && (
-            (targetLanguage == "Spanish" && normalized.contains("encanta")) ||
-            (targetLanguage == "French" && normalized.contains("adore"))
-        )
-        appendReceipt(assistance: ["MEANING_CONFIRMATION_\(isFixtureMatch ? "MATCH" : "HOLD")"])
-        statusMessage = isFixtureMatch ? "Meaning confirmed for this bounded fixture." : "Meaning needs learner confirmation."
-    }
-
-    private func replayLastRound() async {
-        guard let last = receiptStore.receipts.last else {
-            statusMessage = "No local receipt yet."
-            return
-        }
-        currentPhrase = last.originalText
-        translatedPhrase = last.translatedText
-        targetLanguage = last.targetLanguage
-        appendReceipt(assistance: ["REPLAY_SESSION_\(last.sessionID)"])
-        statusMessage = "Last local receipt replayed."
-    }
-
-    private func rewindAction() {
-        isPlaying = false
-        trackingOffset = max(-1.0, trackingOffset - 0.2)
-        appendReceipt(assistance: ["REW"])
-    }
-
-    private func playAction() {
-        isPlaying.toggle()
-        appendReceipt(assistance: [isPlaying ? "PLAY" : "PAUSE"])
-    }
-
-    private func forwardAction() {
-        isPlaying = false
-        trackingOffset = min(1.0, trackingOffset + 0.2)
-        appendReceipt(assistance: ["FF"])
-    }
-
-    private func ejectAction() {
-        isPlaying = false
-        sessionID = UUID().uuidString
-        currentPhrase = "I love this."
-        translatedPhrase = "Me encanta esto."
-        targetLanguage = "Spanish"
-        trackingOffset = 0.0
-        appendReceipt(assistance: ["EJECT_SESSION"])
-        statusMessage = "Session ejected. Local receipts preserved."
-    }
-
-    private func appendReceipt(assistance: [String]) {
-        receiptStore.append(
-            LearningReceipt(
-                originalText: currentPhrase,
-                translatedText: translatedPhrase,
-                targetLanguage: targetLanguage,
-                assistanceUsed: assistance,
-                sessionID: sessionID
-            )
-        )
     }
 }
 
@@ -472,7 +421,7 @@ struct IntentButton: View {
 }
 
 struct ReceiptListView: View {
-    let receipts: [LearningReceipt]
+    let receipts: [AppleBlossomReceipt]
 
     var body: some View {
         NavigationStack {
@@ -482,7 +431,10 @@ struct ReceiptListView: View {
                         .font(.headline)
                     Text("Lang: \(receipt.targetLanguage)")
                         .font(.caption)
-                    Text("Assist: \(receipt.assistanceUsed.joined(separator: ", "))")
+                    Text("Event: \(receipt.event.rawValue) · \(receipt.disposition.rawValue)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                    Text("Session: \(receipt.sessionID)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                     Text(receipt.timestamp, style: .time)
@@ -495,8 +447,8 @@ struct ReceiptListView: View {
 }
 
 // MARK: - App Intents
-// v0.1 registers the system actions. State mutation remains inside the app until
-// the shared App-Intent command bridge is added in a later receipt.
+// Gate 05A/05B is intentionally NOT claimed yet. These register actions only;
+// cold/warm durable engine invocation remains the next device-specific receipt.
 struct StartBlossomRoundIntent: AppIntent {
     static var title: LocalizedStringResource = "Start a Blossom round"
     func perform() async throws -> some IntentResult { .result(dialog: "Open Apple Blossom to start the round.") }
