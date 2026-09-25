@@ -1,0 +1,106 @@
+{
+  "schema": "JOYSPACE_FAMILY_GAME_CONTRACT",
+  "name": "Iron Bowl Family Fact — PorchLightON",
+  "version": "0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "status": "READY_FOR_FIRST_ROUND",
+  "bound_at": "2026-08-17T16:15:00-05:00",
+  "purpose": "A fun family replay game with comic-tragedy energy that turns claims, memories, and family stories into safe playable rounds without turning play into proof.",
+  "tone": ["FUN_AF", "SOUTHERN_PORCH", "IRON_BOWL_LOUD", "COMIC_TRAGEDY", "SISTER_SECRET_SYNTAX_GAP_WATCH"],
+  "state": {
+    "PORCHLIGHT_ON": true,
+    "FAMILY_FUN": true,
+    "REPLAY_READY": true,
+    "DICE_COUNT": 3,
+    "SCORING_RULE": false,
+    "AUTHORITY_CREATED": false,
+    "CLAIM_IS_FACT": false,
+    "STORY_IS_PROOF": false,
+    "DICE_IS_EVIDENCE": false,
+    "MEMORY_IS_HISTORY": false
+  },
+  "cast": {
+    "family_table": [
+      "DADDY_JAY",
+      "HEIDEE",
+      "JAYCEE",
+      "BRIANNA",
+      "MARYDEE",
+      "GAGA",
+      "GRAMMY",
+      "LEANNE",
+      "BE",
+      "BRE",
+      "MRS_WISDOM"
+    ],
+    "replay_helpers": [
+      {"id": "ZIGGY", "function": "GAP_JUMPER_CHAOS_AGENT"},
+      {"id": "GRAY_BABY", "function": "GAP_OBSERVER_WEIRDNESS_DETECTOR"},
+      {"id": "LEAHPRIME", "function": "EXPLAINER_GAP_OBSERVER"},
+      {"id": "SISTER_SECRET_SYNTAX", "function": "PATTERN_LANGUAGE_CONTRADICTION_SPOTTER"}
+    ],
+    "guards": [
+      "CAST_ENTRY != GENEALOGY_PROOF",
+      "REPLAY_HELPER != FAMILY_MEMBER",
+      "CHARACTER_ROLE != INSTITUTIONAL_AUTHORITY",
+      "DIE_RESULT != EVIDENTIARY_AUTHORITY"
+    ]
+  },
+  "core_law": [
+    "CLAIM != FACT",
+    "STORY != PROOF",
+    "DICE_ROLL != EVIDENCE",
+    "FUN != AUTHORITY",
+    "SHARED_MEMORY != VERIFIED_HISTORY"
+  ],
+  "game_loop": [
+    "PORCHLIGHT_ON",
+    "PICK_A_FAMILY_CLAIM",
+    "ROLL_3_DICE",
+    "TELL_THE_STORY",
+    "CHECK_THE_GAPS",
+    "MARK_PASS_HOLD_CONFLICT_REPLAY",
+    "PORCHLIGHT_STAYS_ON"
+  ],
+  "dice": {
+    "FACT_DIE": ["MEMORY", "PHOTO", "MESSAGE", "WITNESS", "RECEIPT", "UNKNOWN"],
+    "IRON_BOWL_DIE": ["ROLL_TIDE", "WAR_EAGLE", "GAME_DAY", "RIVALRY", "LAUGH", "DRAMA"],
+    "FAMILY_DIE": ["CARE", "CONTEXT", "RELATIONSHIP", "SECRET", "CONFLICT", "REPAIR"]
+  },
+  "sister_secret_syntax": {
+    "questions": [
+      "What exactly was claimed?",
+      "Who said it?",
+      "What part is memory?",
+      "What part has a receipt?",
+      "What must stay private?"
+    ]
+  },
+  "allowed_flavor": ["FUNNY", "DRAMATIC", "BITTERSWEET", "CHAOTIC", "LOUD"],
+  "prohibited_flavor": ["CRUEL", "COERCIVE", "FALSELY_AUTHORITATIVE"],
+  "dispositions": ["PASS", "HOLD", "CONFLICT", "REPLAY"],
+  "semantic_guardrails": [
+    "PASS = ROUND_PASSED_DECLARED_CHECKS_ONLY",
+    "PASS != VERIFIED_HISTORY",
+    "HOLD != FALSE",
+    "CONFLICT != ACCUSATION",
+    "REPLAY != RETRACTION",
+    "SECRET != DECEPTION",
+    "PRIVACY != MISSING_EVIDENCE"
+  ],
+  "win_condition": [
+    "ONE_BETTER_QUESTION",
+    "ONE_PRESERVED_STORY",
+    "ONE_PROTECTED_BOUNDARY"
+  ],
+  "round_1": {
+    "state": "READY_NOT_STARTED",
+    "storyteller": "UNASSIGNED",
+    "claim": "UNDECLARED",
+    "dice_roll": "NOT_ROLLED",
+    "disposition": "NONE"
+  },
+  "authority_created": false,
+  "relationship_edges_created": 0,
+  "public_identity_bindings_created": 0
+}

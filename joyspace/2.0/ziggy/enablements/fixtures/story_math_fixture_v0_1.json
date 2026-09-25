@@ -1,0 +1,10 @@
+{
+  "fixture_id": "HEIDEE_STORY_MATH_FIXTURE_v0.1",
+  "mode": "CHILD_SAFE_FICTION",
+  "prompt_seed": "Build an original adventure where choices naturally use quantities, patterns, time, space, rhythm, or sharing.",
+  "allowed_math": ["COUNT", "GROUP", "COMPARE", "TIME", "SPACE", "PATTERN", "FRACTION_RATIO", "PROBABILITY", "ESTIMATION"],
+  "reveal_command": "SHOW_ME_THE_MATH",
+  "family_claims_allowed": false,
+  "real_person_inference_allowed": false,
+  "authority_scope": "PARENTAL_ONLY"
+}

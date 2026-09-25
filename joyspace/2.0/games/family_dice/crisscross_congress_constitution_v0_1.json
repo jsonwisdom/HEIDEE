@@ -1,0 +1,96 @@
+{
+  "artifact": "CRISSCROSS_CONGRESS_CONSTITUTION_FAMILY_DICE_v0.1",
+  "version": "0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "status": "GAME_MODE_READY",
+  "purpose": "Route family civics questions through typed dice, constitutional source checks, and Congress.gov/Constitution Annotated receipts without turning questions, rolls, hearings, bills, or family stories into law or fact.",
+  "source_class": "PUBLIC_CIVICS_SOURCE",
+  "sources": [
+    {
+      "source_id": "CONSTITUTION_ARTICLE_I_SECTION_1",
+      "publisher": "Library of Congress",
+      "surface": "Constitution Annotated",
+      "url": "https://constitution.congress.gov/browse/article-1/section-1/",
+      "binding": "Legislative powers granted by the Constitution are vested in Congress, consisting of the Senate and House of Representatives."
+    },
+    {
+      "source_id": "CONSTITUTION_ARTICLE_I_SECTION_8",
+      "publisher": "Library of Congress",
+      "surface": "Constitution Annotated",
+      "url": "https://constitution.congress.gov/browse/article-1/section-8/",
+      "binding": "Congress exercises enumerated legislative powers; a family question does not itself establish congressional authority over the subject."
+    },
+    {
+      "source_id": "CONSTITUTION_AMENDMENT_I_PETITION",
+      "publisher": "Library of Congress",
+      "surface": "Constitution Annotated",
+      "url": "https://constitution.congress.gov/constitution/amendment-1/",
+      "binding": "The First Amendment protects the right of the people peaceably to assemble and to petition the Government for a redress of grievances."
+    }
+  ],
+  "game_loop": [
+    "FAMILY_QUESTION",
+    "ROLL_TYPED_DICE",
+    "ROUTE_TO_CONSTITUTIONAL_QUESTION",
+    "LOOK_FOR_CONGRESS_OR_CONSTITUTION_RECEIPT",
+    "SEPARATE_RECORD_FROM_INFERENCE",
+    "PASS_HOLD_CONFLICT_OUTSIDE_SCOPE",
+    "REPLAY"
+  ],
+  "dice": [
+    {
+      "die": "QUESTION_DIE",
+      "faces": ["WHO", "WHAT", "WHEN", "WHERE", "WHY", "HOW"]
+    },
+    {
+      "die": "CONSTITUTION_DIE",
+      "faces": ["ARTICLE_I", "AMENDMENT_I", "ENUMERATED_POWER", "RIGHT_OR_LIMIT", "STATE_FEDERAL_SPLIT", "UNKNOWN_CLAUSE"]
+    },
+    {
+      "die": "CONGRESS_RECORD_DIE",
+      "faces": ["BILL", "LAW", "HEARING", "COMMITTEE", "VOTE", "NOT_FOUND"]
+    },
+    {
+      "die": "RECEIPT_DIE",
+      "faces": ["PRIMARY_TEXT", "OFFICIAL_SUMMARY", "ROLL_CALL", "COMMITTEE_RECORD", "MEMBER_STATEMENT", "MISSING"]
+    },
+    {
+      "die": "FAMILY_DIE",
+      "faces": ["ASK", "LEARN", "COMPARE", "REPAIR", "HOLD", "REPLAY"]
+    }
+  ],
+  "dispositions": ["PASS", "HOLD", "CONFLICT", "OUTSIDE_CONGRESSIONAL_SCOPE"],
+  "constitutional_membrane": [
+    "FAMILY_QUESTION != FACT",
+    "DICE_ROLL != LAW",
+    "BILL != LAW",
+    "HEARING != FINDING",
+    "MEMBER_STATEMENT != ACT_OF_CONGRESS",
+    "CONGRESS_RECORD != CONSTITUTIONALITY_RULING",
+    "PETITION_RIGHT != GUARANTEED_GOVERNMENT_RESULT",
+    "CONSTITUTIONAL_SOURCE != PERSONAL_LEGAL_ADVICE",
+    "FAMILY_STORY != PUBLIC_RECORD"
+  ],
+  "privacy_rules": {
+    "family_names_required": false,
+    "private_relationship_history_required": false,
+    "public_release_default": false,
+    "relationship_edges_created": 0,
+    "authority_created": false
+  },
+  "round_02_seed": {
+    "status": "READY_NOT_ROLLED",
+    "seed_question": "Can a family ask Congress a question or petition the Government and then trace the public constitutional and legislative record without treating the question as proof?",
+    "source_bound_answer": "YES_FOR_PETITION_AND_PUBLIC_RECORD_REPLAY_WITH_SCOPE_CHECKS",
+    "notes": [
+      "The First Amendment provides a petition right.",
+      "Article I vests federal legislative power in Congress and bounds that power constitutionally.",
+      "The game must still identify the relevant constitutional power or limit for any requested congressional action."
+    ]
+  },
+  "cross_provider_rules": [
+    "GITHUB_COMMIT != DRIVE_REVISION",
+    "SOURCE_BOUND != CLAIM_TRUE_BEYOND_SOURCE",
+    "CROSS_PROVIDER_ATOMICITY = FALSE"
+  ]
+}

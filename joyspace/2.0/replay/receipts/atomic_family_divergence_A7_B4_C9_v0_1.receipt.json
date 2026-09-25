@@ -1,0 +1,52 @@
+{
+  "authority_created": false,
+  "auto_merge_performed": false,
+  "checkpoint_id": "MOVIE_NIGHT_1987_CHECKPOINT_001",
+  "differences": [
+    {
+      "left": "NODE_A",
+      "right": "NODE_B",
+      "same_hash": false,
+      "same_version": false,
+      "version_delta": 3
+    },
+    {
+      "left": "NODE_A",
+      "right": "NODE_C",
+      "same_hash": false,
+      "same_version": false,
+      "version_delta": -2
+    },
+    {
+      "left": "NODE_B",
+      "right": "NODE_C",
+      "same_hash": false,
+      "same_version": false,
+      "version_delta": -5
+    }
+  ],
+  "disposition": "DIFFERENCE_RECEIPT",
+  "divergence_preserved": true,
+  "event_id": "ATOMIC_FAMILY_DIVERGENCE_A7_B4_C9_V0_1",
+  "node_hashes": {
+    "NODE_A": "dd84b2c8cab12f464689277cccaeaecb1c94340dd18f02686c72534ff5560b33",
+    "NODE_B": "1addb766631e468d3e2eafe732e9d00343e1097f694c6aa276393b6dd7fe7b9a",
+    "NODE_C": "12ae59bdc6985b66421abb7feeda130d3859a0e054415530f05d527881422726"
+  },
+  "node_versions_after": {
+    "NODE_A": 7,
+    "NODE_B": 4,
+    "NODE_C": 9
+  },
+  "node_versions_before": {
+    "NODE_A": 7,
+    "NODE_B": 4,
+    "NODE_C": 9
+  },
+  "post_versions_unchanged": true,
+  "reconciliation": "MANUAL_RELATIONAL_VOLUNTARY",
+  "replayed_at": "2026-08-20T19:30:00-05:00",
+  "schema": "ATOMIC_FAMILY_DIFFERENCE_RECEIPT_V0_1",
+  "vcr_action": "TRACKING",
+  "version": "0.1.0"
+}

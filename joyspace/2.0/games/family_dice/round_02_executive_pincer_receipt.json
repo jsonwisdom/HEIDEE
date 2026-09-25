@@ -1,0 +1,60 @@
+{
+  "artifact": "FAMILY_DICE_ROUND_02_EXECUTIVE_PINCER_RECEIPT_v0.2",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "protocol": "Parental Process Pincer Pinky Promise Protocol.md",
+  "round": 2,
+  "status": "LOCKED_HOLD_FOR_SPECIFIC_CLAIM",
+  "locked": true,
+  "played": "2026-08-17 America/Chicago",
+  "dice_result": {
+    "EXECUTIVE_ACTION_DIE": "PUBLIC_STATEMENT",
+    "AUTHORITY_DIE": "CLAIMED_INHERENT_POWER",
+    "RECEIPT_DIE": "FEDERAL_REGISTER",
+    "CHECKS_DIE": "APPROPRIATIONS",
+    "FAMILY_DIE": "ASK",
+    "DISPOSITION": "HOLD"
+  },
+  "family_facing_reading": [
+    "Executive makes a public statement.",
+    "Exact words matter.",
+    "What specific power is being claimed?",
+    "Where is the official receipt: Federal Register or signed instrument that cites constitutional or statutory authority?",
+    "Does any real-world effect depend on money that only Congress can appropriate?",
+    "ASK.",
+    "HOLD until the claim is bound by actual authority, receipts, and appropriations constraints."
+  ],
+  "constitutional_reading": {
+    "article_ii": "Article II supplies the President with executive power and the duty to take care that the laws be faithfully executed. It does not convert every public statement into binding law.",
+    "executive_instrument": "An actual executive order or proclamation appearing in the Federal Register may identify claimed constitutional and statutory authority; implementation remains subject to applicable law and appropriations constraints.",
+    "appropriations_gate": "A claimed executive effect that depends on federal spending must be checked against Congress's appropriations authority and the specific enacted funding law."
+  },
+  "family_posture": {
+    "message": "Cool. Show the receipts.",
+    "parental_authority": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "privacy": "SEALED",
+    "executive_action_separate_from_family_authority": true
+  },
+  "pinky_promise": "RECEIPTS_BEFORE_BELIEF",
+  "constitutional_membrane": [
+    "DICE_ROLL != EXECUTIVE_AUTHORITY",
+    "PUBLIC_STATEMENT != LAW",
+    "CLAIMED_INHERENT_POWER != ESTABLISHED_POWER",
+    "FEDERAL_REGISTER_SEARCH != PROOF_OF_CLAIM",
+    "APPROPRIATIONS_CHECK != AUTOMATIC_CONGRESSIONAL_VETO",
+    "FAMILY_QUESTION != ACCUSATION",
+    "PARENTAL_PROCESS != GOVERNMENT_AUTHORITY"
+  ],
+  "privacy": {
+    "family_details_default": "FAMILY_RESTRICTED",
+    "protected_details_exposed": false,
+    "relationship_edges_created": 0,
+    "public_identity_bindings_created": 0
+  },
+  "round_03": {
+    "state": "READY_NOT_ROLLED"
+  },
+  "authority_created": false,
+  "source_mutated": false
+}

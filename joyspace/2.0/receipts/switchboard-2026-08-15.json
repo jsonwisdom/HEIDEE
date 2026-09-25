@@ -1,0 +1,30 @@
+{
+  "event": "PARENTAL_SWITCHBOARD_AND_ZIGGY_ENABLEMENTS_ACCEPTED",
+  "timestamp_precision": "DATE_ONLY_RECEIPT_LABEL",
+  "date": "2026-08-15",
+  "operator_identity": "jaywisdom.eth",
+  "authority": "PARENTAL_ONLY",
+  "system_authority": false,
+  "institutional_authority": false,
+  "posture": {
+    "ART": true,
+    "MUSIC": true,
+    "CREATION": true,
+    "IMAGINATION": true,
+    "STORY_BUILDING": true,
+    "EMBEDDED_MATH": true,
+    "ZIGGY_AI": true
+  },
+  "gate": "REVIEW_OPEN",
+  "order_lock": true,
+  "integration": {
+    "schema": "/joyspace/2.0/parental_controls.json",
+    "blueprint": "/joyspace/2.0/blueprint.md#parental-controls-block",
+    "ziggy": "/joyspace/2.0/ziggy/",
+    "fixtures": "/joyspace/2.0/ziggy/enablements/fixtures/",
+    "instruments": "/joyspace/2.0/ziggy/enablements/instruments/"
+  },
+  "source_family_claims_mutated": false,
+  "github_merge_authorized": false,
+  "runtime_execution": false
+}

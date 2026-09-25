@@ -1,0 +1,37 @@
+{
+  "schema": "APPLE_BLOSSOM_GATE00_BUILD_EXECUTION_V0_1",
+  "executed_at": "2026-08-20T19:58:24-05:00",
+  "toolchain": {
+    "swift": "6.2.1",
+    "target": "x86_64-unknown-linux-gnu",
+    "package_manager": "SwiftPM"
+  },
+  "build": {
+    "swiftpm_build": "PASS",
+    "swiftpm_tests": "PASS",
+    "tests_passed": 3,
+    "tests_failed": 0,
+    "gate00_executable": "PASS"
+  },
+  "gate00": {
+    "disposition": "PASS",
+    "external_provider_active": false,
+    "network_required": false,
+    "microphone_required": false,
+    "foundation_model_required": false,
+    "fallback_used": true,
+    "receipt_created": true,
+    "raw_audio_persistence": "MEMORY_ONLY_NEVER_DISK",
+    "old_session_reactivated_after_eject": false,
+    "post_eject_round_completed": true,
+    "authority_created": false
+  },
+  "device_gates": {
+    "xcode_typecheck": "NOT_RUN",
+    "iphone_runtime": "NOT_RUN",
+    "microphone_runtime": "NOT_RUN",
+    "siri_warm": "NOT_RUN",
+    "siri_cold": "NOT_RUN"
+  },
+  "interpretation": "GATE_00_PROVES_FOUNDATION_ONLY_CORE_AND_DETERMINISTIC_FALLBACK; IT_DOES_NOT_PROVE_IOS_RUNTIME"
+}

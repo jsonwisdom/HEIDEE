@@ -1,0 +1,9 @@
+{
+  "instrument_id": "ZIGGY_REPLAY_METER_v0.1",
+  "input": ["fixture_id", "instrument_ids", "child_choice_sequence"],
+  "output": "LEARNING_REPLAY_RECEIPT",
+  "records": ["story_state", "math_domain", "choice_sequence", "reveal_used", "lane_state"],
+  "does_not_record": ["PRIVATE_CHILD_DATA", "PASSWORDS", "HEALTH_RECORDS", "SCHOOL_RECORDS"],
+  "promotion": "NONE_AUTOMATIC",
+  "authority_scope": "PARENTAL_ONLY"
+}

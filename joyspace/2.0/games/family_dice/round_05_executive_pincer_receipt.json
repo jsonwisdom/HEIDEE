@@ -1,0 +1,61 @@
+{
+  "artifact": "FAMILY_DICE_ROUND_05_EXECUTIVE_PINCER_RECEIPT_v0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "protocol": "Parental Process Pincer Pinky Promise Protocol.md",
+  "round": 5,
+  "status": "ROLLED_HOLD_FOR_SPECIFIC_ENFORCEMENT_ACTION",
+  "played": "2026-08-17T16:52:00-05:00 America/Chicago",
+  "roll_method": "cryptographically_secure_local_random_choice",
+  "dice_result": {
+    "EXECUTIVE_ACTION_DIE": "ENFORCEMENT_ACTION",
+    "AUTHORITY_DIE": "ARTICLE_II",
+    "RECEIPT_DIE": "STATUTE_TEXT",
+    "CHECKS_DIE": "APPROPRIATIONS",
+    "FAMILY_DIE": "REPAIR",
+    "DISPOSITION": "HOLD"
+  },
+  "family_facing_reading": [
+    "Start with the exact enforcement action: who acted, what was done, and under what written authority.",
+    "ARTICLE_II means identify the specific presidential or executive duty/power being claimed; the label alone does not decide legality.",
+    "STATUTE_TEXT means read the actual Act of Congress the Executive Branch says it is enforcing rather than relying on a speech, summary, headline, or game roll.",
+    "APPROPRIATIONS means check whether implementation depends on money Congress enacted, limited, conditioned, or did not provide.",
+    "REPAIR means correct any broken link in the chain: action to authority, authority to statute, statute to funding, or claim to receipt.",
+    "HOLD until one specific enforcement action is bound to the actual statute and appropriations path."
+  ],
+  "pincer_replay": {
+    "left_jaw": "WHAT_ENFORCEMENT_ACTION_ACTUALLY_OCCURRED",
+    "right_jaw": "WHAT_ARTICLE_II_DUTY_OR_POWER_AND_WHAT_STATUTE_AUTHORIZE_OR_LIMIT_IT",
+    "center": "STATUTE_TEXT_PLUS_APPROPRIATIONS_RECEIPT_CHECK",
+    "family_action": "REPAIR",
+    "current_disposition": "HOLD"
+  },
+  "membrane": [
+    "ENFORCEMENT_ACTION != STATUTE",
+    "ARTICLE_II_LABEL != UNLIMITED_EXECUTIVE_POWER",
+    "EXECUTIVE_ENFORCEMENT_CLAIM != STATUTORY_TEXT",
+    "STATUTE_TEXT != PROOF_OF_FACTUAL_ENFORCEMENT_CLAIM",
+    "APPROPRIATION != UNLIMITED_DISCRETION",
+    "REPAIR != PROMOTE",
+    "DICE_ROLL != LEGAL_CONCLUSION",
+    "PARENTAL_PROCESS != GOVERNMENT_AUTHORITY"
+  ],
+  "family_posture": {
+    "parental_authority": true,
+    "system_authority": false,
+    "institutional_authority": false,
+    "privacy": "SEALED",
+    "executive_action_separate_from_family_authority": true,
+    "message": "Show the action. Show Article II. Show the statute. Show the money. Repair the broken link."
+  },
+  "privacy": {
+    "protected_details_exposed": false,
+    "relationship_edges_created": 0,
+    "public_identity_bindings_created": 0
+  },
+  "next_input": "A specific enforcement action, agency action, directive, case, or claim for replay.",
+  "round_06_executive": {
+    "state": "READY_NOT_ROLLED"
+  },
+  "authority_created": false,
+  "source_mutated": false
+}

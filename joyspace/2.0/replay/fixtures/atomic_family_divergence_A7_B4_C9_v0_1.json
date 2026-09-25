@@ -1,0 +1,54 @@
+{
+  "schema": "ATOMIC_FAMILY_EXCHANGE_CHECKPOINT_V0_1",
+  "version": "0.1.0",
+  "event_id": "ATOMIC_FAMILY_DIVERGENCE_A7_B4_C9_V0_1",
+  "observed_at": "2026-08-20T19:30:00-05:00",
+  "vcr_action": "TRACKING",
+  "nodes": [
+    {
+      "node_id": "NODE_A",
+      "node_kind": "LOCAL_AUTHORED_VERSION",
+      "version": 7,
+      "content_hash": "dd84b2c8cab12f464689277cccaeaecb1c94340dd18f02686c72534ff5560b33",
+      "ownership": "NODE_LOCAL"
+    },
+    {
+      "node_id": "NODE_B",
+      "node_kind": "LOCAL_AUTHORED_VERSION",
+      "version": 4,
+      "content_hash": "1addb766631e468d3e2eafe732e9d00343e1097f694c6aa276393b6dd7fe7b9a",
+      "ownership": "NODE_LOCAL"
+    },
+    {
+      "node_id": "NODE_C",
+      "node_kind": "ASSIST_LOG",
+      "version": 9,
+      "content_hash": "12ae59bdc6985b66421abb7feeda130d3859a0e054415530f05d527881422726",
+      "ownership": "NODE_LOCAL"
+    }
+  ],
+  "checkpoint": {
+    "checkpoint_id": "MOVIE_NIGHT_1987_CHECKPOINT_001",
+    "kind": "LAST_MUTUALLY_ACKNOWLEDGED_CHECKPOINT",
+    "acknowledged_at": "2026-08-20T19:00:00-05:00",
+    "participants": ["NODE_A", "NODE_B", "NODE_C"],
+    "scope": "AMERICAN_80S_MOVIE_REPLAY",
+    "purpose": "COMPARE_WITHOUT_GLOBAL_MERGE",
+    "node_versions": {
+      "NODE_A": 6,
+      "NODE_B": 4,
+      "NODE_C": 8
+    }
+  },
+  "exchange_policy": {
+    "auto_global_merge": false,
+    "divergence_policy": "PRESERVE",
+    "reconciliation": "MANUAL_RELATIONAL_VOLUNTARY"
+  },
+  "expected_result": {
+    "disposition": "DIFFERENCE_RECEIPT",
+    "auto_merge_performed": false,
+    "post_versions_unchanged": true
+  },
+  "authority_created": false
+}

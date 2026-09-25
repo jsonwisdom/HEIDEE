@@ -1,0 +1,107 @@
+{
+  "artifact": "JOYSPACE_ZORA_STORY_INTEL_NODES_v0.1",
+  "version": "0.1",
+  "scope": "JOYSPACE_EXTERNAL_STORY_INTEL",
+  "status": "DRAFT_REVIEW_OPEN",
+  "purpose": "Preserve Zora/on-chain/story/intel candidates adjacent to JoySpace without promoting them into family genealogy, child identity, public-person endorsement, or authority.",
+  "family_membership_created": false,
+  "nodes": [
+    {
+      "node_id": "NODE8",
+      "node_class": "ZORA_CREATOR_PROFILE_NODE",
+      "contract_address": "0x4c461cffb0600e3f4c9756907caae9c525fa3399",
+      "network": "base",
+      "chain_id": 8453,
+      "evidence_state": "SOURCE_BOUND_ZORA_PROFILE_SNAPSHOT",
+      "evidence": {
+        "repository": "jsonwisdom/jay-zora-portal",
+        "path": "discovery/zora/profile_coins_response.json",
+        "observed_profile_handle": "node8",
+        "observed_creator_coin_address": "0x4c461cffb0600e3f4c9756907caae9c525fa3399",
+        "observed_social_signal": "tiktok:jaywisdom.base"
+      },
+      "jay_identity_binding": "HOLD_PARTIAL_PROFILE_SIGNAL_ONLY",
+      "family_member": false,
+      "child_node": false,
+      "authority_created": false
+    },
+    {
+      "node_id": "DEEZER",
+      "node_class": "SYNTHETIC_STORY_ROLE_AND_ZORA_CONTENTCOIN",
+      "contract_address": "0x4bf1a3993d635b7593ebe3f5742e07b91442a692",
+      "network": "base",
+      "chain_id": 8453,
+      "evidence_state": "RECEIPT_BOUND_OPERATOR_VERIFICATION_ASSERTED",
+      "evidence": {
+        "repository": "jsonwisdom/JOY",
+        "mint_receipt": "FAMILY/receipts/DEEZER_MINT_V0_1.md",
+        "verification_assertion": "FAMILY/receipts/DEEZER_MINT_ONCHAIN_VERIFICATION_ASSERTION_V0_1.md",
+        "assistant_independent_chain_verification": false,
+        "drive_story_alias_state": "USER_DECLARED_STORY_ALIAS"
+      },
+      "person_identity_binding": "NOT_CREATED",
+      "family_member": false,
+      "child_node": false,
+      "authority_created": false
+    },
+    {
+      "node_id": "SOPHIA",
+      "node_class": "CONCEPTUAL_WISDOM_BRANCH_WITH_UNBOUND_ZORA_CANDIDATE",
+      "contract_address_candidate": "0x4abff5a53301b7fb363ffd2c4ab0cd03ff79ecde",
+      "network": "base",
+      "chain_id": 8453,
+      "evidence_state": "SPLIT",
+      "evidence": {
+        "repository": "jsonwisdom/JOY",
+        "conceptual_branch": "docs/SOPHIA_WISDOM_BRANCH.md",
+        "proof_receipt": "receipts/sophia/SOPHIA_PROOF_RECEIPT_V0_1.json",
+        "conceptual_branch_state": "OPEN_UNVERIFIED_REPLAY_REQUIRED",
+        "contract_binding_state": "HOLD_PENDING_ZORA_SDK_OR_CHAIN_READBACK"
+      },
+      "mrs_wisdom_identity_binding": "NOT_CREATED_BY_THIS_REGISTRY",
+      "family_member": false,
+      "child_node": false,
+      "authority_created": false
+    },
+    {
+      "node_id": "CHUCK_GRASSLEY_NAMED_ARTIFACT",
+      "node_class": "PUBLIC_PERSON_NAMED_ARTIFACT_CANDIDATE",
+      "contract_address_candidate": "0x510802c6cad82d548a3384e2706959e52b790ba4",
+      "network": "base",
+      "chain_id": 8453,
+      "evidence_state": "HOLD_USER_SUPPLIED_ADDRESS_PENDING_ZORA_READBACK",
+      "evidence": {
+        "display_name_source": "USER_SUPPLIED",
+        "repository_binding_found": false,
+        "drive_binding_found": false,
+        "zora_sdk_readback_required": true
+      },
+      "public_person_wallet_binding": "NOT_CREATED",
+      "endorsement_binding": "NOT_CREATED",
+      "creator_binding": "NOT_CREATED",
+      "family_member": false,
+      "child_node": false,
+      "authority_created": false
+    }
+  ],
+  "routing": {
+    "NODE8": "ZORA_IDENTITY_AND_DISTRIBUTION_LANE",
+    "DEEZER": "JOY_STORY_AND_ZORA_RECEIPT_LANE",
+    "SOPHIA": "JOY_WISDOM_BRANCH_AND_ZERO_TRUST_ZORA_BINDING_LANE",
+    "CHUCK_GRASSLEY_NAMED_ARTIFACT": "CIVIC_PUBLIC_PERSON_REFERENCE_LANE"
+  },
+  "invariants": [
+    "EXTERNAL_NODE != FAMILY_MEMBER",
+    "CONTRACT_ADDRESS != HUMAN_IDENTITY",
+    "ZORA_HANDLE != LEGAL_IDENTITY",
+    "SOCIAL_LINK != WALLET_CONTROL_PROOF",
+    "STORY_ALIAS != LEGAL_IDENTITY",
+    "NAMED_ARTIFACT != PUBLIC_PERSON_ENDORSEMENT",
+    "NAMED_ARTIFACT != PUBLIC_PERSON_WALLET_CONTROL",
+    "PUBLIC_PERSON_REFERENCE != FAMILY_NODE",
+    "OPERATOR_VERIFICATION_ASSERTION != ASSISTANT_INDEPENDENT_CHAIN_VERIFICATION",
+    "CONCEPTUAL_BRANCH != CONTRACT_BINDING",
+    "AUTHORITY_CREATED = FALSE"
+  ],
+  "authority_created": false
+}

@@ -1,0 +1,67 @@
+{
+  "artifact": "HEIDEE_RELATIONSHIP_CLAIMS_v0.2",
+  "version": "0.2",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "purpose": "Child-safe family relationship replay. Preserve declarations edge-by-edge without deriving adjacent kinship, adult relationships, or public identity bindings.",
+  "preserved_fixture": {
+    "edge_id": "AUNT_RANN_AUNT_OF_HEIDEE_v0.1",
+    "from": "AUNT_RANN",
+    "predicate": "AUNT_OF",
+    "to": "HEIDEE",
+    "edge_exists": true,
+    "evidence_class": "UNKNOWN",
+    "relationship_state": "HOLD",
+    "relationship_verified": false,
+    "evidence_refs": [],
+    "consent_scope": "UNKNOWN"
+  },
+  "declared_claims": [
+    {"edge_id":"DADDY_JAY_PARENT_OF_HEIDEE_v0.2","from":"DADDY_JAY","predicate":"PARENT_OF","to":"HEIDEE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"DADDY_JAY_PARENT_OF_JAYCEE_v0.2","from":"DADDY_JAY","predicate":"PARENT_OF","to":"JAYCEE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"DADDY_JAY_PARENT_OF_BRIANNA_v0.2","from":"DADDY_JAY","predicate":"PARENT_OF","to":"BRIANNA","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"MARYDEE_PARENT_OF_HEIDEE_v0.2","from":"MARYDEE","predicate":"PARENT_OF","to":"HEIDEE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"MARYDEE_PARENT_OF_JAYCEE_v0.2","from":"MARYDEE","predicate":"PARENT_OF","to":"JAYCEE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"GAGA_PARENT_OF_MARYDEE_v0.2","from":"GAGA","predicate":"PARENT_OF","to":"MARYDEE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"GAGA_PARENT_OF_LEANNE_v0.2","from":"GAGA","predicate":"PARENT_OF","to":"LEANNE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"LEANNE_PARENT_OF_BE_v0.2","from":"LEANNE","predicate":"PARENT_OF","to":"BE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"LEANNE_PARENT_OF_BRE_v0.2","from":"LEANNE","predicate":"PARENT_OF","to":"BRE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false},
+    {"edge_id":"LEEANN_PARENT_OF_BOSSBRE_v0.2","from":"LEEANN","predicate":"PARENT_OF","to":"BOSSBRE","edge_exists":true,"evidence_class":"USER_DECLARED","relationship_state":"DECLARED","relationship_verified":false}
+  ],
+  "protected_gaps": [
+    {
+      "gap_id": "DADDY_JAY_MARYDEE_ADULT_RELATIONSHIP_v0.2",
+      "participants": ["DADDY_JAY", "MARYDEE"],
+      "predicate": null,
+      "edge_exists": false,
+      "relationship_state": "HOLD_UNSPECIFIED",
+      "reason": "Shared child nodes do not establish an adult relationship.",
+      "forbidden_inferences": ["SPOUSE_OF","PARTNER_OF","CO_PARENT_OF","HOUSEHOLD_WITH","CUSTODY_RELATIONSHIP","INTERPERSONAL_HISTORY"]
+    }
+  ],
+  "identity_membranes": [
+    "LEEANN != LEANNE_UNLESS_EXPLICITLY_BOUND",
+    "BOSSBRE != BRE_UNLESS_EXPLICITLY_BOUND",
+    "LEEANN_FAMILY_NODE != LEEANN_H_CHAVERS_PUBLIC_PERSON_UNLESS_IDENTITY_BINDING_IS_ESTABLISHED"
+  ],
+  "invariants": [
+    "EVIDENCE_CLASS != RELATIONSHIP_STATE",
+    "EDGE_EXISTS != RELATIONSHIP_VERIFIED",
+    "USER_DECLARED_EDGE != VERIFIED_GENEALOGY",
+    "SHARED_CHILD != ADULT_RELATIONSHIP",
+    "ROLE_CARD != GENEALOGY_PROOF",
+    "PORCH_POSITION != KINSHIP",
+    "LANE_PRESENT != FAMILY_EDGE",
+    "EDGE_PROMOTION_IS_LOCAL_ONLY",
+    "NO_ADJACENT_EDGE_INFERENCE"
+  ],
+  "counts": {
+    "preserved_hold_fixtures": 1,
+    "user_declared_relationship_claims": 10,
+    "verified_relationship_edges": 0,
+    "inferred_relationship_edges": 0,
+    "protected_unspecified_relationships": 1
+  },
+  "relationship_verification_performed": false,
+  "new_family_created": false,
+  "authority_created": false
+}

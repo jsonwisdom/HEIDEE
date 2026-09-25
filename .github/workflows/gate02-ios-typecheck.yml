@@ -1,0 +1,162 @@
+name: Gate 02 - iOS SDK Typecheck
+
+on:
+  push:
+    branches:
+      - agent/joyspace-2.0-family-directories-first
+    paths:
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Package.swift'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Sources/AppleBlossom/**'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Sources/AppleBlossomCore/**'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Tests/AppleBlossomCoreTests/**'
+      - '.github/workflows/gate02-ios-typecheck.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Package.swift'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Sources/AppleBlossom/**'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Sources/AppleBlossomCore/**'
+      - 'joyspace/2.0/appledevelop/AppleBlossomCore/Tests/AppleBlossomCoreTests/**'
+      - '.github/workflows/gate02-ios-typecheck.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate02:
+    name: Gate 02 / iOS SDK SwiftUI + AppIntents Typecheck
+    runs-on: macos-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Discover and select Xcode 27 when installed
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECEIPT_DIR="joyspace/2.0/appledevelop/AppleBlossomCore/.gate02"
+          mkdir -p "$RECEIPT_DIR"
+          : > "$RECEIPT_DIR/available-xcodes.txt"
+          XCODE27=""
+          for app in /Applications/Xcode*.app; do
+            [[ -d "$app" ]] || continue
+            version=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/version.plist" 2>/dev/null || true)
+            printf '%s\t%s\n' "$app" "$version" | tee -a "$RECEIPT_DIR/available-xcodes.txt"
+            if [[ "$version" == 27* ]]; then
+              XCODE27="$app"
+            fi
+          done
+          if [[ -n "$XCODE27" ]]; then
+            sudo xcode-select -s "$XCODE27/Contents/Developer"
+            echo "XCODE27_SELECTED=$XCODE27" | tee "$RECEIPT_DIR/xcode-selection.txt"
+          else
+            echo "XCODE27_SELECTED=NONE" | tee "$RECEIPT_DIR/xcode-selection.txt"
+          fi
+
+      - name: Capture iOS toolchain receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECEIPT_DIR="joyspace/2.0/appledevelop/AppleBlossomCore/.gate02"
+          xcodebuild -version | tee "$RECEIPT_DIR/xcode-version.txt"
+          swift --version | tee "$RECEIPT_DIR/swift-version.txt"
+          xcrun --sdk iphonesimulator --show-sdk-version | tee "$RECEIPT_DIR/ios-simulator-sdk-version.txt"
+          xcrun --sdk iphonesimulator --show-sdk-path | tee "$RECEIPT_DIR/ios-simulator-sdk-path.txt"
+          git rev-parse HEAD | tee "$RECEIPT_DIR/head-sha.txt"
+          XCODE_VERSION=$(xcodebuild -version | awk '/Xcode/{print $2; exit}')
+          SDK_VERSION=$(xcrun --sdk iphonesimulator --show-sdk-version)
+          echo "XCODE_VERSION=$XCODE_VERSION" >> "$GITHUB_ENV"
+          echo "IOS_SIM_SDK_VERSION=$SDK_VERSION" >> "$GITHUB_ENV"
+
+      - name: Resolve Swift package
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        run: swift package resolve
+
+      - name: Validate SwiftPM Gate 02 target exists
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        shell: bash
+        run: |
+          set -euo pipefail
+          swift package describe 2>&1 | tee .gate02/package-describe.txt
+          grep -q 'AppleBlossom' .gate02/package-describe.txt
+
+      - name: Typecheck AppleBlossomCore against iOS simulator SDK
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
+          mkdir -p .gate02/modules
+          xcrun --sdk iphonesimulator swiftc \
+            -target arm64-apple-ios17.0-simulator \
+            -sdk "$SDKROOT" \
+            -parse-as-library \
+            -emit-module \
+            -module-name AppleBlossomCore \
+            Sources/AppleBlossomCore/AppleBlossomCore.swift \
+            -emit-module-path .gate02/modules/AppleBlossomCore.swiftmodule \
+            2>&1 | tee .gate02/core-ios-typecheck-log.txt
+
+      - name: Typecheck SwiftUI + AppIntents shell against iOS simulator SDK
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
+          xcrun --sdk iphonesimulator swiftc \
+            -typecheck \
+            -parse-as-library \
+            -target arm64-apple-ios17.0-simulator \
+            -sdk "$SDKROOT" \
+            -I .gate02/modules \
+            Sources/AppleBlossom/AppleBlossomApp.swift \
+            2>&1 | tee .gate02/app-ios-typecheck-log.txt
+
+      - name: Re-run sealed EJECT suite unchanged
+        working-directory: joyspace/2.0/appledevelop/AppleBlossomCore
+        shell: bash
+        run: |
+          set -o pipefail
+          swift test --filter AppleBlossomEjectTests 2>&1 | tee .gate02/eject-test-log.txt
+
+      - name: Seal Gate 02 environment requirement
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECEIPT_DIR="joyspace/2.0/appledevelop/AppleBlossomCore/.gate02"
+          XCODE_MAJOR="${XCODE_VERSION%%.*}"
+          SDK_MAJOR="${IOS_SIM_SDK_VERSION%%.*}"
+          if [[ "$XCODE_MAJOR" != "27" || "$SDK_MAJOR" != "27" ]]; then
+            {
+              echo "GATE_02_STATUS=HOLD_ENVIRONMENT"
+              echo "XCODE_VERSION=$XCODE_VERSION"
+              echo "IOS_SIM_SDK_VERSION=$IOS_SIM_SDK_VERSION"
+              echo "REQUIRED_XCODE_MAJOR=27"
+              echo "REQUIRED_IOS_SDK_MAJOR=27"
+            } | tee "$RECEIPT_DIR/gate02-status.txt"
+            exit 2
+          fi
+          {
+            echo "GATE_02_STATUS=PASS"
+            echo "XCODE_VERSION=$XCODE_VERSION"
+            echo "IOS_SIM_SDK_VERSION=$IOS_SIM_SDK_VERSION"
+            echo "XCODE_IOS_APP_TYPECHECK=PASS"
+            echo "EJECT_SUITE=PASS"
+          } | tee "$RECEIPT_DIR/gate02-status.txt"
+
+      - name: Archive Gate 02 receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Gate02_iOS_Typecheck_Receipt
+          path: |
+            joyspace/2.0/appledevelop/AppleBlossomCore/.gate02/**
+          retention-days: 7
+          if-no-files-found: error
+          include-hidden-files: true

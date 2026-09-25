@@ -1,0 +1,45 @@
+{
+  "artifact": "HEIDEE_FAMILY_DICE_ROUND_06_RECEIPT",
+  "version": "0.1",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "round": 6,
+  "player": "JAY",
+  "game_state": {
+    "ending_score": 28,
+    "score_delta_this_round": 10,
+    "prior_score": "NOT_INDEPENDENTLY_REPLAYED",
+    "scoring_rule": "NOT_ESTABLISHED_IN_THIS_RECEIPT"
+  },
+  "dice": {
+    "count": 2,
+    "left_die": 6,
+    "right_die": 6,
+    "observed_total": 12,
+    "pair_state": "LOCKED",
+    "roll_source": "USER_DECLARED"
+  },
+  "privacy": {
+    "bossbre_check": "PASS_USER_DECLARED",
+    "protected_details_exposed": false,
+    "relationship_edges_created": 0,
+    "public_identity_bindings_created": 0
+  },
+  "cast": {
+    "current_player_actor": "DADDY_JAY",
+    "next_round_cast_draw": "NOT_SELECTED",
+    "heidee_actor_cards_available": true
+  },
+  "replay_guards": [
+    "GAME_STATE != FAMILY_FACT",
+    "DICE_ROLL != VERDICT",
+    "ROLL_TOTAL != SCORE_DELTA_UNLESS_SCORING_RULE_ESTABLISHED",
+    "CAST_DRAW != RELATIONSHIP_EDGE",
+    "PRIVACY_CHECK != IDENTITY_PROOF",
+    "ACTOR_CARD != PERSON_PROOF"
+  ],
+  "round_7": {
+    "status": "READY_NOT_ROLLED",
+    "bossbre_privacy_check_required": true
+  },
+  "authority_created": false
+}

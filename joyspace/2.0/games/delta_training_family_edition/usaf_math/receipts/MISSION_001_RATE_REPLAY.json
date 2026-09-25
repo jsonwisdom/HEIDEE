@@ -1,0 +1,96 @@
+{
+  "artifact_id": "DELTA_TRAINING_FAMILY_EDITION_USAF_MATH_MISSION_001_RATE_REPLAY",
+  "semantic_class": "CIVILIAN_FAMILY_MATH_REPLAY_RECEIPT",
+  "status": "PASS_WITH_BOUNDARY",
+  "mission": {
+    "mission_id": "MISSION_001_RATE",
+    "context_class": "USAF_STYLE_CIVILIAN_EDUCATIONAL",
+    "scenario_source": "SYNTHETIC",
+    "real_world_event_claimed": false
+  },
+  "math": {
+    "level": "M2_RATIOS_RATES",
+    "problem_type": "RATE",
+    "prompt": "A synthetic plane-game token travels 240 miles in 3 hours. What is the average rate?",
+    "inputs": {
+      "distance_miles": 240,
+      "time_hours": 3
+    },
+    "expected_answer": 80,
+    "expected_units": "miles/hour"
+  },
+  "dice": {
+    "used": false,
+    "die_result": null,
+    "selected_problem_type": null,
+    "problem_selector_only": true,
+    "answer_authority": false,
+    "evidence_authority": false,
+    "verdict_authority": false
+  },
+  "roles": {
+    "daddy_jay": "FRAME_MISSION",
+    "jaycee": "LEARNER_REPLAY_ROLE",
+    "heidee": "DOUBLE_CHECK",
+    "ziggy": "GAP_CHECK",
+    "leahprime": "EXPLAIN_MATH",
+    "bossbre": "PRIVACY_PRESSURE_GATE",
+    "delta": "COMPARE_BEFORE_AFTER",
+    "receiptos": "RECORD_EXACT_STATE"
+  },
+  "learner_attempt": {
+    "mode": "SYNTHETIC_DEMONSTRATION",
+    "answer": 80,
+    "units": "miles/hour",
+    "real_performance_claimed": false,
+    "school_grade_created": false
+  },
+  "checks": {
+    "solve": "PASS",
+    "units": "PASS",
+    "reverse": "PASS",
+    "gap_check": {
+      "status": "PASS",
+      "gaps": []
+    },
+    "explanation": {
+      "status": "PRESENT",
+      "synthetic": true,
+      "authority": false
+    }
+  },
+  "delta": {
+    "state_a": {
+      "distance_miles": 240,
+      "time_hours": 3
+    },
+    "transform": "distance / time",
+    "state_b": {
+      "average_rate_miles_per_hour": 80
+    },
+    "delta_description": "The given distance and time are transformed into an average rate; 80 miles/hour multiplied by 3 hours reverses to 240 miles.",
+    "change_detected": true,
+    "cause_proven": false
+  },
+  "receiptos": {
+    "recorded": true,
+    "replayable": true,
+    "source_mutated": false,
+    "facts_promoted": 0
+  },
+  "execution": {
+    "scope": "LOCAL_LEARNING_REPLAY_ONLY",
+    "external_effect": "NONE",
+    "consequential_action_requires_human_authorization": true,
+    "human_authorization_present": false
+  },
+  "boundaries": {
+    "usaf_curriculum_claimed": false,
+    "military_training_claimed": false,
+    "operational_order_created": false,
+    "institutional_adoption_claimed": false,
+    "family_fact_created": false,
+    "public_identity_binding_created": false
+  },
+  "authority_created": false
+}

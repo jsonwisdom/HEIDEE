@@ -1,0 +1,96 @@
+{
+  "artifact_id": "DELTA_DICE_TABLE_V1_0",
+  "version": "1.0",
+  "semantic_class": "CIVILIAN_FAMILY_MATH_PROBLEM_SELECTOR_TABLE",
+  "scope": "JOYSPACE_FOR_FAMILIES",
+  "purpose": "Select one bounded civilian math problem class for DELTA Training Family Edition without selecting an answer, fact, evidence state, verdict, grade, military action, or authority state.",
+  "receipt_schema": "../schemas/family_edition_receipt_v0_1.schema.json",
+  "die": {
+    "kind": "D6",
+    "minimum": 1,
+    "maximum": 6,
+    "selector_only": true
+  },
+  "receipt_binding": {
+    "dice.used": true,
+    "dice.die_result": "FACE_RESULT",
+    "dice.selected_problem_type": "SELECTOR_KEY",
+    "dice.problem_selector_only": true,
+    "dice.answer_authority": false,
+    "dice.evidence_authority": false,
+    "dice.verdict_authority": false,
+    "math_constraint": "math.level and math.problem_type must be selected from the rolled face allowed_levels and allowed_problem_types"
+  },
+  "faces": [
+    {
+      "result": 1,
+      "selector_key": "FOUNDATIONS",
+      "label": "Foundations",
+      "allowed_levels": ["M0_COUNTING", "M1_ARITHMETIC"],
+      "allowed_problem_types": ["COUNTING", "ARITHMETIC"]
+    },
+    {
+      "result": 2,
+      "selector_key": "RATES_UNITS",
+      "label": "Rates + Units",
+      "allowed_levels": ["M2_RATIOS_RATES", "M3_UNIT_CONVERSION"],
+      "allowed_problem_types": ["RATE", "UNIT_CONVERSION"]
+    },
+    {
+      "result": 3,
+      "selector_key": "ALGEBRA_GEOMETRY",
+      "label": "Algebra + Geometry",
+      "allowed_levels": ["M4_ALGEBRA", "M5_GEOMETRY"],
+      "allowed_problem_types": ["ALGEBRA", "GEOMETRY"]
+    },
+    {
+      "result": 4,
+      "selector_key": "VECTORS_FUNCTIONS",
+      "label": "Vectors + Functions",
+      "allowed_levels": ["M6_VECTORS", "M7_FUNCTIONS"],
+      "allowed_problem_types": ["VECTOR", "FUNCTION"]
+    },
+    {
+      "result": 5,
+      "selector_key": "DELTA_UNCERTAINTY",
+      "label": "Delta + Uncertainty",
+      "allowed_levels": ["M8_DELTA", "M9_PROBABILITY", "M10_STATISTICS"],
+      "allowed_problem_types": ["DELTA", "PROBABILITY", "STATISTICS"]
+    },
+    {
+      "result": 6,
+      "selector_key": "NETWORKS_OPTIMIZATION_RECURSION",
+      "label": "Networks + Optimization + Recursion",
+      "allowed_levels": ["M11_GRAPH_THEORY", "M12_OPTIMIZATION", "M13_RECURSION"],
+      "allowed_problem_types": ["GRAPH_ROUTE", "OPTIMIZATION", "RECURSION"]
+    }
+  ],
+  "collapse_rule": {
+    "roll_creates_problem_class_only": true,
+    "mission_receipt_required": true,
+    "learner_attempt_required_for_performance_claim": true,
+    "real_performance_claimed": false,
+    "school_grade_created": false,
+    "facts_promoted": 0
+  },
+  "boundaries": {
+    "usaf_curriculum_claimed": false,
+    "military_training_claimed": false,
+    "operational_order_created": false,
+    "institutional_adoption_claimed": false,
+    "family_fact_created": false,
+    "public_identity_binding_created": false
+  },
+  "invariants": [
+    "DICE_ROLL != ANSWER",
+    "DICE_ROLL != FACT",
+    "DICE_ROLL != EVIDENCE",
+    "DICE_ROLL != VERDICT",
+    "DICE_ROLL != AUTHORITY",
+    "PROBLEM_CLASS != USAF_CURRICULUM",
+    "FAMILY_GAME != MILITARY_TRAINING",
+    "MATH_PROMPT != OPERATIONAL_ORDER",
+    "SCORE != SCHOOL_GRADE"
+  ],
+  "authority_created": false
+}
