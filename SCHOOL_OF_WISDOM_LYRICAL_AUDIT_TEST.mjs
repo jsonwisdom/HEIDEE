@@ -15,7 +15,7 @@ assert.equal(n.checks[0].verdict,'FAIL');assert.equal(n.checks[1].verdict,'PASS'
 const short=await (await compare('a','b')).json();
 assert.equal(short.checks[2].verdict,'UNKNOWN');
 assert.equal(short.checks[3].verdict,'UNKNOWN');
-const similar=await (await compare('The school preserves records and tests each claim.','The school preserves records and checks each claim.')).json();
+const similar=await (await compare('School music teaches creative evidence today','School music teaches creative evidence tomorrow')).json();
 assert.equal(similar.shared_wording_review,true);
 const tooLong=await compare('A'.repeat(501),'short');
 assert.equal(tooLong.status,400);
