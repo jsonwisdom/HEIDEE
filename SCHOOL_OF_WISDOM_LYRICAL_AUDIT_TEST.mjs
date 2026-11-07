@@ -1,0 +1,24 @@
+/* Read-only, no network. Run from repo root: node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs */
+import assert from 'node:assert/strict';
+import worker from './SCHOOL_OF_WISDOM_LYRICAL_AUDIT_WORKER.js';
+const base='https://example.invalid';
+const get=async path=>worker.fetch(new Request(base+path));
+const compare=async (a,b)=>worker.fetch(new Request(base+'/compare',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({a,b})}));
+const health=await (await get('/health')).json();
+assert.equal(health.ok,true);assert.equal(health.authority,false);
+const lesson=await (await get('/lesson.json')).json();
+assert.equal(lesson.evidence.length,4);assert.equal(lesson.evidence[2].verdict,'UNKNOWN');
+const e=await (await compare('The school preserves records.','The school preserves records.')).json();
+assert.equal(e.checks[0].verdict,'PASS');
+const n=await (await compare('The School, preserves records!','the school preserves records')).json();
+assert.equal(n.checks[0].verdict,'FAIL');assert.equal(n.checks[1].verdict,'PASS');
+const short=await (await compare('a','b')).json();
+assert.equal(short.checks[2].verdict,'UNKNOWN');
+assert.equal(short.checks[3].verdict,'UNKNOWN');
+const similar=await (await compare('The school preserves records and tests each claim.','The school preserves records and checks each claim.')).json();
+assert.equal(similar.shared_wording_review,true);
+const tooLong=await compare('A'.repeat(501),'short');
+assert.equal(tooLong.status,400);
+const demo=await (await get('/demo.json')).json();
+assert.equal(demo.authority,false);
+console.log('PASS · 9 scope-limited test groups; no external network, storage, or authentication');
