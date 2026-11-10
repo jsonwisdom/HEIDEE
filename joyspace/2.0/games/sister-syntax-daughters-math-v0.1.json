@@ -1,0 +1,103 @@
+{
+  "schema_version": "SISTER_SYNTAX_DAUGHTERS_MATH_V0_1",
+  "status": "LOCAL_DRAFT_ONLY",
+  "role": "PUBLIC_SAFE_EDUCATIONAL_FIXTURE",
+  "authority": {
+    "parental": true,
+    "ai": false,
+    "system": false,
+    "institutional": false,
+    "school_affiliation": false
+  },
+  "privacy": {
+    "child_data": false,
+    "accounts": false,
+    "tracking": false,
+    "real_secrets": false,
+    "unconsented_sharing": false,
+    "local_only": true
+  },
+  "provenance": {
+    "sister_syntax": "jsonwisdom/JOY/docs/SUPER_SECRET_SISTER_SYNTAX.md",
+    "three_sisters": "jsonwisdom/JOY/docs/THREE_SISTERS_SUPER_SECRET_SIDECAR.md",
+    "jaycee_recursive_math": "JayCee Recursive Math Sister Lab v0.1 — private Drive learning design; contents not republished",
+    "auburn_gambit": "Jay's Alabama Gambit — Super Secret Sister Iron Bowl Edition MVP v0.1 — private Drive learning design; contents not republished"
+  },
+  "sister_math_commands": [
+    "QUESTION",
+    "FREEZE",
+    "TRANSFORM",
+    "CHECK",
+    "COMPARE",
+    "REVERSE",
+    "EXPLAIN",
+    "REPEAT"
+  ],
+  "numeric_fixture": {
+    "initial": 5,
+    "operation": "ADD",
+    "delta": 3,
+    "transformed": 8,
+    "inverse_operation": "SUBTRACT",
+    "recovered": 5,
+    "invariant": "REVERSE(TRANSFORM(initial)) == initial"
+  },
+  "three_daughters_algorithm": {
+    "stages": [
+      "PROTECT",
+      "PRESERVE",
+      "EXPAND"
+    ],
+    "terminal_authority": false,
+    "expansion_requires": {
+      "privacy_public_safe": true,
+      "consent_explicit": true,
+      "human_review": true
+    },
+    "no_share_is_valid": true
+  },
+  "scenarios": [
+    {
+      "id": "no_consent",
+      "privacy_public_safe": true,
+      "consent_explicit": false,
+      "human_review": true,
+      "expected": "NO_SHARE"
+    },
+    {
+      "id": "private_material",
+      "privacy_public_safe": false,
+      "consent_explicit": true,
+      "human_review": true,
+      "expected": "PRIVATE_HOLD"
+    },
+    {
+      "id": "needs_review",
+      "privacy_public_safe": true,
+      "consent_explicit": true,
+      "human_review": false,
+      "expected": "REVIEW_HOLD"
+    },
+    {
+      "id": "public_safe_only",
+      "privacy_public_safe": true,
+      "consent_explicit": true,
+      "human_review": true,
+      "expected": "LOCAL_REPLAY_READY"
+    }
+  ],
+  "theme": {
+    "name": "Auburn War Eagle / Iron Bowl",
+    "mode": "OPTIONAL_FICTIONAL_CLASSROOM_SKIN",
+    "no_student_or_alumni_claim": true,
+    "no_institutional_endorsement_claim": true,
+    "rivals_are_not_enemies": true
+  },
+  "proof_boundaries": [
+    "REPLAY_MATCH != HISTORICAL_TRUTH",
+    "GAME_SCORE != SCHOOL_GRADE",
+    "FAMILY_ROLE != GENEALOGY",
+    "CHILD_SILENCE != CONSENT",
+    "NO_SHARE != FAILURE"
+  ]
+}
