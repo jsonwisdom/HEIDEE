@@ -1,0 +1,72 @@
+{
+  "schema": "ziggy.math-lab.fixtures.v0.1",
+  "status": "LOCAL_DRAFT_ONLY",
+  "authority": {
+    "parental": true,
+    "ai": false,
+    "institutional": false
+  },
+  "privacy": {
+    "accounts": false,
+    "tracking": false,
+    "remote_calls": false,
+    "storage": "ephemeral-memory-only",
+    "child_data_in_public_receipts": false
+  },
+  "initial_state": {
+    "acorns": 5,
+    "map_pieces": 2,
+    "clock_ticks": 3
+  },
+  "canonical_serialization": "JSON.stringify({acorns,map_pieces,clock_ticks}) in exactly that key order with no spaces",
+  "steps": [
+    {
+      "id": "fixture_001",
+      "event": "find_three_acorns",
+      "expected_state": {
+        "acorns": 8,
+        "map_pieces": 2,
+        "clock_ticks": 4
+      },
+      "sha256": "56266f849f56b2dd73dd78f731985c4ea0c850c2730242691cd30c9b4fa6fca2"
+    },
+    {
+      "id": "fixture_002",
+      "event": "share_half",
+      "expected_state": {
+        "acorns": 4,
+        "map_pieces": 2,
+        "clock_ticks": 5
+      },
+      "sha256": "3bdf65214a8541293e2b28dc4a6167154abaee81918d68049f56a56aaa08f61e"
+    }
+  ],
+  "probability_fixtures": [
+    {
+      "flips": 2,
+      "outcomes": 4,
+      "each_path_probability": "1/4"
+    },
+    {
+      "flips": 3,
+      "outcomes": 8,
+      "each_path_probability": "1/8"
+    },
+    {
+      "flips": 4,
+      "outcomes": 16,
+      "each_path_probability": "1/16"
+    },
+    {
+      "flips": 5,
+      "outcomes": 32,
+      "each_path_probability": "1/32"
+    }
+  ],
+  "die_fixture": {
+    "faces": 6,
+    "each_face_probability": "1/6",
+    "model": "fair_independent_rolls"
+  },
+  "method": "SHA-256 validates deterministic fixture bytes only; a matching hash does not establish real-world events or child identity"
+}
