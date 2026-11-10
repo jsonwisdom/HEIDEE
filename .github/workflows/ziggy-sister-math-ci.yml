@@ -1,0 +1,36 @@
+name: HEIDEE Ziggy + Sister Syntax CI (read-only)
+
+on:
+  pull_request:
+    paths:
+      - "ci_runner_pr7.sh"
+      - "joyspace/2.0/index.html"
+      - "joyspace/2.0/games/**"
+      - ".github/workflows/ziggy-sister-math-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-math-and-privacy:
+    name: Fixture SHA-256, probability, reversible math and public-safe boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out PR content
+        uses: actions/checkout@v4
+      - name: Node.js 22 (no npm install or network dependencies)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run fail-closed local math tests
+        shell: bash
+        run: bash ./ci_runner_pr7.sh
+      - name: Print deployment hold
+        if: always()
+        shell: bash
+        run: |
+          echo "This job checks source fixtures only."
+          echo "It does not deploy, publish, establish child consent, or verify live instruments."
+          echo "PUBLICATION HOLD"

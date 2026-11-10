@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Ziggy Math Lab · HEIDEE JoySpace</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color-scheme:light;--ink:#152638;--bg:#f5f9f8;--card:#fff;--edge:#d7e4e1;--accent:#235e78;--gold:#edb961}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}main{max-width:900px;margin:auto;padding:1rem 1rem 3rem}header{background:#163f50;color:#fff;border-radius:1rem;padding:1.5rem;margin-bottom:1rem}header p{max-width:65ch}h1{margin:.15rem 0;font-size:clamp(1.7rem,5vw,2.45rem)}h2{margin-top:0;font-size:1.3rem}.eyebrow{font-size:.75rem;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:#f2cd82}.card{background:var(--card);border:1px solid var(--edge);border-radius:1rem;padding:1.15rem;margin:1rem 0;box-shadow:0 2px 10px #173c490a}.small,small{font-size:.875rem;color:#465c69}a{color:#145573}header a{color:#fff}.controls{display:flex;gap:.55rem;flex-wrap:wrap;margin:.8rem 0}button,select,input{font:inherit}button,select{border:1px solid #8caeb9;border-radius:.65rem;padding:.62rem .8rem;background:#e5f2f1;color:var(--ink)}button{cursor:pointer;font-weight:700}button:disabled{cursor:not-allowed;opacity:.48}button:hover:not(:disabled){background:#c7e8e3}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #f0a728;outline-offset:3px}label{font-weight:650}input[type=range]{width:min(100%,340px)}input[type=number]{width:5rem;padding:.5rem;border:1px solid #8caeb9;border-radius:.5rem}.output{background:#eaf3f0;padding:.8rem;border-radius:.65rem;min-height:2.7rem}.dots{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0}.dot{width:1rem;height:1rem;border-radius:50%;background:#1d7891}.fraction{width:120px;height:120px;border-radius:50%;border:3px solid #285368;margin:1rem auto;background:conic-gradient(#358a9d 0%,#eff4f2 0%)}.row{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}.row>div{flex:1;min-width:190px}.tree-scroll{overflow-x:auto;border:1px solid var(--edge);border-radius:.65rem;padding:.6rem;margin:.65rem 0;max-width:100%}.tree-level{display:flex;gap:.35rem;justify-content:space-around;min-width:max-content;margin:.5rem 0;position:relative}.node{background:#e9f4f4;border:1px solid #aacbcb;padding:.37rem .4rem;border-radius:.5rem;min-width:3.25rem;text-align:center;font-size:.78rem;white-space:nowrap}.level-name{font-size:.73rem;font-weight:700;color:#4b6c71}.pill{display:inline-block;border-radius:99px;padding:.2rem .55rem;background:#f4e6bb;color:#57400c;font-size:.78rem;font-weight:700}.notice{border-left:4px solid #dca747;padding:.35rem .85rem;background:#fff6df}footer{font-size:.83rem;color:#425d68;margin-top:2rem}details{margin-top:.9rem}summary{cursor:pointer;font-weight:700}table{border-collapse:collapse;width:100%;font-size:.875rem}th,td{border-bottom:1px solid var(--edge);text-align:left;padding:.5rem}
+@media(max-width:480px){.card{padding:.9rem}.node{font-size:.72rem;min-width:2.8rem}header{padding:1.15rem}}
+</style>
+</head>
+<body><main>
+<header>
+<div class="eyebrow">HEIDEE · JoySpace 2.0 · Parent-led learning</div>
+<h1>🌰 Ziggy Math Lab</h1>
+<p>Experience → Notice → Name → Explain → Replay. Explore stories, groups, fractions and chance with no account, ads, tracking or internet connection.</p>
+<p><span class="pill">Offline classroom prototype</span> <a href="../index.html">← JoySpace homepage</a></p>
+</header>
+<div class="notice"><strong>Family boundary:</strong> This lab is a local-only teaching instrument, not a live AI service or a replacement for parental judgment. Nothing you do here is saved, transmitted or published. A parent or teacher decides whether to use it.</div>
+<section class="card" aria-labelledby="story-title">
+<h2 id="story-title">1. Ziggy's acorn story</h2>
+<p>Ziggy begins with <strong>5 acorns</strong>, <strong>2 map pieces</strong>, and <strong>3 clock ticks</strong>.</p>
+<div class="controls"><button id="find">Find 3 acorns</button><button id="share" disabled>Share half with squirrel</button><button id="reset-story">Replay from start</button></div>
+<p class="output" id="story-out" aria-live="polite"></p>
+<p class="small" id="fixture-status" aria-live="polite">Fixture check: not run. The exercise is educational; a hash does not prove a real-world event.</p>
+<details><summary>SHOW ME THE MATH</summary><p>Step 1: 5 + 3 = 8 acorns; time 3 + 1 = 4 ticks. Step 2: 8 ÷ 2 = 4 acorns remain; time 4 + 1 = 5 ticks.</p><p>Two fixed state fixtures are checked using SHA-256 on the device when available. If local hashing is unavailable, the check says UNKNOWN; no server is contacted.</p></details>
+</section>
+<section class="card" aria-labelledby="group-title">
+<h2 id="group-title">2. Counting and grouping</h2>
+<label for="count">Dots: <output id="count-label">12</output></label>
+<div><input id="count" type="range" min="0" max="24" step="1" value="12"></div>
+<label for="group">Group size:</label> <select id="group"><option value="2">2</option><option value="3">3</option></select>
+<div id="dots" class="dots" aria-hidden="true"></div><p class="output" id="group-out" aria-live="polite"></p>
+</section>
+<section class="card" aria-labelledby="fraction-title">
+<h2 id="fraction-title">3. Fraction Explorer</h2>
+<div class="row"><div><label for="num">Numerator</label> <input id="num" type="number" min="0" max="12" step="1" value="1">
+<label for="den">Denominator</label> <input id="den" type="number" min="1" max="12" step="1" value="2">
+<p class="output" id="fraction-out" aria-live="polite"></p></div><div><div id="pie" class="fraction" role="img" aria-label="One half shaded"></div></div></div>
+<p class="small">The numerator cannot exceed the denominator. The colored area shows the part of one whole.</p>
+</section>
+<section class="card" aria-labelledby="tree-title">
+<h2 id="tree-title">4. Probability trees</h2>
+<label for="flips">Fair coin flips:</label>
+<select id="flips"><option value="2">2 flips</option><option value="3">3 flips</option><option value="4">4 flips</option><option value="5" selected>5 flips</option></select>
+<p id="tree-summary" class="output" aria-live="polite"></p><div class="tree-scroll" id="tree" role="region" aria-label="Coin-flip tree; scroll sideways to explore"></div>
+<details><summary>SHOW ME THE MATH</summary><p>At each flip, H and T each have probability 1/2. After <span id="flip-count">5</span> independent flips, there are <span id="path-count">32</span> possible paths, each with probability <span id="path-probability">1/32</span>. These are mathematical probabilities, not predictions of a particular child's future.</p></details>
+</section>
+<section class="card" aria-labelledby="die-title">
+<h2 id="die-title">5. Fair six-sided die</h2>
+<button id="roll">Roll classroom die</button> <button id="clear-rolls">Clear recent rolls</button>
+<p class="output" id="die-out" aria-live="polite">Each face has theoretical probability 1/6. No rolls made.</p>
+<p class="small">Illustrative browser-generated rolls; not a certified physical randomness source. The recent-history display exists only in temporary page memory.</p>
+</section>
+<footer>LOCAL_DRAFT_ONLY · PARENTAL_AUTHORITY=true · AI_AUTHORITY=false · NO_ACCOUNTS · NO_TRACKING · NO_PAYMENTS · NO_CHILD_DATA_IN_RECEIPTS · No network APIs, external assets, or persistent storage.</footer>
+</main>
+<script>
+'use strict';
+const byId = id => document.getElementById(id);
+const expected=[
+{step:1, acorns:8, map_pieces:2, clock_ticks:4, sha:"56266f849f56b2dd73dd78f731985c4ea0c850c2730242691cd30c9b4fa6fca2"},
+{step:2, acorns:4, map_pieces:2, clock_ticks:5, sha:"3bdf65214a8541293e2b28dc4a6167154abaee81918d68049f56a56aaa08f61e"}
+];
+const state={acorns:5,map_pieces:2,clock_ticks:3,step:0};
+function showStory(){
+ byId('story-out').textContent="Acorns: "+state.acorns+" · Map pieces: "+state.map_pieces+" · Clock ticks: "+state.clock_ticks;
+ byId('find').disabled=state.step!==0;byId('share').disabled=state.step!==1;
+}
+async function checkFixture(){
+ if(state.step===0){byId('fixture-status').textContent="Fixture check: not run.";return;}
+ const exp=expected[state.step-1];
+ const matches=state.acorns===exp.acorns && state.map_pieces===exp.map_pieces && state.clock_ticks===exp.clock_ticks;
+ if(!matches){byId('fixture-status').textContent="Fixture state: FAIL";return;}
+ if(!globalThis.crypto || !globalThis.crypto.subtle || !globalThis.TextEncoder){byId('fixture-status').textContent="Fixture arithmetic: PASS · SHA-256: UNKNOWN (local crypto unavailable)";return;}
+ try{
+ const bytes=new TextEncoder().encode(JSON.stringify({acorns:state.acorns,map_pieces:state.map_pieces,clock_ticks:state.clock_ticks}));
+ const digest=await crypto.subtle.digest('SHA-256',bytes);
+ const hex=Array.from(new Uint8Array(digest)).map(n=>n.toString(16).padStart(2,'0')).join('');
+ byId('fixture-status').textContent="Fixture "+state.step+": "+(hex===exp.sha?"PASS":"FAIL")+" (local SHA-256)";
+ }catch(_){byId('fixture-status').textContent="Fixture arithmetic: PASS · SHA-256: UNKNOWN";}
+}
+byId('find').addEventListener('click',()=>{if(state.step!==0)return;state.acorns+=3;state.clock_ticks++;state.step=1;showStory();checkFixture();});
+byId('share').addEventListener('click',()=>{if(state.step!==1)return;state.acorns/=2;state.clock_ticks++;state.step=2;showStory();checkFixture();});
+byId('reset-story').addEventListener('click',()=>{state.acorns=5;state.map_pieces=2;state.clock_ticks=3;state.step=0;showStory();checkFixture();});
+function updateGrouping(){
+ const count=Number(byId('count').value),size=Number(byId('group').value);
+ byId('count-label').textContent=String(count);
+ const dots=byId('dots');dots.replaceChildren();
+ for(let i=0;i<count;i++){const dot=document.createElement('span');dot.className='dot';dots.appendChild(dot);}
+ const groups=Math.floor(count/size),remainder=count%size;
+ byId('group-out').textContent=count+" dots = "+groups+" complete group"+(groups===1?"":"s")+" of "+size+"; remainder "+remainder+".";
+}
+byId('count').addEventListener('input',updateGrouping);
+byId('group').addEventListener('change',updateGrouping);
+function updateFraction(){
+ const d=Math.max(1,Math.min(12,Math.trunc(Number(byId('den').value)||1)));
+ const n=Math.max(0,Math.min(d,Math.trunc(Number(byId('num').value)||0)));
+ byId('den').value=String(d);byId('num').value=String(n);
+ const pct=100*n/d;byId('fraction-out').textContent=n+"/"+d+" = "+pct.toFixed(1)+"% of one whole";
+ byId('pie').style.background="conic-gradient(#358a9d 0% "+pct+"%, #eff4f2 "+pct+"% 100%)";
+ byId('pie').setAttribute('aria-label',n+" out of "+d+" equal parts shaded");
+}
+byId('num').addEventListener('change',updateFraction);byId('den').addEventListener('change',updateFraction);
+function coinPath(i,bits){return i.toString(2).padStart(bits,'0').replace(/0/g,'H').replace(/1/g,'T');}
+function updateTree(){
+ const n=Number(byId('flips').value),total=2**n;
+ byId('tree-summary').textContent=total+" paths · each path = 1/"+total+" · H and T each = 1/2 per flip";
+ byId('flip-count').textContent=n;byId('path-count').textContent=total;byId('path-probability').textContent="1/"+total;
+ const tree=byId('tree');tree.replaceChildren();
+ for(let depth=1;depth<=n;depth++){
+  const label=document.createElement('div');label.className='level-name';label.textContent="Flip "+depth+" · "+(2**depth)+" branches";tree.appendChild(label);
+  const row=document.createElement('div');row.className='tree-level';
+  for(let i=0;i<2**depth;i++){
+   const node=document.createElement('span');node.className='node';node.textContent=coinPath(i,depth)+(depth===n?" · 1/"+total:"");row.appendChild(node);
+  }tree.appendChild(row);
+ }
+}
+byId('flips').addEventListener('change',updateTree);
+const rolls=[];function updateRolls(){byId('die-out').textContent=rolls.length?"Recent rolls: "+rolls.join(", ")+" · theoretical P(face)=1/6":"Each face has theoretical probability 1/6. No rolls made.";}
+byId('roll').addEventListener('click',()=>{rolls.push(1+Math.floor(Math.random()*6));if(rolls.length>8)rolls.shift();updateRolls();});
+byId('clear-rolls').addEventListener('click',()=>{rolls.length=0;updateRolls();});
+showStory();updateGrouping();updateFraction();updateTree();
+</script>
+</body></html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer"><title>Sister Syntax Math | HEIDEE JoySpace</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#173047;background:#f5faf7}*{box-sizing:border-box}body{margin:0}main{max-width:780px;margin:auto;padding:1rem 1rem 4rem}header{background:#273d65;color:#fff;padding:1.5rem;border-radius:1rem}h1{margin:.25rem 0}h2{margin-top:0}.card{background:#fff;border:1px solid #d7e4e1;border-radius:1rem;padding:1.2rem;margin:1rem 0}button,select{padding:.7rem;font:inherit;border-radius:.6rem;border:1px solid #abc9ce;background:#e4f4f2;color:#163f50;font-weight:700;cursor:pointer}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #f7ba4d;outline-offset:3px}button:disabled{opacity:.5;cursor:default}.buttons{display:flex;flex-wrap:wrap;gap:.5rem}.output{background:#edf5fa;border-radius:.5rem;padding:1rem;min-height:3rem}.small,small{font-size:.9rem;color:#4b5f67}a{color:#246a77}header a{color:#fff}.tag{background:#ffeba9;border-radius:99px;padding:.2rem .6rem;display:inline-block;color:#5e4717;font-size:.8rem;font-weight:700}code{white-space:normal}footer{font-size:.85rem;color:#53606c}
+</style></head><body><main>
+<header><div class="tag">LOCAL_DRAFT_ONLY · no network calls</div><h1>🌸 Sister Syntax Math</h1><p>Original learning game: Ask → Freeze → Transform → Check → Compare → Reverse → Explain → Repeat.</p><p><a href="../index.html">← JoySpace homepage</a></p></header>
+<div class="card"><h2>1. A mathematically reversible story</h2><p>Begin with 5 pretend tokens. Add 3; then reverse the operation. Can you recover the starting number?</p>
+<div class="buttons">
+<button id="transform">TRANSFORM +3</button><button id="reverse" disabled>REVERSE −3</button><button id="repeat">REPEAT</button>
+</div><p class="output" id="math-state" aria-live="polite">FREEZE: 5 tokens</p>
+<details><summary>SHOW ME THE MATH</summary><p><code>5 + 3 = 8; 8 − 3 = 5.</code> Delta = 3; reversing restores the frozen start. Changing a game does not change any real person's records.</p></details></div>
+<div class="card"><h2>2. Three Daughters Algorithm — safe routing</h2><p>PROTECT → PRESERVE → EXPAND. Select a <em>fictional</em> example; this does not request, record, or establish anyone's consent.</p>
+<label for="case">Select a boundary example:</label>
+<select id="case"><option value="no_consent">Public-safe story, sharing not approved</option><option value="private_material">Private family details</option><option value="needs_review">Public-safe story, needs human review</option><option value="public_safe_only">Public-safe, reviewed teaching fixture</option></select>
+<p id="case-result" class="output" aria-live="polite">NO_SHARE — privacy preserved; no publication.</p>
+<small>“NO_SHARE” is a valid outcome. A local classroom demo is not parental authorization or a public publication gate.</small></div>
+<div class="card"><h2>3. Auburn / War Eagle perspective game</h2><p>Choose a fictional team perspective for the <strong>same</strong> math question. The answer must not change with the color of the jersey.</p><div class="buttons"><button id="war-eagle">WAR EAGLE</button><button id="roll-tide">ROLL TIDE</button></div>
+<p id="team-result" class="output" aria-live="polite">Choose either perspective: 5 + 3 = 8.</p><small>This is an optional sports-themed learning skin, not a claim about any learner's campus, enrollment, affiliation or endorsement. Rivals are not enemies.</small></div>
+<div class="card"><h2>4. Sister Syntax rules</h2><p>Joy first. Receipts second. Authority never. Children can ask, challenge, replay, decline and rest. No child responses are collected or transmitted.</p></div>
+<footer>Parent-led educational prototype · AI_AUTHORITY=false · NO_ACCOUNTS · NO_TRACKING · NO_CHILD_DATA · NO_SECRETS · NO_DEPLOYMENT. Source: public JOY Sister Syntax specification and protected local-only math research.</footer>
+</main><script>
+'use strict';
+const el=id=>document.getElementById(id);
+let phase=0;
+function render(){el('math-state').textContent=phase===0?'FREEZE: 5 tokens':phase===1?'TRANSFORM: 5 + 3 = 8 tokens':'REVERSE: 8 − 3 = 5 tokens; invariant PASS';el('transform').disabled=phase!==0;el('reverse').disabled=phase!==1;}
+el('transform').addEventListener('click',()=>{if(phase!==0)return;phase=1;render();});
+el('reverse').addEventListener('click',()=>{if(phase!==1)return;phase=2;render();});
+el('repeat').addEventListener('click',()=>{phase=0;render();});
+const outcomes={no_consent:'NO_SHARE — privacy preserved; no publication.',private_material:'PRIVATE_HOLD — private details never become public.',needs_review:'REVIEW_HOLD — human review required.',public_safe_only:'LOCAL_REPLAY_READY — practice fixture only; not permission to publish.'};
+el('case').addEventListener('change',()=>{el('case-result').textContent=outcomes[el('case').value];});
+el('war-eagle').addEventListener('click',()=>{el('team-result').textContent='WAR EAGLE perspective: 5 + 3 = 8; 8 − 3 = 5.';});
+el('roll-tide').addEventListener('click',()=>{el('team-result').textContent='ROLL TIDE perspective: 5 + 3 = 8; 8 − 3 = 5.';});
+render();
+</script></body></html>
