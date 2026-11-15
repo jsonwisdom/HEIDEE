@@ -55,3 +55,16 @@ A public-safe classroom module preserving what original sources establish versus
 - [Run the reproducible test suite](./SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs)
 
 This corridor is **not** a child-profile service, lyric redistribution service, plagiarism verdict engine, payment rail, or signer. No personal data or authorization is created by an evidence PASS.
+
+
+---
+
+## JoySpace — Draw, Save, Print (2026-11-15)
+
+- [Open the source for the new creative page](./docs/joyspace/index.html).
+- Draw with a mouse, finger or pen; undo; save a PNG; and print without a wallet, account login, or network API.
+- Online publishing/sharing is **not enabled**. The Share control gives a trusted-grown-up reminder; it is not a parental-verification mechanism.
+- A hardware security key, if an adult chooses to configure one, protects an adult account. It is **not required** for creative play and is **not being enrolled or bound to a wallet** by this update.
+- This is a **repository source update**, not a claim that a live website has been deployed or tested.
+
+**No private family information, crypto secrets, guardian authentication data, or government attribution is included.** 
