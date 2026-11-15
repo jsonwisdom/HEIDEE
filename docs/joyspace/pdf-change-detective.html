@@ -18,7 +18,7 @@ button:disabled{opacity:.45;cursor:not-allowed}pre{white-space:pre-wrap;overflow
 <p>🌸 JoySpace · School of Wisdom · Offline-first civic learning</p>
 <h1>PDF Change Detective</h1>
 <p class="intro">Kids can read two public documents, check their exact bytes, and explain what changed. Files are processed <strong>on this device</strong>. You can save a witness-copy briefing for a trusted adult to review. No upload, account, or wallet required.</p>
-<p class="note"><strong>Important:</strong> A different SHA-256 hash proves the file bytes differ. It does <em>not</em> prove a law, policy, or meaning changed. A matching hash proves identical bytes, not that a source is official.</p>
+<p class="note"><strong>Important:</strong> Different SHA-256 digests establish that the files differ. A matching digest is very strong integrity evidence, and this tool also checks every byte before reporting MATCH. Neither check authenticates the publisher or determines policy meaning.</p>
 <section class="resources"><h2>Find original documents</h2>
 <p><a href="https://www.nist.gov/publications" target="_blank" rel="noopener noreferrer">NIST publications</a> · <a href="https://www.justice.gov/oip/what-you-will-find-foia-reading-rooms" target="_blank" rel="noopener noreferrer">DOJ FOIA reading rooms</a> · <a href="https://www.congress.gov/" target="_blank" rel="noopener noreferrer">Congress.gov</a> · <a href="https://www.govinfo.gov/" target="_blank" rel="noopener noreferrer">GovInfo official publications</a></p>
 <p><small>Download two versions of the same document from the source. Official site links are provided for research, not as an assertion about any specific downloaded file.</small></p></section>
@@ -56,7 +56,7 @@ async function readPDF(which){const file=get(which).files[0];if(!file)throw Erro
 if(file.size>MAX)throw Error("Each local PDF must be 30 MiB or smaller.");
 const bytes=new Uint8Array(await file.arrayBuffer());
 if(bytes.length<5||String.fromCharCode(...bytes.slice(0,5))!=="%PDF-")throw Error("The selected file does not start with a PDF file header.");
-return {file,sha:await digest(bytes),size:bytes.length};}
+return {file,sha:await digest(bytes),size:bytes.length,bytes};}
 async function compare(){
 state.old=state.new=state.root=null;state.comparison="UNKNOWN";result.textContent="Calculating local file hashes…";
 if(!crypto?.subtle){result.textContent="SHA-256 unavailable in this browser. Open the page through HTTPS.";return;}
@@ -65,10 +65,11 @@ const a=await readPDF("old"),b=await readPDF("new");
 const leafA=dehex(await digest(joint(0,dehex(a.sha))));
 const leafB=dehex(await digest(joint(0,dehex(b.sha))));
 const root=await digest(joint(1,leafA,leafB));
-const status=a.sha===b.sha?"MATCH — same exact bytes":"DELTA — the bytes are different; cause and significance require reading";
-Object.assign(state,{old:a,new:b,root,comparison:status});
+const compared=Math.min(a.bytes.length,b.bytes.length);let differentPositions=Math.abs(a.bytes.length-b.bytes.length);for(let i=0;i<compared;i++){if(a.bytes[i]!==b.bytes[i])differentPositions++;}const sameBytes=differentPositions===0;const status=sameBytes?"MATCH — byte-for-byte identical":"DELTA — the bytes are different; cause and significance require reading";
+Object.assign(state,{old:{file:a.file,sha:a.sha,size:a.size},new:{file:b.file,sha:b.sha,size:b.size},root,comparison:status,differentPositions});
 result.textContent=[
 "LOCAL CHECK: "+status,
+"POSITIONAL BYTE DELTA (not edit-distance or policy meaning): "+differentPositions,
 "EARLIER PDF: "+a.file.name+" | "+a.size+" bytes",
 "SHA-256: "+a.sha,
 "LATER PDF: "+b.file.name+" | "+b.size+" bytes",
@@ -100,6 +101,7 @@ const lines=[
 "Later PDF: "+(state.new?.file.name||"UNKNOWN"),
 "Later bytes: "+(state.new?.size??"UNKNOWN"),"Later SHA-256: "+(state.new?.sha||"UNKNOWN"),
 "Exact-byte comparison: "+state.comparison,
+"Positional byte delta (not an edit distance): "+(state.differentPositions??"UNKNOWN"),
 "Two-leaf Merkle root: "+(state.root||"UNKNOWN"),
 "Canonical construction: leaf = SHA256(0x00 || SHA256(file)); root = SHA256(0x01 || leaf_old || leaf_new)",
 "Reader-reviewed page or section: "+(get("page").value.trim()||"NOT RECORDED"),
