@@ -79,3 +79,7 @@ This corridor is **not** a child-profile service, lyric redistribution service, 
 
 
 **No private family information, crypto secrets, guardian authentication data, or government attribution is included.** 
+
+### Δ17 daily PDF replay
+
+The offline [PDF Change Detective](./docs/joyspace/pdf-change-detective.html) is a child-safe **manual** source-byte lesson. The [JOY Δ17 continuity rules](https://github.com/jsonwisdom/JOY/blob/master/joyspace/DELTA17_DAILY_REPLAY_V0_1.md) keep missing observations as UNKNOWN, not zero. Private financial/support history is outside this child-facing page. No Base or Ethereum Merkle publication is made.
