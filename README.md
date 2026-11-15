@@ -67,4 +67,15 @@ This corridor is **not** a child-profile service, lyric redistribution service, 
 - A hardware security key, if an adult chooses to configure one, protects an adult account. It is **not required** for creative play and is **not being enrolled or bound to a wallet** by this update.
 - This is a **repository source update**, not a claim that a live website has been deployed or tested.
 
+
+### School of Wisdom — PDF Change Detective (2026-11-15)
+
+- [Open the source for the local PDF comparison lesson](./docs/joyspace/pdf-change-detective.html).
+- Two local PDFs can be opened in the device's PDF viewer, then compared by SHA-256 and a two-leaf Merkle root.
+- A local **Presidential Morning Brief — WITNESS COPY** can be saved for adult review; **no government message is sent**.
+- `MATCH` means identical bytes; `DELTA` means byte differences, **not** a verified substantive/legal revision.
+- This commit does **not** activate scheduled crawls, collect minor identities, authorize children to share publicly, or connect a YubiKey/wallet.
+- Agency provenance, public deployment, live browser usability, and human approval remain `UNKNOWN`.
+
+
 **No private family information, crypto secrets, guardian authentication data, or government attribution is included.** 
