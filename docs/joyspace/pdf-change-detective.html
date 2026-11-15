@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JoySpace · PDF Change Detective</title>
+<style>
+:root{font:17px/1.45 system-ui,sans-serif;color:#243245;background:#fffaf0}
+*{box-sizing:border-box}body{margin:0}main{max-width:980px;margin:auto;padding:20px 16px 48px}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.3em 0}.intro{max-width:72ch}
+a{color:#115c9b}fieldset{margin:18px 0;border:2px solid #607993;border-radius:15px;padding:16px}
+legend{font-weight:750}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+label{display:block;font-weight:600;margin:10px 0 5px}input[type=file],input[type=text],select,textarea{font:inherit;width:100%;padding:9px;border:1px solid #8699ae;border-radius:9px;background:#fff}
+textarea{min-height:95px}button{font:inherit;cursor:pointer;border:2px solid #284667;background:white;color:#182a41;border-radius:9px;padding:10px 14px;margin:5px 5px 5px 0}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #1479c9;outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef5ff;padding:15px;border-radius:12px;font:14px/1.5 ui-monospace,monospace}
+.note{background:#eaf6ee;padding:14px;border-radius:12px}small{color:#47566c}
+@media print{button,fieldset,.resources,footer{display:none}}
+</style></head><body><main>
+<p>🌸 JoySpace · School of Wisdom · Offline-first civic learning</p>
+<h1>PDF Change Detective</h1>
+<p class="intro">Kids can read two public documents, check their exact bytes, and explain what changed. Files are processed <strong>on this device</strong>. You can save a witness-copy briefing for a trusted adult to review. No upload, account, or wallet required.</p>
+<p class="note"><strong>Important:</strong> A different SHA-256 hash proves the file bytes differ. It does <em>not</em> prove a law, policy, or meaning changed. A matching hash proves identical bytes, not that a source is official.</p>
+<section class="resources"><h2>Find original documents</h2>
+<p><a href="https://www.nist.gov/publications" target="_blank" rel="noopener noreferrer">NIST publications</a> · <a href="https://www.justice.gov/oip/what-you-will-find-foia-reading-rooms" target="_blank" rel="noopener noreferrer">DOJ FOIA reading rooms</a> · <a href="https://www.congress.gov/" target="_blank" rel="noopener noreferrer">Congress.gov</a> · <a href="https://www.govinfo.gov/" target="_blank" rel="noopener noreferrer">GovInfo official publications</a></p>
+<p><small>Download two versions of the same document from the source. Official site links are provided for research, not as an assertion about any specific downloaded file.</small></p></section>
+<fieldset><legend>1. Identify the claim</legend>
+<label for="agency">Which publisher are you checking?</label>
+<select id="agency"><option value="NIST">NIST</option><option value="DOJ">Department of Justice</option><option value="Congress">Congress / Library of Congress</option><option value="GPO">Government Publishing Office</option><option value="Other">Other / unknown publisher</option></select>
+<label for="source">Public source URL (optional, copied from the original site)</label>
+<input id="source" type="text" placeholder="https://...">
+<label for="document">Document name or publication number (optional)</label>
+<input id="document" type="text" placeholder="Example: SP 800-63-4"></fieldset>
+<fieldset><legend>2. Compare your own local PDFs</legend>
+<div class="grid"><div><label for="old">Earlier PDF</label><input type="file" id="old" accept="application/pdf,.pdf"><button type="button" id="openOld">Read earlier PDF</button></div>
+<div><label for="new">Later PDF</label><input type="file" id="new" accept="application/pdf,.pdf"><button type="button" id="openNew">Read later PDF</button></div></div>
+<p><button type="button" id="compare">Compare SHA-256 &amp; build two-leaf Merkle proof</button></p></fieldset>
+<fieldset><legend>3. Read and explain</legend>
+<label for="page">Page number or section (optional)</label><input id="page" type="text" placeholder="Which page did you review?">
+<label for="notes">What did you notice? (optional; this is an observation, not a verified legal finding)</label>
+<textarea id="notes" placeholder="I read both PDFs. I observed..."></textarea>
+<button type="button" id="brief">Save morning briefing draft (.txt)</button></fieldset>
+<h2>Evidence result</h2>
+<pre id="result" role="status" aria-live="polite">UNKNOWN — choose two local PDF versions and press Compare.</pre>
+<footer><p><small>Reader safety: no identity data, credential collection, payment flow, wallet requests, network tracking, or automatic government messaging. Names and comments you enter may appear in the local downloaded briefing: review before sharing. A daily *automatic* government-PDF monitor is not enabled by this page.</small></p>
+<p><a href="./index.html">Back to JoySpace drawing</a></p></footer>
+<script>
+(() => {
+"use strict";
+const get=id=>document.getElementById(id),result=get("result");
+const state={old:null,new:null,root:null,comparison:"UNKNOWN"};
+const MB=1024*1024, MAX=30*MB;
+const hex=bytes=>Array.from(bytes,x=>x.toString(16).padStart(2,"0")).join("");
+function dehex(s){const out=new Uint8Array(s.length/2);for(let i=0;i<out.length;i++)out[i]=parseInt(s.slice(i*2,i*2+2),16);return out;}
+async function digest(bytes){return hex(new Uint8Array(await crypto.subtle.digest("SHA-256",bytes)));}
+function joint(prefix,...buffers){const len=buffers.reduce((n,x)=>n+x.length,1),out=new Uint8Array(len);out[0]=prefix;let pos=1;for(const b of buffers){out.set(b,pos);pos+=b.length;}return out;}
+async function readPDF(which){const file=get(which).files[0];if(!file)throw Error("Choose the "+(which==="old"?"earlier":"later")+" PDF.");
+if(file.size>MAX)throw Error("Each local PDF must be 30 MiB or smaller.");
+const bytes=new Uint8Array(await file.arrayBuffer());
+if(bytes.length<5||String.fromCharCode(...bytes.slice(0,5))!=="%PDF-")throw Error("The selected file does not start with a PDF file header.");
+return {file,sha:await digest(bytes),size:bytes.length};}
+async function compare(){
+state.old=state.new=state.root=null;state.comparison="UNKNOWN";result.textContent="Calculating local file hashes…";
+if(!crypto?.subtle){result.textContent="SHA-256 unavailable in this browser. Open the page through HTTPS.";return;}
+try{
+const a=await readPDF("old"),b=await readPDF("new");
+const leafA=dehex(await digest(joint(0,dehex(a.sha))));
+const leafB=dehex(await digest(joint(0,dehex(b.sha))));
+const root=await digest(joint(1,leafA,leafB));
+const status=a.sha===b.sha?"MATCH — same exact bytes":"DELTA — the bytes are different; cause and significance require reading";
+Object.assign(state,{old:a,new:b,root,comparison:status});
+result.textContent=[
+"LOCAL CHECK: "+status,
+"EARLIER PDF: "+a.file.name+" | "+a.size+" bytes",
+"SHA-256: "+a.sha,
+"LATER PDF: "+b.file.name+" | "+b.size+" bytes",
+"SHA-256: "+b.sha,
+"TWO-LEAF ROOT: "+root,
+"Root rule: leaf = SHA256(00 || SHA256(file)); root = SHA256(01 || leaf_old || leaf_new).",
+"Publisher authenticity: UNKNOWN until source provenance independently established.",
+"Legal or policy interpretation: HUMAN REVIEW REQUIRED.",
+"Government delivery: NOT SENT."
+].join("\n");
+}catch(err){result.textContent="UNKNOWN — "+String(err?.message||err);}
+}
+function preview(which){const file=get(which).files[0];if(!file){result.textContent="Choose the PDF before opening it.";return;}
+const url=URL.createObjectURL(file);const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),60000);}
+get("compare").addEventListener("click",compare);
+get("openOld").addEventListener("click",()=>preview("old"));
+get("openNew").addEventListener("click",()=>preview("new"));
+get("brief").addEventListener("click",()=>{
+const agency=get("agency").value,source=get("source").value.trim(),doc=get("document").value.trim();
+const lines=[
+"SUPREME SEYMOUR | GENERATION Z PDF CHANGE DESK",
+"Daily Presidential Brief — WITNESS COPY / NOT SENT",
+"Recorded locally: "+new Date().toISOString(),
+"Agency (selected by reader, not authenticated): "+agency,
+"Document label: "+(doc||"UNKNOWN"),"Source URL (entered by reader): "+(source||"NOT PROVIDED"),
+"Earlier PDF: "+(state.old?.file.name||"UNKNOWN"),
+"Earlier bytes: "+(state.old?.size??"UNKNOWN"),"Earlier SHA-256: "+(state.old?.sha||"UNKNOWN"),
+"Later PDF: "+(state.new?.file.name||"UNKNOWN"),
+"Later bytes: "+(state.new?.size??"UNKNOWN"),"Later SHA-256: "+(state.new?.sha||"UNKNOWN"),
+"Exact-byte comparison: "+state.comparison,
+"Two-leaf Merkle root: "+(state.root||"UNKNOWN"),
+"Canonical construction: leaf = SHA256(0x00 || SHA256(file)); root = SHA256(0x01 || leaf_old || leaf_new)",
+"Reader-reviewed page or section: "+(get("page").value.trim()||"NOT RECORDED"),
+"Reader observation (not authenticated): "+(get("notes").value.trim()||"NO OBSERVATION"),
+"Independent agency provenance: UNKNOWN",
+"Meaningful policy change: UNKNOWN until human comparison",
+"Legal judgment: NONE",
+"Publication / sending: NOT PERFORMED",
+"Personal information/credentials: DO NOT INCLUDE",
+];
+const blob=new Blob([lines.join("\n")+"\n"],{type:"text/plain;charset=utf-8"});
+const url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="pdf-change-witness-copy.txt";a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
+result.textContent+="\nWitness-copy report prepared locally. It was NOT sent to any agency.";
+});
+})();
+</script>
+</main></body></html>
