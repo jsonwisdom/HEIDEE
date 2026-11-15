@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>JoySpace | Draw, Save, Print</title>
+<style>
+:root{font:17px/1.5 system-ui,sans-serif;color:#263046;background:#fff9f1}
+*{box-sizing:border-box}
+body{margin:0}
+main{max-width:940px;margin:auto;padding:20px 16px 44px}
+h1{font-size:clamp(2rem,5vw,3.4rem);margin:.2em 0}
+.intro{font-size:1.06rem;max-width:64ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+button,label{border:2px solid #3b4c70;border-radius:11px;padding:11px 14px;background:white;font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:4px solid #0a66cc;outline-offset:2px}
+button:disabled{opacity:.55;cursor:not-allowed}
+canvas{display:block;touch-action:none;background:white;border:4px solid #415777;border-radius:14px;max-width:100%;height:auto;cursor:crosshair}
+.note{padding:13px 16px;background:#e8f2fc;border-radius:12px}
+#printTitle{display:none}
+@media print {
+  .intro,.tools,.note,footer{display:none!important}
+  body,main{padding:0;margin:0;background:#fff}
+  h1{display:none}
+  #printTitle{display:block}
+  canvas{width:100%;max-width:100%;border:0}
+}
+</style>
+</head>
+<body>
+<main>
+<header><p>🌸 JoySpace · Make something yours</p><h1>Draw a little wonder.</h1>
+<p class="intro">Draw, save your picture, or print it to share at home. No wallet, account, token, or sign-in needed.</p></header>
+<div class="tools">
+<label for="color">Color <input aria-label="Pen color" type="color" id="color" value="#5442aa"></label>
+<label for="size">Brush <input aria-label="Brush size" id="size" type="range" min="2" max="26" value="8"></label>
+<button type="button" id="erase">Eraser: off</button>
+<button type="button" id="undo">Undo</button>
+<button type="button" id="clear">New page</button>
+<button type="button" id="save">Save picture</button>
+<button type="button" id="print">Print</button>
+<button type="button" id="share">Share</button>
+</div>
+<p id="printTitle">My JoySpace Drawing</p>
+<canvas id="art" width="800" height="540" aria-label="Drawing canvas. Draw with your pointer, finger, or pen.">Your browser does not support the drawing canvas.</canvas>
+<p class="note" id="message" role="status" aria-live="polite">Your drawing stays in this browser until you save it. There is no online upload.</p>
+<footer><p>For online sharing, ask a trusted grown-up. This version does not publish art or contact anyone. ❤️</p></footer>
+</main>
+<script>
+(() => {
+"use strict";
+const canvas=document.getElementById("art"),ctx=canvas.getContext("2d");
+const msg=document.getElementById("message"),color=document.getElementById("color"),size=document.getElementById("size");
+const eraseBtn=document.getElementById("erase");let drawing=false,erasing=false,last=null;
+const undo=[];const limit=12;
+function base(){ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);}
+base();
+function mark(){try{undo.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(undo.length>limit)undo.shift();}catch{msg.textContent="Undo is unavailable on this device.";}}
+function point(event){const r=canvas.getBoundingClientRect();return {x:(event.clientX-r.left)*canvas.width/r.width,y:(event.clientY-r.top)*canvas.height/r.height};}
+function paint(a,b){ctx.strokeStyle=erasing?"#ffffff":color.value;ctx.fillStyle=ctx.strokeStyle;ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=Number(size.value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+canvas.addEventListener("pointerdown",e=>{if(!e.isPrimary)return;mark();drawing=true;last=point(e);canvas.setPointerCapture(e.pointerId);paint(last,last);});
+canvas.addEventListener("pointermove",e=>{if(!drawing||!e.isPrimary)return;const p=point(e);paint(last,p);last=p;});
+function end(){drawing=false;last=null;}
+canvas.addEventListener("pointerup",end);canvas.addEventListener("pointercancel",end);
+eraseBtn.addEventListener("click",()=>{erasing=!erasing;eraseBtn.textContent="Eraser: "+(erasing?"on":"off");eraseBtn.setAttribute("aria-pressed",String(erasing));});
+document.getElementById("undo").addEventListener("click",()=>{if(!undo.length){msg.textContent="Nothing to undo yet.";return;}ctx.putImageData(undo.pop(),0,0);msg.textContent="Last step undone.";});
+document.getElementById("clear").addEventListener("click",()=>{if(window.confirm("Start a fresh drawing?")){mark();base();msg.textContent="Fresh canvas ready."; }});
+document.getElementById("save").addEventListener("click",()=>{const a=document.createElement("a");a.download="joyspace-drawing.png";a.href=canvas.toDataURL("image/png");a.click();msg.textContent="Picture saved on your device. Nothing uploaded.";});
+document.getElementById("print").addEventListener("click",()=>window.print());
+document.getElementById("share").addEventListener("click",()=>{msg.textContent="Ask a trusted grown-up to help share your saved or printed picture. This page cannot post online.";});
+})();
+</script>
+</body>
+</html>
