@@ -58,7 +58,7 @@ const bytes=new Uint8Array(await file.arrayBuffer());
 if(bytes.length<5||String.fromCharCode(...bytes.slice(0,5))!=="%PDF-")throw Error("The selected file does not start with a PDF file header.");
 return {file,sha:await digest(bytes),size:bytes.length,bytes};}
 async function compare(){
-state.old=state.new=state.root=null;state.comparison="UNKNOWN";result.textContent="Calculating local file hashes…";
+state.old=state.new=state.root=state.differentPositions=null;state.comparison="UNKNOWN";result.textContent="Calculating local file hashes…";
 if(!crypto?.subtle){result.textContent="SHA-256 unavailable in this browser. Open the page through HTTPS.";return;}
 try{
 const a=await readPDF("old"),b=await readPDF("new");
