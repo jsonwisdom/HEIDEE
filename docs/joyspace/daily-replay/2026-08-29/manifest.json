@@ -1,0 +1,71 @@
+{
+  "schema": "HEIDEE_DAILY_REPLAY_V0_1",
+  "date": "2026-08-29",
+  "repository": "jsonwisdom/HEIDEE",
+  "branch": "daily-replay-2026-08-29",
+  "mode": "public_safe_family_continuity",
+  "authority_created": false,
+  "directories_first": true,
+  "source_policy": {
+    "facts_promoted_without_evidence": 0,
+    "silent_inference": "BLOCKED",
+    "story_is_evidence": false,
+    "generated_is_verified": false,
+    "medical_claims": "EXCLUDED"
+  },
+  "roles": {
+    "heidee_surface": "JoySpace child-specific implementation",
+    "joy_pattern": "shared protection pattern",
+    "mrs_wisdom": {
+      "role": "observer_steward",
+      "participation": "human-directed",
+      "identity_verified_by_repo": false,
+      "consent_inferred": false,
+      "authority": false
+    }
+  },
+  "workstreams": [
+    {
+      "id": "BLOSSOM",
+      "title": "From Cosmos to Curly Braces",
+      "primitive": "{}",
+      "verbs": ["OBSERVE", "STRUCTURE", "CREATE", "VERSION", "REPLAY"],
+      "state": "GENERATED_CONCEPT"
+    },
+    {
+      "id": "SOPHIA_WISDOM",
+      "title": "Girl Living Ledger",
+      "focus": ["stories", "music", "dreams", "friends", "feelings", "fashion", "ideas", "memories", "goals", "money"],
+      "apple_role": "creative-tool concept only",
+      "state": "GENERATED_CONCEPT"
+    },
+    {
+      "id": "GOLDEN_FLEECE",
+      "title": "COMPUTERWISDOM Round Trip",
+      "path": ["BYTE", "JSON", "HASH", "RECEIPT", "STRUCTURE", "STORY", "PUBLIC_ARTIFACT", "REVERSE_REPLAY", "BYTE"],
+      "results": ["MATCH", "DELTA", "HOLD"],
+      "state": "GENERATED_CONCEPT"
+    },
+    {
+      "id": "DELTA_ZERO",
+      "title": "The Missing JSON",
+      "purpose": "technical reverse replay of public institutional artifacts",
+      "targets_discussed": ["Justice", "Congress", "GovInfo", "NIST", "Federal Register", "Regulations.gov", "Courts", "GAO", "Air Force", "Space Force"],
+      "state": "DEVELOPMENT_DIRECTION"
+    },
+    {
+      "id": "ZORA_DUAL_FLYWHEEL",
+      "views": ["STORY", "STATE", "PROOF", "DELTA"],
+      "audiences": ["creator_citizen", "auditor_machine"],
+      "motive_inference": false,
+      "state": "GENERATED_CONCEPT"
+    },
+    {
+      "id": "VOICE_CONTINUITY",
+      "purpose": ["capture", "navigation", "recall", "continuity"],
+      "medical_efficacy_claim": false,
+      "state": "DEVELOPMENT_DIRECTION"
+    }
+  ],
+  "promotion": "PENDING_HUMAN_REVIEW"
+}
