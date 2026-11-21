@@ -33,6 +33,13 @@ jobs:
           persist-credentials: false
       - name: Local Python adapter fixtures
         run: python -m unittest discover -s tools -p 'test_joy_leeloo_adapter.py' -v
+      - name: Existing HEIDEE master files and regression checks
+        run: |
+          test "$(git hash-object SCHOOL_OF_WISDOM_LYRICAL_AUDIT_WORKER.js)" = "79b45755f40992c69c699bfa5de2f4604a525b19"
+          test "$(git hash-object SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs)" = "b3b386221c9e55b64c535df8090ee7628a7ee8e0"
+          test "$(git hash-object docs/joyspace/pdf-change-detective.html)" = "d8a4be8913fcd09361e4acc33382bd1874aa8c08"
+          node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs
+
       - name: Native original JOY Bash checker
         run: |
           bash ext/JOY/FAMILY/receipts/replay_alabama_alms_role_membrane_v0_1.sh ext/JOY
