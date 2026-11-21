@@ -1,0 +1,95 @@
+name: JOYSPACE Proof 007 candidate executable — review only
+
+on:
+  push:
+    branches:
+      - audit/joyspace-leeloo-executable-review-2026-11-21
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: pinned-source-and-executable-candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout isolated HEIDEE candidate branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned JOY
+        uses: actions/checkout@v4
+        with:
+          repository: jsonwisdom/JOY
+          ref: a9d9bf1678cbc97703df7582ec5879b6ea5a0bd7
+          path: ext/JOY
+          persist-credentials: false
+      - name: Checkout pinned AL
+        uses: actions/checkout@v4
+        with:
+          repository: jsonwisdom/AL
+          ref: 0798dcc429c76d13f0537f1a8e6ca064d27378d7
+          path: ext/AL
+          persist-credentials: false
+      - name: Replay original Proof 005 tests
+        run: python -m unittest discover -s tools -p 'test_joy_leeloo_adapter.py' -v
+      - name: Execute Proof 007 candidate unit fixtures
+        run: python -m unittest discover -s tools -p 'test_leeloo_candidate_runtime.py' -v
+      - name: Preserve HEIDEE master regression
+        run: |
+          test "$(git hash-object SCHOOL_OF_WISDOM_LYRICAL_AUDIT_WORKER.js)" = "79b45755f40992c69c699bfa5de2f4604a525b19"
+          test "$(git hash-object SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs)" = "b3b386221c9e55b64c535df8090ee7628a7ee8e0"
+          test "$(git hash-object docs/joyspace/pdf-change-detective.html)" = "d8a4be8913fcd09361e4acc33382bd1874aa8c08"
+          node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs
+      - name: Run original JOY native Bash checker
+        run: bash ext/JOY/FAMILY/receipts/replay_alabama_alms_role_membrane_v0_1.sh ext/JOY
+      - name: Invoke candidate executable CLI with pinned EV-009 receipt
+        run: |
+          mkdir -p receipts
+          python tools/leeloo_candidate_runtime.py \
+            --request tools/fixtures/leeloo_proof007_all_pass.json \
+            --joy-root ext/JOY --al-root ext/AL \
+            --receipt receipts/proof007-effective-hold.json
+          python -c 'import json; r=json.load(open("receipts/proof007-effective-hold.json")); assert r["interface"]=="CANDIDATE_EXECUTABLE_ONLY" and r["candidate_state"]=="PASS" and r["effective_decision"]=="HOLD" and r["authority"] is False and r["ev009"]["docket"]=="EV-009"'
+          sha256sum receipts/proof007-effective-hold.json
+      - name: Corrupt synthetic Family Gate input — must REJECT
+        run: |
+          python -c 'import json;from pathlib import Path; p=Path("tools/fixtures/leeloo_proof007_all_pass.json"); d=json.loads(p.read_text());d["family_gate"]="BYPASSED";Path("receipts/corrupt-family-input.json").write_text(json.dumps(d))'
+          set +e
+          python tools/leeloo_candidate_runtime.py \
+            --request receipts/corrupt-family-input.json \
+            --joy-root ext/JOY --al-root ext/AL \
+            --receipt receipts/proof007-family-reject.json
+          code=$?
+          set -e
+          test "$code" -eq 2
+          python -c 'import json; r=json.load(open("receipts/proof007-family-reject.json")); assert r["effective_decision"]=="REJECT" and r["authority"] is False'
+          sha256sum receipts/proof007-family-reject.json
+      - name: Corrupt EV-009 receipt bytes — must REJECT
+        run: |
+          mkdir -p corruptAL/ALMS/vernacular corruptAL/constitution/multipass corruptAL/receipts/multipass
+          cp ext/AL/ALMS/vernacular/ALABAMA_ALMS_JOY_ROLE_MEMBRANE_POINTER_V0_1.md corruptAL/ALMS/vernacular/
+          cp ext/AL/constitution/multipass/LEELOO_DALLAS_MULTIPASS_V0_1.md corruptAL/constitution/multipass/
+          cp ext/AL/receipts/multipass/EV-009-LEELOO-DALLAS-MULTIPASS-RECEIPT.json corruptAL/receipts/multipass/
+          python -c 'from pathlib import Path; p=Path("corruptAL/receipts/multipass/EV-009-LEELOO-DALLAS-MULTIPASS-RECEIPT.json");s=p.read_text();assert "PRECEDENT_BOUND_PENDING_PUBLIC_GREEN" in s;p.write_text(s.replace("PRECEDENT_BOUND_PENDING_PUBLIC_GREEN","GREEN"))'
+          set +e
+          python tools/leeloo_candidate_runtime.py \
+            --request tools/fixtures/leeloo_proof007_all_pass.json \
+            --joy-root ext/JOY --al-root corruptAL \
+            --receipt receipts/proof007-ev009-reject.json
+          code=$?
+          set -e
+          test "$code" -eq 2
+          python -c 'import json; r=json.load(open("receipts/proof007-ev009-reject.json")); assert r["effective_decision"]=="REJECT" and r["authority"] is False and r["reason"]=="ev009_receipt_git_blob_drift"'
+          sha256sum receipts/proof007-ev009-reject.json
+      - name: Safe review-only summary
+        if: always()
+        run: |
+          {
+            echo "### Proof 007 — Review-only candidate executable"
+            echo "The candidate is NOT an original/prod LeeLoo service."
+            echo "Source and synthetic pass remain EFFECTIVE_DECISION=HOLD."
+            echo "No authority, consent, payment, child data, agent runtime, merge, or deployment."
+          } >> "$GITHUB_STEP_SUMMARY"
