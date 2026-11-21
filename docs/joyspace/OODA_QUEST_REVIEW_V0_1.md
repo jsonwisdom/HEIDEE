@@ -9,8 +9,8 @@ HEIDEE owns the JoySpace experience. JOY supplies shared protection rules; Libra
 - ZIP: `HEIDEE_JoySpace_OODA_Quest_Offline_v0_1.zip`.
 - ZIP SHA-256: `a9892eea551393f9a727a1ae979c2066fb9af6de26872b32c0ae9629e93b26b3`.
 - Embedded HTML SHA-256: `7cf769a905f15f53033baf927c3aa62d2f8794cadbc95afd6da8412738d4a040`.
-- The ZIP bytes have NOT been uploaded to this repository. An existing GitHub branch / manifest does NOT prove byte-level source parity with a local ZIP.
-- Local Node rule suite: 6 missions x 3 answer choices, 256 precedence-state tuples, PASS. Browser rendering could not be tested due to the environment blocking browser navigation. Windows run remains HOLD.
+- The tested HTML itself is now committed as `docs/joyspace/ooda-quest.html` at Git blob `ace7b7e930f09a5be2caa7dda7e83aea54a836d4`. GitHub and Windows ZIP HTML SHA-256 match exactly. The ZIP container has not been committed; it includes the same HTML bytes and a local Windows launcher.
+- Local Node rule suite: 6 missions x 3 answer choices, 256 precedence-state tuples, PASS. Headless Chromium set-content tests at 1150px and 390px passed for mission actions, Librarian hints, rejection, receipt downloads, and voluntary pause. A direct local `file://` browser run was blocked by the test environment; real Windows execution remains HOLD.
 
 ## Game design: Six voluntary missions
 | ID | Role | Skill | Correct practice | Claim status |
@@ -32,4 +32,4 @@ Each OODA mission: OBSERVE → ORIENT → DECIDE → ACT → LEARN. Hints are op
 - Correct gameplay is not consent, guardianship, verified identity, actual safety or a real-world outcome. Participation is optional.
 
 ## Review boundaries
-This document does not merge, retarget, deploy to Cloudflare, enable a domain, activate a live agent, touch Coinbase, change account security, transmit private records or create permission. Any future live website requires separate explicit human approval and browser quality assurance. Public-safe concept only. JOY first; HEIDEE independent; no fake green.
+This review track contains exact HTML and source-bound tests but does not merge, retarget, deploy to Cloudflare, enable a domain, activate a live agent, touch Coinbase, change account security, transmit private records or create permission. Any future live website requires separate explicit human approval and browser quality assurance. Public-safe concept only. JOY first; HEIDEE independent; no fake green.
