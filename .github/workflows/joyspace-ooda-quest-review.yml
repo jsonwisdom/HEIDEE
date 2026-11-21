@@ -34,6 +34,11 @@ jobs:
         run: node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs
       - name: Check OODA Quest mission manifest
         run: node tests/joyspace_quest_contract.mjs
+      - name: Verify exact offline HTML source and play mechanics
+        run: |
+          test "$(git hash-object docs/joyspace/ooda-quest.html)" = "ace7b7e930f09a5be2caa7dda7e83aea54a836d4"
+          test "$(sha256sum docs/joyspace/ooda-quest.html | cut -d' ' -f1)" = "7cf769a905f15f53033baf927c3aa62d2f8794cadbc95afd6da8412738d4a040"
+          node tests/joyspace_quest_runtime.mjs
       - name: Evidence boundary
         if: always()
         run: |
