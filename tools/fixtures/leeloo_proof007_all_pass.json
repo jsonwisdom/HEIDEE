@@ -1,0 +1,13 @@
+{
+  "schema": "leeloo/review-candidate/1",
+  "family_gate": "SOVEREIGN",
+  "authority": false,
+  "human_approval": "NOT_GRANTED",
+  "heidee_consent": "NOT_INFERRED",
+  "lanes": {
+    "computer_wisdom_public": "PASS",
+    "joy_wisdom_public": "PASS",
+    "al_wisdom_public": "PASS",
+    "replay_trinity": "PASS"
+  }
+}
