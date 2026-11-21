@@ -1,0 +1,42 @@
+name: HEIDEE JoySpace OODA Quest — manifest contract review
+
+on:
+  push:
+    branches:
+      - audit/heidee-joyspace-ooda-quest-v0-1-2026-11-21
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-game-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout HEIDEE review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned JOY family-security boundary
+        uses: actions/checkout@v4
+        with:
+          repository: jsonwisdom/JOY
+          ref: a9d9bf1678cbc97703df7582ec5879b6ea5a0bd7
+          path: ext/JOY
+          persist-credentials: false
+      - name: Verify original HEIDEE and JOY source boundaries
+        run: |
+          test "$(git hash-object HEIDEE_COMPUTER_WISDOM_FAMILY_LEGACY_REPORT_2026-11-07.md)" = "79e66f3281f8cb6272a7ea03058d4f12026ddb36"
+          test "$(git hash-object artifacts/HEIDEE_FAMILY_LEARNING_RAIL_BIND_V0.md)" = "d05fb243d44b05fef6be502cbaaf0ee4dded8285"
+          test "$(git hash-object ext/JOY/docs/school-of-wisdom/LIBRARIAN_SUGGESTIONS_GAMEPLAY_ALMS_ON_V0_1.md)" = "95f216f6e23e5edf72937f03e7d0d7f579983f99"
+      - name: Existing HEIDEE offline regressions
+        run: node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs
+      - name: Check OODA Quest mission manifest
+        run: node tests/joyspace_quest_contract.mjs
+      - name: Evidence boundary
+        if: always()
+        run: |
+          echo '### HEIDEE OODA Quest · review-only' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Manifest contract and older regression tests only. Offline HTML browser parity is NOT established by this job.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No deployment, family approval, public tracking, profiles, money, accounts, or child enrollment.' >> "$GITHUB_STEP_SUMMARY"
