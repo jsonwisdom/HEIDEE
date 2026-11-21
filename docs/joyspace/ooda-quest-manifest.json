@@ -1,0 +1,82 @@
+{
+  "schema": "heidee/joyspace/ooda-quest-manifest/0.1",
+  "mode": "SYNTHETIC_OFFLINE_ONLY",
+  "authority": false,
+  "family_gate": "SOVEREIGN_UNVERIFIED",
+  "heidee_consent": "NOT_INFERRED",
+  "human_approval": "NOT_ASSERTED",
+  "alms_engine": "ON_FOR_PUBLIC_SOURCE_CLASSES_ONLY",
+  "flywheel_maintenance": "OFF",
+  "auto_enrollment": false,
+  "network_calls": false,
+  "persistence": false,
+  "competitions": false,
+  "missions": [
+    {
+      "id": "SIGNAL",
+      "title": "Signal Spotter",
+      "safe_choice_index": 1,
+      "options": [
+        "Tap the mystery link",
+        "Open the known app yourself and verify",
+        "Send a code to the sender"
+      ],
+      "claim_verdict": "HOLD"
+    },
+    {
+      "id": "SHELF",
+      "title": "Receipt Detective",
+      "safe_choice_index": 2,
+      "options": [
+        "Announce it as proven",
+        "Share before checking",
+        "Ask for the original public record"
+      ],
+      "claim_verdict": "HOLD"
+    },
+    {
+      "id": "ZIGGY",
+      "title": "The Two Clocks",
+      "safe_choice_index": 1,
+      "options": [
+        "Hide the older date",
+        "Mark CONFLICT and preserve both records",
+        "Pick whichever date looks right"
+      ],
+      "claim_verdict": "CONFLICT"
+    },
+    {
+      "id": "PAUSE",
+      "title": "Boss Bre's Reset",
+      "safe_choice_index": 0,
+      "options": [
+        "Pause or leave without penalty",
+        "Force yourself to keep playing",
+        "Publish your score to prove effort"
+      ],
+      "claim_verdict": "HOLD"
+    },
+    {
+      "id": "DELTA",
+      "title": "Byte Detective",
+      "safe_choice_index": 2,
+      "options": [
+        "Call one a fraud immediately",
+        "Assume they are identical because titles match",
+        "Record a DELTA; investigate without assumptions"
+      ],
+      "claim_verdict": "HOLD"
+    },
+    {
+      "id": "GATE",
+      "title": "The Green Button",
+      "safe_choice_index": 0,
+      "options": [
+        "No: participation is separate and voluntary",
+        "Yes, the repository decides",
+        "Enable automatic publishing"
+      ],
+      "claim_verdict": "HOLD"
+    }
+  ]
+}
