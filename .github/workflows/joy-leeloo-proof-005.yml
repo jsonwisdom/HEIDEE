@@ -1,0 +1,66 @@
+name: JOY ALMS LeeLoo Proof 005 (review-only)
+on:
+  push:
+    branches:
+      - audit/joyspace-master-compat-2026-11-21
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof005:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout HEIDEE review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned JOY commit (public, read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: jsonwisdom/JOY
+          ref: a9d9bf1678cbc97703df7582ec5879b6ea5a0bd7
+          path: ext/JOY
+          persist-credentials: false
+      - name: Checkout pinned AL commit (public, read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: jsonwisdom/AL
+          ref: 0798dcc429c76d13f0537f1a8e6ca064d27378d7
+          path: ext/AL
+          persist-credentials: false
+      - name: Local Python adapter fixtures
+        run: python -m unittest discover -s tools -p 'test_joy_leeloo_adapter.py' -v
+      - name: Native original JOY Bash checker
+        run: |
+          bash ext/JOY/FAMILY/receipts/replay_alabama_alms_role_membrane_v0_1.sh ext/JOY
+      - name: Pinned JOY and AL source verification
+        run: |
+          mkdir -p receipts
+          python tools/joy_leeloo_adapter.py --joy-root ext/JOY --al-root ext/AL --receipt receipts/proof005.json
+          python -c 'import json; x=json.load(open("receipts/proof005.json")); assert x["source_verification"]=="PASS" and x["effective_decision"]=="HOLD" and x["authority"] is False'
+          sha256sum receipts/proof005.json
+      - name: Tampered Family Gate must fail closed
+        run: |
+          mkdir -p corrupted/FAMILY/receipts
+          cp ext/JOY/FAMILY/receipts/ALABAMA_ALMS_BOSS_BRE_LIBRARIAN_HEIDEE_MERGE* corrupted/FAMILY/receipts/
+          cp ext/JOY/FAMILY/receipts/replay_alabama_alms_role_membrane_v0_1.sh corrupted/FAMILY/receipts/
+          python -c 'from pathlib import Path; p=Path("corrupted/FAMILY/receipts/ALABAMA_ALMS_BOSS_BRE_LIBRARIAN_HEIDEE_MERGE_INDEX_V0_1.json"); t=p.read_text(); assert "\"family_gate\": \"SOVEREIGN\"" in t; p.write_text(t.replace("\"family_gate\": \"SOVEREIGN\"", "\"family_gate\": \"BYPASSED\""))'
+          set +e
+          python tools/joy_leeloo_adapter.py --joy-root corrupted --al-root ext/AL --receipt receipts/corrupted-rejected.json
+          code=$?
+          set -e
+          test "$code" -eq 2
+          python -c 'import json; x=json.load(open("receipts/corrupted-rejected.json")); assert x["effective_decision"]=="REJECT"'
+          sha256sum receipts/corrupted-rejected.json
+      - name: Publish only public-safe evidence metadata
+        run: |
+          {
+            echo "### JOY ALMS LeeLoo Proof 005"
+            echo "Verification runs on public checked-out sources only."
+            echo "Source-verified is NOT integrated, authorized, deployed, or family-approved."
+            echo "Effective decision must remain HOLD."
+            echo "HEIDEE consent NOT INFERRED; LeahPrime runtime HOLD."
+          } >> "$GITHUB_STEP_SUMMARY"
