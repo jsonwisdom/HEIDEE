@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>JoySpace · OODA Quest</title>
+<style>
+:root{font:17px/1.5 system-ui,-apple-system,sans-serif;color:#27344c;background:#fff9f1}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 12% 0%,#fce6f7,transparent 30%),radial-gradient(circle at 89% 16%,#dff3fc,transparent 35%),#fff9f1}
+main{max-width:970px;margin:auto;padding:20px 18px 48px}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+h1{margin:4px 0 6px;font-size:clamp(2.25rem,5.5vw,3.7rem);line-height:1.1;letter-spacing:-.03em}
+h2{font-size:clamp(1.4rem,4vw,2.2rem);margin:0 0 10px}
+p{margin:8px 0}
+.kicker{font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;font-weight:850;color:#6e4080}
+.sub{max-width:66ch;color:#4c596c}
+.pill{border:1.5px solid #a89bbe;border-radius:50px;padding:7px 12px;font-size:.79rem;font-weight:700;background:#fff;white-space:nowrap}
+.back{color:#264d85;text-decoration:underline;text-underline-offset:3px}
+.hero{margin:25px 0 20px;padding:28px;border:2px solid #474c79;border-radius:24px;background:#fff;box-shadow:9px 9px 0 #e7daf0}
+.layout{display:grid;grid-template-columns:1fr 290px;gap:20px;align-items:start}
+.panel{border:2px solid #a8b0c5;border-radius:18px;padding:17px;background:#fff}
+.mission-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+button{font:inherit;cursor:pointer;border:2px solid #34466d;border-radius:12px;padding:11px 14px;background:#fff;color:#27344c;text-align:left}
+button:hover{background:#f0eafa}button:focus-visible,a:focus-visible{outline:4px solid #006ad4;outline-offset:3px}
+button:disabled{opacity:.6;cursor:not-allowed}
+.mission{display:block;min-height:100px;width:100%}
+.mission strong{display:block;font-size:1.04rem}.mission small{display:block;font-size:.83rem;color:#5a6680;margin-top:8px}
+.mission.selected{background:#ebe5fd;border-color:#6353a4}
+.action{background:#384d87;color:#fff;font-weight:750;text-align:center}
+.action:hover{background:#283e77}
+.secondary{background:#eaf4fa}
+.choices{display:grid;gap:10px;margin:20px 0}
+.choices button{width:100%}
+.status{padding:13px;border-radius:12px;background:#f1f4fc;min-height:60px}
+.stepper{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.stepper span{background:#eeeaf4;border-radius:25px;padding:5px 10px;font-weight:700;font-size:.76rem}
+.stepper .active{background:#d3dff8}
+.meta{font-size:.87rem;color:#606b82}.hide{display:none!important}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#resume{display:block;width:100%;text-align:center;margin-top:10px}
+#hint{background:#fff4df;border-radius:12px;padding:12px 14px;margin:15px 0}
+#result{border:2px dashed #8f8eaf;border-radius:16px;padding:18px;margin:16px 0;background:#fcfcff}
+.stamp{font-weight:800;color:#405986;margin-right:8px}
+.badge-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.badge-list span{font-size:.82rem;background:#edf4fc;border-radius:20px;padding:5px 9px}
+footer{margin-top:20px;padding:16px 0;color:#535e71;font-size:.88rem}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.hero{padding:20px}.panel{margin-top:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="kicker">🌸 JoySpace · School of Wisdom</div><h1>OODA Quest</h1><p class="sub">Six tiny mysteries. Practice spotting evidence, protecting privacy, and choosing when to pause. Nothing is timed or ranked.</p></div><div><span class="pill">OFFLINE · PRACTICE ONLY</span></div></header>
+<div class="hero"><div class="kicker">Observe → Orient → Decide → Act → Learn</div><p>Pick any mission. Ask the 📚 Librarian for a hint. 🐿️ Ziggy helps spot missing evidence. Boss Bre reminds you that stopping is always allowed.</p><div class="row"><button class="secondary" id="pause" type="button">💜 Boss Bre · Pause / stop</button><button id="reset" type="button">↺ Start fresh (local only)</button></div></div>
+<div class="layout"><section class="panel"><div id="map"><h2>Mission Map</h2><p class="meta">Pick your path. Practice stamps are only for this browser tab; nothing is saved or uploaded.</p><div id="missions" class="mission-list"></div></div>
+<div id="play" class="hide"><div class="row"><button id="back" type="button">← Mission map</button><span id="missionId" class="pill"></span></div><div class="stepper" aria-label="OODA phases"><span class="active">OBSERVE</span><span>ORIENT</span><span>DECIDE</span><span>ACT</span><span>LEARN</span></div><h2 id="missionName"></h2><p id="story"></p><div class="row"><button type="button" id="library">📚 Ask the Librarian</button><button type="button" id="ziggy">🐿️ Ask Ziggy</button></div><p id="hint" class="hide" role="status"></p><div class="choices" id="choices" aria-label="Practice choices"></div><div id="result" class="hide" role="status" aria-live="polite"><p id="feedback"></p><p id="evidence"></p><p class="meta">Practice success does not grant identity, approval, consent, permission, or live deployment.</p><div class="row"><button id="receipt" type="button" class="secondary">Save synthetic receipt (optional)</button><button id="next" type="button" class="action">Back to map</button></div></div></div>
+<div id="paused" class="hide"><h2>💜 Rest is part of the game.</h2><p>You can close this tab, take a break, or return whenever you want. No score is lost, no one is contacted, and nobody is watching.</p><button id="resume" class="action" type="button">Return to mission map</button></div>
+</section><aside class="panel"><div class="kicker">Your practice shelf</div><h2 id="count">0 / 6</h2><p>Thoughtful choices explored. No leaderboard, login, penalty, or personal profile.</p><div class="badge-list" id="stamps" aria-live="polite"><span>No stamps yet—and that's fine!</span></div><hr><p><strong>📚 Librarian</strong> finds questions and evidence shelves. It never decides for you.</p><p><strong>🐿️ Ziggy</strong> asks what might still be missing.</p><p><strong>💜 Boss Bre</strong> protects the right to pause.</p><p class="meta"><strong>Family Gate:</strong> SOVEREIGN_UNVERIFIED<br><strong>Authority:</strong> false<br><strong>External actions:</strong> none</p></aside></div>
+<footer><p>JoySpace belongs to HEIDEE's independent learning space. No enrollment or consent is inferred. All scenarios are invented; do not enter real names, passwords, addresses, or recovery codes.</p><p>This page runs fully offline without accounts, analytics, APIs, payments, tokens, or persistence. Public test success ≠ real-world family approval.</p><p><a class="back" href="./index.html">← Back to Draw, Save, Print</a></p></footer>
+</main>
+<script id="joyspace-quest-code">
+(() => {
+"use strict";
+const MISSIONS = Object.freeze([
+{id:"SIGNAL",name:"Signal Spotter",icon:"🔍",stamp:"Signal Spotter",story:"A pretend message says: 'Click this strange link or you'll lose your game today!'",options:["Tap the mystery link","Open the known app yourself and verify","Send a code to the sender"],safe:1,source:"HOLD",hint:"A rushed message isn't proof. Find the original source without following its link.",challenge:"What evidence proves who sent it?",lesson:"You checked the source instead of trusting urgency."},
+{id:"SHELF",name:"Receipt Detective",icon:"📚",stamp:"Receipt Keeper",story:"A pretend headline says a new rule passed. No official text or receipt is shown.",options:["Announce it as proven","Share before checking","Ask for the original public record"],safe:2,source:"HOLD",hint:"A headline is a clue, not the source document.",challenge:"What receipt would make this claim checkable?",lesson:"You held a claim while looking for a primary source."},
+{id:"ZIGGY",name:"The Two Clocks",icon:"🐿️",stamp:"Gap Spotter",story:"Two pretend records disagree about the date of the same event.",options:["Hide the older date","Mark CONFLICT and preserve both records","Pick whichever date looks right"],safe:1,source:"CONFLICT",hint:"Conflicting records shouldn't be collapsed into a single green light.",challenge:"Could both records describe different events?",lesson:"You protected a disagreement until new evidence can resolve it."},
+{id:"PAUSE",name:"Boss Bre's Reset",icon:"💜",stamp:"Pause Champion",story:"This pretend game stops feeling fun, and you want a break.",options:["Pause or leave without penalty","Force yourself to keep playing","Publish your score to prove effort"],safe:0,source:"HOLD",hint:"You can stop. The room matters more than a scoreboard.",challenge:"Does a game need a finish line to be worthwhile?",lesson:"You chose care and control over performance pressure."},
+{id:"DELTA",name:"Byte Detective",icon:"🧩",stamp:"Delta Detective",story:"Two practice files have the same title but different content hashes.",options:["Call one a fraud immediately","Assume they are identical because titles match","Record a DELTA; investigate without assumptions"],safe:2,source:"HOLD",hint:"Different hashes show different bytes, not why or who changed them.",challenge:"Does a byte difference establish intent or legal meaning?",lesson:"You separated the observed byte difference from its interpretation."},
+{id:"GATE",name:"The Green Button",icon:"🛡️",stamp:"Choice Keeper",story:"A synthetic unit test shows PASS. Does that automatically enroll anyone in JoySpace?",options:["No: participation is separate and voluntary","Yes, the repository decides","Enable automatic publishing"],safe:0,source:"HOLD",hint:"A code test isn't a person's agreement or approval.",challenge:"Who can actually choose whether to join?",lesson:"You kept independent human choice above software status."}
+]);
+const PRECEDENCE = Object.freeze({REJECT:0,CONFLICT:1,HOLD:2,PASS:3});
+function priority(states){if(!Array.isArray(states)||states.length===0||states.some(s=>!Object.hasOwn(PRECEDENCE,s)))throw Error("invalid practice state");return states.reduce((a,b)=>PRECEDENCE[a]<=PRECEDENCE[b]?a:b);}
+function answer(mission,selected){if(!mission||!Number.isInteger(selected)||selected<0||selected>=mission.options.length)return Object.freeze({practice:"REJECT",claim:"HOLD",effective:"REJECT",correct:false});const correct=selected===mission.safe;return Object.freeze({practice:correct?"PASS":"REJECT",claim:mission.source,effective:correct?"HOLD":"REJECT",correct});}
+function practiceReceipt(mission,selected){const r=answer(mission,selected);return Object.freeze({schema:"heidee/joyspace/ooda-quest/0.1",mode:"SYNTHETIC_OFFLINE_ONLY",mission_id:mission.id,choice_index:selected,practice_verdict:r.practice,claim_verdict:r.claim,effective_decision:r.effective,family_gate:"SOVEREIGN_UNVERIFIED",human_approval:"NOT_ASSERTED",heidee_consent:"NOT_INFERRED",authority:false,private_data_collected:false,external_actions:false,public_release:false,account_changes:false,financial_actions:false});}
+// Exposed only as a testable pure ruleset; no network or storage operations.
+globalThis.JoySpaceQuestRules=Object.freeze({missions:MISSIONS,priority,answer,practiceReceipt});
+if(typeof document==="undefined")return;
+const $=id=>document.getElementById(id);
+const completed=new Set();let current=0,selected=null;
+function setText(id,value){$(id).textContent=value;}
+function stampShelf(){setText("count",`${completed.size} / ${MISSIONS.length}`);const badges=$("stamps");badges.replaceChildren();if(!completed.size){const e=document.createElement("span");e.textContent="No stamps yet—and that's fine!";badges.append(e);return;}for(const m of MISSIONS){if(!completed.has(m.id))continue;const e=document.createElement("span");e.textContent=m.icon+" "+m.stamp;badges.append(e);}}
+function map(){for(const name of ["play","paused"])$(name).classList.add("hide");$("map").classList.remove("hide");const slot=$("missions");slot.replaceChildren();MISSIONS.forEach((m,i)=>{const b=document.createElement("button");b.className="mission";b.type="button";const title=document.createElement("strong");title.textContent=m.icon+" "+m.name;const sub=document.createElement("small");sub.textContent=completed.has(m.id)?"✓ Practice stamp explored":"Choose your path →";b.append(title,sub);b.onclick=()=>open(i);slot.append(b);});stampShelf();}
+function open(i){current=i;selected=null;const m=MISSIONS[i];$("map").classList.add("hide");$("paused").classList.add("hide");$("play").classList.remove("hide");$("result").classList.add("hide");$("hint").classList.add("hide");setText("missionId",`MISSION ${i+1} / ${MISSIONS.length}`);setText("missionName",m.icon+" "+m.name);setText("story",m.story);const choices=$("choices");choices.replaceChildren();m.options.forEach((option,j)=>{const button=document.createElement("button");button.type="button";button.textContent=String.fromCharCode(65+j)+" · "+option;button.onclick=()=>choose(j);choices.append(button);});}
+function choose(index){const m=MISSIONS[current],r=answer(m,index);selected=index;setText("feedback",r.correct?`🌟 Thoughtful choice! ${m.lesson}`:`🟠 Not this time. ${m.hint} You may try again—no penalty.`);setText("evidence",`Practice: ${r.practice} · Claim: ${r.claim} · Effective permission: ${r.effective}`);$("result").classList.remove("hide");if(r.correct){completed.add(m.id);stampShelf();} }
+function showHint(kind){const m=MISSIONS[current];setText("hint",kind==="librarian"?"📚 Librarian: "+m.hint:"🐿️ Ziggy: "+m.challenge);$("hint").classList.remove("hide");}
+function pause(){for(const id of ["map","play"])$(id).classList.add("hide");$("paused").classList.remove("hide");}
+function saveReceipt(){if(selected===null)return;const m=MISSIONS[current],record=practiceReceipt(m,selected);const data=new Blob([JSON.stringify(record,null,2)+"\n"],{type:"application/json"});const a=document.createElement("a");const url=URL.createObjectURL(data);a.href=url;a.download="joyspace-practice-"+m.id.toLowerCase()+".json";a.click();URL.revokeObjectURL(url);}
+$("library").onclick=()=>showHint("librarian");$("ziggy").onclick=()=>showHint("ziggy");$("back").onclick=map;$("next").onclick=map;$("pause").onclick=pause;$("resume").onclick=map;$("receipt").onclick=saveReceipt;$("reset").onclick=()=>{completed.clear();selected=null;map();};map();
+})();
+</script>
+</body>
+</html>
