@@ -1,0 +1,23 @@
+name: HEIDEE JoySpace Librarian (offline)
+on:
+  push:
+    branches: [ci-first-heidee-librarian-joyspace-20261122]
+  pull_request:
+    paths:
+      - "tests/joyspace_librarian_gate.py"
+      - "docs/joyspace/**"
+      - "README.md"
+      - ".github/workflows/heidee-joyspace-librarian.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  read-only-source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Librarian source boundary / SHA-256 checks
+        run: python3 tests/joyspace_librarian_gate.py
+      - name: Existing School of Wisdom worker tests
+        run: node SCHOOL_OF_WISDOM_LYRICAL_AUDIT_TEST.mjs
